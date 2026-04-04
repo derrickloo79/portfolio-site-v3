@@ -194,10 +194,10 @@ ul { list-style: none; }
   color: var(--red);
 }
 .hero-body {
-  font-size: var(--text-base);
+  font-size: var(--text-xl);
   line-height: 1.4;
   color: var(--black);
-  max-width: 52ch;
+  /* max-width: 52ch; */
 }
 .hero-body p + p {
   margin-top: 0.875rem;
