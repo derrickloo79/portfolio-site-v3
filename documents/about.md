@@ -22,8 +22,11 @@ The logo is made up of my initials, D and L. It's rotated 90 degrees clockwise t
 1. Product designer
    1. OmniHR: jun 2022 - nov 2025
 
+1. UXUI designer
+   1. Treehouse Finance: nov 2021 - jun 2022
+
 1. Project manager / product designer
-   1. Claritecs: jun 2019 - nov 2022
+   1. Claritecs: jun 2019 - nov 2021
 
 1. Project manager
    1. Codigo: aug 2018 - jun 2019
@@ -42,4 +45,4 @@ The logo is made up of my initials, D and L. It's rotated 90 degrees clockwise t
 1. qianyu sg
 1. tetraexcellence pte ltd
 1. ground-up initiative
-1. 
+1.
