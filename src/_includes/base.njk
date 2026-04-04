@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ description or 'Derrick Loo — Senior Product Designer based in Singapore. 6+ years shipping B2B products in maritime and HR.' }}">
+  <title>{% if title %}{{ title }} — {% endif %}Derrick Loo</title>
+  <link rel="icon" href="/assets/logo-plain-red-2x.png" type="image/png">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <header class="site-nav">
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a href="/" class="nav-logo" aria-label="Derrick Loo — Home">
+        <img src="/assets/logo-plain-red-2x.png" alt="Derrick Loo">
+      </a>
+      <ul class="nav-links">
+        <li><a href="/" {% if navActive == 'home' %}aria-current="page"{% endif %}>Home</a></li>
+        <li><a href="/work/" {% if navActive == 'work' %}aria-current="page"{% endif %}>Work</a></li>
+        <li><a href="/about/" {% if navActive == 'about' %}aria-current="page"{% endif %}>About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    {{ content | safe }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-copy">© 2026 Derrick Loo</p>
+      <ul class="footer-links">
+        <li><a href="https://www.linkedin.com/in/derrickloo" target="_blank" rel="noopener">LinkedIn</a></li>
+        <!-- TODO: replace with your email -->
+        <li><a href="mailto:hello@derrickloo.com">Email</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>
