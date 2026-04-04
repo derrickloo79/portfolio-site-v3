@@ -80,13 +80,14 @@ body {
 a {
   color: var(--black);
   text-decoration: underline;
-  text-decoration-color: var(--rule);
-  text-underline-offset: 3px;
-  transition: color 0.12s, text-decoration-color 0.12s;
+  text-decoration-style: wavy;
+  text-decoration-color: var(--red);
+  text-decoration-thickness: 1.2px;
+  text-underline-offset: 4px;
+  transition: color 0.12s;
 }
 a:hover {
   color: var(--red);
-  text-decoration-color: var(--red);
 }
 img { max-width: 100%; display: block; }
 ul { list-style: none; }
@@ -285,11 +286,6 @@ ul { list-style: none; }
   letter-spacing: 0.04em;
   transition: color 0.12s;
   flex-shrink: 0;
-}
-.home-work-footer a {
-  font-size: var(--text-sm);
-  font-weight: 500;
-  color: var(--black);
 }
 
 /* ── ABOUT TEASER (HOME) ────────────────────────────────────── */
@@ -595,7 +591,7 @@ ul { list-style: none; }
 }
 .cs-cta {
   display: inline-block;
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   font-weight: 500;
   color: var(--black);
 }
