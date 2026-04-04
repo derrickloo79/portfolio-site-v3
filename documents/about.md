@@ -39,7 +39,7 @@ The logo is made up of my initials, D and L. It's rotated 90 degrees clockwise t
 
 # clients
 
-1. whilemsen shipboker
+1. whilemsen shipbroker
 1. super steel pte ltd
 1. super bend pte ltd
 1. qianyu sg
