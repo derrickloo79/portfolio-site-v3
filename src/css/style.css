@@ -188,6 +188,7 @@ ul { list-style: none; }
   line-height: 1.1;
   letter-spacing: -0.025em;
   margin-bottom: 1.75rem;
+  text-wrap: balance;
 }
 .hero-headline em {
   font-style: normal;
@@ -611,6 +612,7 @@ ul { list-style: none; }
   .site-nav { margin-bottom: 3.5rem; }
 
   .hero-headline { letter-spacing: -0.02em; }
+  .hero-body { font-size: var(--text-lg); }
 
   .home-work-item { flex-direction: column; gap: 0.25rem; }
   .home-work-meta { display: none; }
