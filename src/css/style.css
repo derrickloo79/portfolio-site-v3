@@ -490,6 +490,12 @@ ul { list-style: none; }
 .exp-item:first-child { border-top: none; }
 .exp-item { border-bottom: 1px solid var(--rule); }
 .exp-item:last-child { border-bottom: none; }
+.career-timeline-link {
+  display: inline-block;
+  margin-top: 2rem;
+  font-size: var(--text-base);
+  color: var(--black);
+}
 .exp-role {
   font-size: var(--text-sm);
   font-weight: 500;
@@ -626,6 +632,7 @@ ul { list-style: none; }
 
 
   .exp-item { grid-template-columns: 1fr; }
+  .career-timeline-link { display: none; }
   .exp-dates { grid-column: 1; grid-row: auto; text-align: left; }
 
   .work-item { grid-template-columns: 1.75rem 1fr; gap: 0.625rem; }
