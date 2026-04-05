@@ -472,10 +472,12 @@ ul { list-style: none; }
   inset: 0;
   opacity: 0;
 }
-.about-avatar-wrap:hover .about-avatar--current {
+.about-avatar-wrap:hover .about-avatar--current,
+.about-avatar-wrap.is-swapped .about-avatar--current {
   opacity: 0;
 }
-.about-avatar-wrap:hover .about-avatar--hover {
+.about-avatar-wrap:hover .about-avatar--hover,
+.about-avatar-wrap.is-swapped .about-avatar--hover {
   opacity: 1;
 }
 .about-avatar-wrap::after {
@@ -495,7 +497,8 @@ ul { list-style: none; }
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
-.about-avatar-wrap:hover::after {
+.about-avatar-wrap:hover::after,
+.about-avatar-wrap.is-swapped::after {
   opacity: 1;
 }
 .about-body {
