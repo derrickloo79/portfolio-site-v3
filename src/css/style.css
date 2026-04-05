@@ -452,12 +452,51 @@ ul { list-style: none; }
   align-items: center;
   gap: 0.2em;
 }
-.about-avatar {
+.about-avatar-wrap {
+  position: relative;
+  display: inline-flex;
   height: 1.3em;
   width: 1.3em;
-  
-  object-fit: cover;
   flex-shrink: 0;
+  cursor: pointer;
+}
+.about-avatar {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+.about-avatar--hover {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+.about-avatar-wrap:hover .about-avatar--current {
+  opacity: 0;
+}
+.about-avatar-wrap:hover .about-avatar--hover {
+  opacity: 1;
+}
+.about-avatar-wrap::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: -2.2em;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.35em;
+  font-weight: 400;
+  white-space: nowrap;
+  background: var(--black);
+  color: var(--bg);
+  padding: 0.4em 0.8em;
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.about-avatar-wrap:hover::after {
+  opacity: 1;
 }
 .about-body {
   max-width: 800px;
