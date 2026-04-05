@@ -448,6 +448,16 @@ ul { list-style: none; }
   letter-spacing: -0.02em;
   line-height: 1.15;
   margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.2em;
+}
+.about-avatar {
+  height: 1.3em;
+  width: 1.3em;
+  
+  object-fit: cover;
+  flex-shrink: 0;
 }
 .about-body {
   max-width: 800px;
