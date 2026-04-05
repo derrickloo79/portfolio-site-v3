@@ -468,12 +468,12 @@ ul { list-style: none; }
   border-top: 1px solid var(--rule);
   margin-bottom: 4rem;
 }
-.about-section-title {
+/* .about-section-title {
   font-size: var(--text-lg);
   font-weight: 700;
   color: var(--faint);
   margin-bottom: 1.75rem;
-}
+} */
 
 /* Experience */
 .exp-list {}
