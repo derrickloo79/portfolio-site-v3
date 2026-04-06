@@ -603,7 +603,8 @@ ul { list-style: none; }
    ════════════════════════════════════════════════════════════ */
 
 .cs-placeholder {
-  padding: 3rem 0 5rem;
+  padding-top: 3rem;
+  padding-bottom: 5rem;
 }
 .cs-back {
   display: inline-flex;
@@ -630,11 +631,11 @@ ul { list-style: none; }
   margin-bottom: 0.875rem;
 }
 .cs-title {
-  font-size: clamp(var(--text-xl), 4.5vw, var(--text-3xl));
+  font-size: clamp(var(--text-xl), 4vw, var(--text-2xl));
   font-weight: 700;
-  letter-spacing: -0.025em;
-  line-height: 1.1;
-  margin-bottom: 2.5rem;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
 }
 .cs-divider {
   width: 2.5rem;
@@ -654,6 +655,96 @@ ul { list-style: none; }
   font-size: var(--text-base);
   font-weight: 500;
   color: var(--black);
+}
+
+
+/* ── CASE STUDY PAGE ─────────────────────────────────────── */
+.cs-page {
+  padding-bottom: 5rem;
+}
+.cs-header {
+  margin-bottom: 3rem;
+}
+.cs-description {
+  font-size: var(--text-lg);
+  line-height: 1.4;
+  color: var(--mid);
+  max-width: 52ch;
+  margin-top: 1.5rem;
+}
+.cs-meta {
+  display: flex;
+  gap: 3rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 4rem;
+}
+.cs-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.cs-meta-label {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.cs-meta-value {
+  font-size: var(--text-sm);
+  color: var(--black);
+}
+.cs-content {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cs-section {
+  margin-bottom: 4rem;
+}
+.cs-section-title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.25rem;
+}
+.cs-section-body {
+  font-size: var(--text-base);
+  line-height: 1.4;
+  color: var(--black);
+}
+.cs-section-body strong { color: var(--black); font-weight: 500; }
+.cs-section-body p {
+  margin-bottom: 1.125rem;
+}
+.cs-section-body p:last-child {
+  margin-bottom: 0;
+}
+.cs-subsection-title {
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.cs-list {
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+.cs-list li {
+  margin-bottom: 0.625rem;
+}
+.cs-list li:last-child {
+  margin-bottom: 0;
+}
+.cs-list--ordered {
+  list-style: decimal;
+}
+.cs-section-body img {
+  max-width: 100%;
+  border-radius: 4px;
+  margin: 1.5rem 0;
 }
 
 
@@ -684,4 +775,9 @@ ul { list-style: none; }
   .exp-dates { grid-column: 1; grid-row: auto; text-align: left; }
 
   .work-item { grid-template-columns: 1.75rem 1fr; gap: 0.625rem; }
+
+  .cs-meta { flex-direction: column; gap: 1.5rem; }
+  .cs-back { margin-bottom: 2.5rem; }
+  .cs-header { margin-bottom: 2rem; }
+  .cs-section { margin-bottom: 3rem; }
 }

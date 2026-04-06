@@ -1,7 +1,95 @@
 ---
-layout: case-study-placeholder.njk
+layout: case-study.njk
 title: Performance Module
 navActive: work
-category: HR · B2B · Work in Progress
+category: HR · B2B
 description: Designing a performance review and goal-tracking experience for a multi-tenant B2B HR platform.
+role: Research, competitive analysis, wireframing, interaction design, UI design
+duration: 5 iterations over 2 years
+team: 1 Designer, 2 PMs, 4 Devs, 2 QAs
 ---
+
+<section class="cs-section">
+  <h2 class="cs-section-title">Overview</h2>
+  <div class="cs-section-body">
+    <p>The performance module allows organisations to conduct reviews of their employees' performance. The system is built around three key entities: <strong>Templates, Cycles,</strong> and <strong>Review phases</strong>.</p>
+    <p>Three personas interact with the system — Admins who configure reviews, Reviewees (employees being reviewed), and Reviewers (managers, peers, subordinates). The core design tension: <strong>power for admins vs. clarity for end users</strong>.</p>
+    <p>What makes this uniquely difficult is the visibility matrix — who sees what, and when. A reviewee or reviewer seeing the wrong thing at the wrong moment breaks trust in the entire system.</p>
+  </div>
+</section>
+
+<section class="cs-section">
+  <h2 class="cs-section-title">Business Objectives</h2>
+  <div class="cs-section-body">
+    <ul class="cs-list">
+      <li><strong>Acquisition:</strong> Incentivise organisations to switch to OmniHR by offering an integrated performance module.</li>
+      <li><strong>Retention:</strong> Encourage stickiness — no need to get a separate appraisal software.</li>
+      <li><strong>Design outcome:</strong> Good enough features to meet the majority of needs. Not aiming to be the best appraisal software — it's not the key differentiation factor.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cs-section">
+  <h2 class="cs-section-title">Process</h2>
+  <div class="cs-section-body">
+    <ol class="cs-list cs-list--ordered">
+      <li>Competitive research across appraisal softwares — noting what we liked, what was missing, and what features we could match or surpass.</li>
+      <li>Defined scope for each iteration with stakeholders.</li>
+      <li>Mapped user journeys for the end-to-end performance cycle: templates and cycles, launching reviews, and viewing results. Key wireframes for initial ideas.</li>
+      <li>Once aligned on strategy, moved to hi-fi designs and dev hand-off presentations.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="cs-section">
+  <h2 class="cs-section-title">Deep Dive: Visibility Rules</h2>
+  <div class="cs-section-body">
+    <p>When expanding from Self &amp; Manager Review to include Peer &amp; Upward Review, we introduced visibility rules. The key questions: whose responses can the reviewee and manager see, and when? Are peer and subordinate identities anonymous or visible?</p>
+    <p>The challenge was covering all scenarios for two main user roles. We solved it by mapping every combination, and sped up the process by reusing components.</p>
+
+    <h3 class="cs-subsection-title">How it works</h3>
+    <ul class="cs-list">
+      <li>A new step in the review cycle creation: <strong>"Can they view results"</strong> lets admins choose if the reviewee and manager can see each persona's responses, and if so, when.</li>
+      <li><strong>"Can they view the name of the reviewer"</strong> controls whether respondent identities are visible.</li>
+      <li>For certain personas, the first option's selection constrains the second — creating dependent logic.</li>
+      <li>We mapped all visibility rule combinations and used them to align on interactions and views across user roles.</li>
+    </ul>
+
+    <!-- TODO: Add screenshot of visibility rules mapping -->
+    <!-- TODO: Add screenshot of right-side component variants -->
+  </div>
+</section>
+
+<section class="cs-section">
+  <h2 class="cs-section-title">Deep Dive: Peer & Upward Review</h2>
+  <div class="cs-section-body">
+    <p>The introduction of peer and upward review meant previous designs couldn't simply be edited. We needed to redesign the to-do page, review cycle listing, and details page. We overcame the lack of exploration time by referencing how competitor softwares handled it.</p>
+
+    <h3 class="cs-subsection-title">Before</h3>
+    <ul class="cs-list">
+      <li>Only self and manager review to consider for each row item.</li>
+      <li>Chips used incorrectly to display the review type period.</li>
+      <li>Review cards not fully utilising available space.</li>
+    </ul>
+    <!-- TODO: Add before screenshot -->
+
+    <h3 class="cs-subsection-title">After</h3>
+    <ul class="cs-list">
+      <li>Needed to show statuses for up to 5 review types + 2 selection periods. Switched from a 2-column to a 2-row layout — Row 1 for essential cycle details, Row 2 for review statuses.</li>
+      <li>Introduced a progress bar in the event details page to balance absolute numbers and completion percentages.</li>
+      <li>Increased gap between review period and status for better readability.</li>
+      <li>New task page tabs: <strong>"My Review"</strong> for reviews and responses related to me, and <strong>"Team Review"</strong> for everything outside of me — subordinates, peers, direct manager.</li>
+    </ul>
+    <!-- TODO: Add after screenshot -->
+  </div>
+</section>
+
+<section class="cs-section">
+  <h2 class="cs-section-title">Reflection</h2>
+  <div class="cs-section-body">
+    <ul class="cs-list">
+      <li><strong>Would do differently:</strong> Use a different layout for the My Review and Team Review cards to reduce wasted space.</li>
+      <li><strong>Current limitation:</strong> The system still can't cleanly handle employees who miss submission deadlines or extend deadlines for specific individuals — this requires backend manipulation by developers.</li>
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,22 @@
+---
+layout: base.njk
+---
+<div class="page cs-page">
+  <a href="/work/" class="cs-back">Back to work</a>
+
+  <header class="cs-header">
+    {% if category %}<p class="cs-category">{{ category }}</p>{% endif %}
+    <h1 class="cs-title">{{ title }}</h1>
+    {% if description %}<p class="cs-description">{{ description }}</p>{% endif %}
+  </header>
+
+  <div class="cs-meta">
+    {% if role %}<div class="cs-meta-item"><span class="cs-meta-label">Role</span><span class="cs-meta-value">{{ role }}</span></div>{% endif %}
+    {% if duration %}<div class="cs-meta-item"><span class="cs-meta-label">Duration</span><span class="cs-meta-value">{{ duration }}</span></div>{% endif %}
+    {% if team %}<div class="cs-meta-item"><span class="cs-meta-label">Team</span><span class="cs-meta-value">{{ team }}</span></div>{% endif %}
+  </div>
+
+  <div class="cs-content">
+    {{ content | safe }}
+  </div>
+</div>
