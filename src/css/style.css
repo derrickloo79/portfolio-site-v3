@@ -46,6 +46,7 @@
 
   --font: 'Innovator Grotesk', system-ui, -apple-system, sans-serif;
 
+  --text-2xs: 0.75rem;    /* 12px */
   --text-xs:  0.875rem;   /* 14px */
   --text-sm:  1.125rem;   /* 18px */
   --text-base: 1.5rem;    /* 24px */
@@ -752,7 +753,7 @@ ul { list-style: none; }
 .cs-caption {
   position: absolute;
   bottom: 0;
-  right: left;
+  left: -4px;
   transform: translateY(50%);
   display: inline-block;
   padding: 0.35rem 0.6rem;
@@ -761,7 +762,7 @@ ul { list-style: none; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--black);
-  background: white;
+  background: var(--bg);
   border-top: 0.5px solid var(--black);
   border-bottom: 0.5px solid var(--black);
 }
@@ -804,4 +805,5 @@ ul { list-style: none; }
   .cs-back { margin-bottom: 2.5rem; }
   .cs-header { margin-bottom: 2rem; }
   .cs-section { margin-bottom: 3rem; }
+  .cs-caption { font-size: var(--text-2xs); }
 }
