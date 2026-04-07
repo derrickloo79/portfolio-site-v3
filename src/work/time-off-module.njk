@@ -1,7 +1,105 @@
 ---
-layout: case-study-placeholder.njk
+layout: case-study.njk
 title: Time Off Module v2.0
 navActive: work
-category: HR · B2B · Mobile
-description: Redesigned leave request and approval workflows to reduce friction for HR admins and employees across 50+ companies.
+category: HR · B2B
+description: Redesigned leave request and approval workflows with multi-level parallel approvers, plus a full overhaul of the time off experience.
+role: Research, wireframing, interaction design, UI design
+duration: 3 months
+team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
 ---
+
+<section class="cs-section">
+  <h2 class="cs-section-title">Overview</h2>
+  <div class="cs-section-body">
+    <p>The time off module needed a significant upgrade — adding multi-level parallel approvers while redesigning the time off tab to surface what's essential and tone down what's not.</p>
+    <p>The system revolves around three key entities: <strong>Approval flows, Submissions,</strong> and <strong>Approvals</strong> — serving three personas: Admins who configure approval rules, Employees who submit leave, and Managers who approve them.</p>
+  </div>
+</section>
+
+<section class="cs-section">
+  <h2 class="cs-section-title">Business Objectives</h2>
+  <div class="cs-section-body">
+    <ul class="cs-list">
+      <li><strong>Demonstrate progress:</strong> Show that OmniHR is constantly enhancing its core modules and address customer requests for the parallel approver feature.</li>
+      <li><strong>Design outcome:</strong> Beyond meeting the new feature requirements, we took the chance to refine existing pages — surface what's essential, tone down what's not.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cs-section">
+  <h2 class="cs-section-title">Process</h2>
+  <div class="cs-section-body">
+    <ol class="cs-list cs-list--ordered">
+      <li>Audited current screens and identified those needing redesign to support the new features.</li>
+      <li>Explored various layouts and discussed trade-offs with stakeholders.</li>
+      <li>Mapped out all approval progress scenarios — including edge cases where approvers were deleted or dismissed.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="cs-section">
+  <h2 class="cs-section-title">Deep Dive: Parallel Approvers</h2>
+  <div class="cs-section-body">
+    <p>When bringing parallel approvers to the time off module, we also introduced approval scope — allowing admins to define which employees get funnelled into a specific approval flow.</p>
+    <p>The challenge: designing a <strong>safety net</strong> that catches any employees who fall through all the defined approval scopes.</p>
+
+    <h3 class="cs-subsection-title">Before</h3>
+    <ul class="cs-list">
+      <li>Admins could only create one approval flow with a single approver per level.</li>
+    </ul>
+    <!-- TODO: Add before screenshot -->
+
+    <h3 class="cs-subsection-title">After</h3>
+    <ul class="cs-list">
+      <li>Expanded function to define the employee scope of each approval rule.</li>
+      <li>Stackable conditions to define criteria for the employee scope.</li>
+      <li>Multiple approvers per level — only one is required to approve for that level to pass.</li>
+      <li>At the approval flow listing, each row is a rule that admins can reorder to change priority. Top rules take precedence.</li>
+      <li>A "safety net" rule at the bottom catches any employee who doesn't match the rules above. It cannot be deleted or reordered.</li>
+    </ul>
+    <!-- TODO: Add after screenshot -->
+  </div>
+</section>
+
+<section class="cs-section">
+  <h2 class="cs-section-title">Deep Dive: Redesigning the Time Off Page</h2>
+  <div class="cs-section-body">
+    <p>The upgraded approval flow needed a way for employees to see approval status details beyond the calendar view — while simultaneously optimising space for the calendar itself.</p>
+
+    <h3 class="cs-subsection-title">Before</h3>
+    <ul class="cs-list">
+      <li>Calendar space wasn't optimised — balance cards took up too much room.</li>
+      <li>No place to display the approval status of time off submissions.</li>
+      <li>"Work schedule" and "holiday config" looked out of place.</li>
+      <li>"Add time off type" button was pushed off-screen as more cards were added.</li>
+      <li>In the Expense module, there were several component variants for different numbers of approvers — too many to maintain.</li>
+      <li>Employees couldn't see the progress of the approval flow in the time off details card.</li>
+    </ul>
+    <!-- TODO: Add before screenshot -->
+
+    <h3 class="cs-subsection-title">After</h3>
+    <ul class="cs-list">
+      <li>Time off balance cards moved to the top with a refreshed visual style.</li>
+      <li>Calendar legend moved up for easier reference.</li>
+      <li>Action buttons grouped together — no more hiding below the fold.</li>
+      <li>Introduced a toggle to switch between calendar and listing views, with both fully optimised for available space.</li>
+      <li>New listing view shows all active (ongoing or upcoming) time off applications.</li>
+      <li>Pending approvals show the number of approvers with a purple badge on the avatar.</li>
+      <li>Streamlined the approver column to just 2 variants: single or multiple approvers — much easier to maintain.</li>
+      <li>Employees now have visibility into the approval flow status and who the approvers are. If the flow is stuck at a level, they can identify the relevant approvers.</li>
+    </ul>
+    <!-- TODO: Add after screenshot -->
+  </div>
+</section>
+
+<section class="cs-section">
+  <h2 class="cs-section-title">Reflection</h2>
+  <div class="cs-section-body">
+    <p>Things we hoped to address in the next iteration:</p>
+    <ul class="cs-list">
+      <li><strong>Stuck submissions:</strong> When approvers were deleted, submissions got stuck at their level with no recourse — employees had to reapply. We needed a better fallback mechanism.</li>
+      <li><strong>Unlimited leave type:</strong> Instead of showing days available, we needed to show days taken — a different mental model that the UI didn't yet support.</li>
+    </ul>
+  </div>
+</section>
