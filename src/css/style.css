@@ -280,6 +280,7 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   gap: 0.625rem;
+  flex-wrap: wrap;
 }
 .home-work-title {
   font-size: var(--text-base);
