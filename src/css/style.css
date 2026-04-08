@@ -794,7 +794,7 @@ ul { list-style: none; }
   .hero-headline { letter-spacing: -0.02em; }
   .hero-body { font-size: var(--text-lg); }
 
-  .home-work-item { flex-direction: column; gap: 0.25rem; }
+  .home-work-item { flex-direction: column; gap: 0.25rem; align-items: flex-start; }
   .home-work-meta { display: none; }
 
   .site-footer { margin-top: 4.5rem; }
