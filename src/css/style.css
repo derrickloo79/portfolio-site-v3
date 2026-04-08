@@ -264,7 +264,7 @@ ul { list-style: none; }
 .home-work-item {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   gap: 1.5rem;
   padding: 1.125rem 0;
   border-top: 1px solid var(--rule);
@@ -276,10 +276,17 @@ ul { list-style: none; }
 .home-work-item:last-child { border-bottom: none; }
 .home-work-item:hover { color: var(--red); }
 .home-work-item:hover .home-work-meta { color: var(--red); opacity: 0.65; }
+.home-work-content {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
 .home-work-title {
   font-size: var(--text-base);
   font-weight: 500;
   line-height: 1.3;
+  display: flex;
+  align-items: center;
 }
 .home-work-meta {
   font-size: var(--text-xs);
@@ -414,7 +421,7 @@ ul { list-style: none; }
   background: #EEE;
   color: #666;
 }
-.badge--signature {
+.badge--claritecs {
   background: var(--red);
   color: white;
 }
