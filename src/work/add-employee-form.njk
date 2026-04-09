@@ -1,7 +1,68 @@
 ---
-layout: case-study-placeholder.njk
+layout: case-study.njk
 title: Add Employee Form Redesign
 navActive: work
 category: HR · B2B · Form Design
-description: Redesigned a 50+ field employee onboarding form, projected to reduce completion time by 25%.
+description: Redesigned the employee onboarding form to streamline data entry, integrate payroll enrolment, and resolve long-standing usability issues.
+role: Research, wireframing, interaction design, UI design
+duration: 3 months
+team: 1 Designer, 2 PMs, 4 Devs, 2 QAs
 ---
+
+<section class="cs-section">
+  <h2 class="cs-section-title">Overview</h2>
+  <div class="cs-section-body">
+    <p>The add employee form is the first touchpoint of onboarding — where admins populate employee details into the system and send out invitations. It's a high-frequency workflow for HR managers, and it had accumulated usability debt over time.</p>
+    <p>I led the redesign to streamline the flow, integrate a new payroll enrolment step, and fix friction points that had been eroding the experience.</p>
+  </div>
+</section>
+
+<section class="cs-section">
+  <h2 class="cs-section-title">Business Objectives</h2>
+  <div class="cs-section-body">
+    <ul class="cs-list">
+      <li><strong>Reduce completion time:</strong> A faster, less error-prone form directly improves customer satisfaction and drives word-of-mouth referrals.</li>
+      <li><strong>Resolve usability debt:</strong> Address long-standing UX issues that had been flagged through customer feedback and my own audit of the existing flow.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cs-section">
+  <h2 class="cs-section-title">Process</h2>
+  <div class="cs-section-body">
+    <ol class="cs-list cs-list--ordered">
+      <li>Gathered customer feedback from the co-founder and customer success team, then audited the existing flow myself to uncover additional issues beyond what was reported.</li>
+      <li>Mapped the user journey end-to-end to identify where the new payroll enrolment step fits naturally.</li>
+      <li>Explored different layouts and interaction patterns for each step, testing which combinations reduced cognitive load.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="cs-section">
+  <h2 class="cs-section-title">Design Decisions</h2>
+  <div class="cs-section-body">
+    <h3 class="cs-subsection-title">Splitting steps to protect priority actions</h3>
+    <p>I initially tried combining two jobs into a single step to reduce the total step count. But this pushed the critical task of assigning onboarding tasks below the fold. I decided to break them into two distinct steps — a longer flow, but one where nothing important gets buried.</p>
+    <!-- TODO: Add screenshot -->
+
+    <h3 class="cs-subsection-title">In-place editing at summary</h3>
+    <p>At the final summary step, I wanted to allow direct inline editing so users wouldn't need to navigate back. This wasn't technically feasible, so I designed the edit button to take users back to the relevant step instead — a pragmatic compromise that kept the flow simple.</p>
+    <!-- TODO: Add screenshot -->
+
+    <h3 class="cs-subsection-title">Sequential stepping after edits</h3>
+    <p>Jumping directly back to the summary after editing a previous step was technically complex and fragile. I opted for sequential stepping — users step through to the end after an edit. It's a trade-off I'd revisit in a future iteration, but it kept the release scope clean.</p>
+
+    <h3 class="cs-subsection-title">ATS integration (scoped out)</h3>
+    <p>I timeboxed an exploration of pulling employee data from an ATS app to pre-fill the form. The interaction and flow showed promise, but we couldn't converge on a final form within the timebox — and it was a deep rabbit hole. I recommended deferring it to a later iteration rather than shipping something half-baked.</p>
+  </div>
+</section>
+
+<section class="cs-section">
+  <h2 class="cs-section-title">Reflection</h2>
+  <div class="cs-section-body">
+    <ul class="cs-list">
+      <li><strong>Would do differently:</strong> Present all steps in a single view with detailed work handled in drawer modals — reducing the perceived complexity of the multi-step flow.</li>
+      <li><strong>Still unresolved:</strong> Inline editing at the summary step and the ability to jump across completed steps — both worth tackling in a future iteration.</li>
+    </ul>
+  </div>
+</section>

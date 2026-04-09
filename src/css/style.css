@@ -426,6 +426,14 @@ ul { list-style: none; }
   background: var(--red);
   color: white;
 }
+.badge--featured {
+  background: var(--red);
+  color: white;
+}
+.badge--wip {
+  background: #EEE;
+  color: #666;
+}
 
 /* Tags */
 .tag {
