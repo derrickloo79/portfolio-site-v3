@@ -48,15 +48,39 @@ team: 1 Designer, 2 PMs, 4 Devs, 2 QAs
     <p>The challenge was covering all scenarios for two main user roles. We solved it by mapping every combination, and sped up the process by reusing components.</p>
 
     <h3 class="cs-subsection-title">How it works</h3>
-    <ul class="cs-list">
-      <li>A new step in the review cycle creation: <strong>"Can they view results"</strong> lets admins choose if the reviewee and manager can see each persona's responses, and if so, when.</li>
+    <p>A new step in the review cycle creation: <strong>Step visibility rules</strong></p>
+    <ol class="cs-list">
+      <li><strong>"Can they view results"</strong> lets admins choose if the reviewee and manager can see each persona's responses, and if so, when.</li>
       <li><strong>"Can they view the name of the reviewer"</strong> controls whether respondent identities are visible.</li>
-      <li>For certain personas, the first option's selection constrains the second — creating dependent logic.</li>
-      <li>We mapped all visibility rule combinations and used them to align on interactions and views across user roles.</li>
-    </ul>
+    </ol>
 
-    <!-- TODO: Add screenshot of visibility rules mapping -->
-    <!-- TODO: Add screenshot of right-side component variants -->
+    <figure class="cs-figure">
+      <img src="/assets/perf-module-1.png" alt="Set visibility rules step">
+      <figcaption class="cs-caption">Set visibility rules step</figcaption>
+    </figure>
+
+    <p>For certain personas, the first option's selection constrains the second — creating dependent logic.</p>
+
+    <figure class="cs-figure">
+      <img src="/assets/perf-module-2.png" alt="Options on the left side affect the right side">
+      <figcaption class="cs-caption">Options on the left side affect the right side</figcaption>
+    </figure>
+
+    <p>We mapped all visibility rule combinations and used them to align on interactions and views across user roles, and sped up the process by reusing components.</p>
+    <p>Two examples of the visibility rules mapping. We used them also to agree on the interactions and views for the various user roles.</p>
+
+    <figure class="cs-figure">
+      <img src="/assets/perf-module-3.png" alt="Mapping of all visibility scenarios">
+      <figcaption class="cs-caption">Mapping of all visibility scenarios</figcaption>
+    </figure>
+
+    <p>Example of all possible variants of the right-side component, which is nested within the card component.</p>
+    <p>It covers all the scenarios for the various review types, eg. Self review, peer selection, etc..</p>
+
+    <figure class="cs-figure">
+      <img src="/assets/perf-module-4.png" alt="Variants of the right-side nested component">
+      <figcaption class="cs-caption">Variants of the right-side nested component</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -66,14 +90,26 @@ team: 1 Designer, 2 PMs, 4 Devs, 2 QAs
     <p>The introduction of peer and upward review meant previous designs couldn't simply be edited. We needed to redesign the to-do page, review cycle listing, and details page. We overcame the lack of exploration time by referencing how competitor softwares handled it.</p>
 
     <h3 class="cs-subsection-title">Before</h3>
-    <ul class="cs-list">
-      <li>Only self and manager review to consider for each row item.</li>
-      <li>Chips used incorrectly to display the review type period.</li>
-      <li>Review cards not fully utilising available space.</li>
-    </ul>
+  
+    <p>At the performance cycle listing page, there was only self and manager review to consider for each row item.</p>
+
     <figure class="cs-figure">
-      <img src="/assets/test-perf.png" alt="...">
-      <figcaption class="cs-caption">Placeholder caption.</figcaption>
+      <img src="/assets/perf-module-5.png" alt="Performance cycle listing page with only self and manager review">
+      <figcaption class="cs-caption">Performance cycle listing page (BEFORE)</figcaption>
+    </figure>
+
+    <p>At the performance details page, review summary cards are not fully utilising the available space; columns showing status for each participant’s self and manager review.</p>
+
+    <figure class="cs-figure">
+      <img src="/assets/perf-module-7.png" alt="Performance cycle listing page with only self and manager review">
+      <figcaption class="cs-caption">Performance cycle details page (BEFORE)</figcaption>
+    </figure>
+    
+    <p>We initially built a dedicated page for the performance reviews tasks which was not consistent with other tasks, and caused some confusion for the users. Also, there was no more space to fit in the new reviewer types with this design.</p>
+    
+    <figure class="cs-figure">
+      <img src="/assets/perf-module-7.png" alt="My Reviews page for reviewing managers">
+      <figcaption class="cs-caption">My Reviews page for reviewing managers (BEFORE)</figcaption>
     </figure>
 
     <h3 class="cs-subsection-title">After</h3>
