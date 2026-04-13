@@ -1,75 +1,81 @@
 # Performance Module
 
-## Overview
+## Context & Challenge
 
-- Performance module allows organisations to conduct reviews of their employees’ performance to see how they are progressing.
+- OmniHR needed a performance review module to give organisations a reason to consolidate onto the platform — both as a **migration incentive** for new clients and a **retention lever** for existing ones.
+- The module allows organisations to create review templates, launch review cycles, and manage multi-directional feedback across employees, managers, peers, and subordinates.
 - **Key entities**: Templates → Cycles → Review phases
 - **Personas**: Admin, Reviewee (Employee), Reviewers (Manager, Peers, Subordinates)
-- **Visibility matrix**: who sees what, when?
-- The core design tension: power for admins vs. clarity for end users
-- Why visibility and timing make this uniquely difficult (a reviewee/reviewer seeing the wrong thing at the wrong moment breaks trust in the whole system)
+- **The core design tension**: giving admins powerful configuration options while keeping the experience clear and trustworthy for end users. A reviewee or reviewer seeing the wrong information at the wrong moment breaks trust in the entire system.
+- **Strategic constraint**: this module needed to meet the majority of use cases without becoming a standalone appraisal product — so every feature decision was a trade-off between depth and simplicity.
 
-## Business Objectives & Design Outcome
+## My Role & Impact
 
-- **User case 1**: Incentivise organisations to jump ship to OmniHR.
-- **User case 2**: Encourage stickiness; no need to get a separate appraisal software.
-- **Design outcome**: good enough features to meet majority of needs; not aiming to be the best appraisal software → not the key differentiation factor.
+- **Role**: Led design end-to-end — research, competitive analysis, wireframing, interaction design, UI design
+- **Duration**: 5 iterations over 2 years, scaling from 2 review types to 4, then integrating with Goal Setting
+- **Team**: 1 Designer (me), 2 PMs, 4 Devs, 2 QAs
+- **Key contributions**:
+  - [Drove the visibility rules framework that became the foundation for how all review responses are surfaced — describe the decision you championed]
+  - [Advocated for / pushed back on a specific scope decision — describe what and why]
+  - [Outcome: e.g. "X clients cited the module as a migration factor", "reduced admin setup time by Y", "support tickets around review visibility dropped by Z%"]
 
-## Role & Timeline
+## Process & Collaboration
 
-- **My Role**: research, competitive analysis, wireframing, interaction design, UI design
-- **Duration**: 5 iterations over 2 years (from just 2 to 4 review types to integrating with Goal Setting cycle)
-- **Cross-Functional Team**: 1x Designer, 2x PMs, 4x Devs, 2x QAs
+- Started with competitive analysis across [X] appraisal tools — identified gaps we could exploit (e.g. [specific gap]) and features we needed to match to be credible.
+- Defined scope for each iteration collaboratively with PMs and stakeholders. [Describe a moment where you influenced scope — what did you push to include or cut, and why?]
+- Mapped end-to-end user journeys for all personas before jumping into screens. This surfaced edge cases early — particularly around visibility timing — and saved rework downstream.
+- [Describe how you validated designs — usability testing, client feedback, support ticket analysis, PM reviews, beta rollouts, etc.]
+- Moved to hi-fi designs and created dev handoff presentations to align on interaction details and reduce back-and-forth during implementation.
 
-## Process
+## Key Design Decisions
 
-- Competitive research with competitor softwares; note down what we liked and don’t, what was missing in theirs that we can take advantage, what features could we match and not.
-- Defined scope for each iteration with stakeholders
-- Worked out the user journeys for the end-to-end performance cycle, starting with templates and cycles, to launching the review and viewing the results + some key wireframe screens for initial ideas
-- Once we agreed on the strategy, we moved on to Hi-Fi designs and dev hand-off presentations.
+### 1. Visibility Rules Framework
 
-## Deep Dive 1: Visibility Rules
+**Situation**: Expanding from Self & Manager Review to include Peer & Upward Review introduced a new problem — whose responses can the reviewee and manager see, when, and whether reviewer identities are anonymous.
 
-### Intro
+**Options considered**:
+- [Option A — e.g. simple toggle per review type. Why this wasn't enough.]
+- [Option B — e.g. the matrix approach you chose. Why this was better.]
 
-- When expanding from just Self & Manager Review → Peer & Upward Review, we introduce the Visibility Rules.
-- Whose responses can the reviewee & manager see and at what time? Are the peers’ and subordinates’ identities anonymous or visible?
-- The challenge is to ensure we cover all the scenarios for the 2 main user roles: reviewee and reviewing managers. We solve it by mapping them all out, and we sped up the process by reusing components.
+**Decision**: Introduced a two-layer visibility configuration in the review cycle creation flow:
+1. "Can they view results" — lets the admin choose whether reviewee and manager can view each persona's responses, and when.
+2. "Can they view the name of the reviewer" — controls identity anonymity per persona.
+- For certain persona combinations, the first setting constrains the options of the second — reducing admin error.
 
-### Details
+**How we got there**: Mapped out all visibility scenarios across the 2 main user roles (reviewee and reviewing managers). These maps doubled as alignment tools with PMs and devs — we used them to agree on interactions and views before building.
 
-- Here’s the new step in the review cycle creation flow.“Can they view results” allows the admin to choose if reviewee and manager can view the results of each persona, and if so, when?
-- “Can they view the name of the reviewer” lets the admin choose if they can view the identities of the respondents.
-- For certain personas, the options for “Can they view results” affects the options of the 2nd one.
-- Two examples of the visibility rules mapping. We use them also to agree on the interactions and views for the various user roles.
-- Example of all possible variants of the right-side component, which is nested within the card component. It covers all the scenarios for the various review types, eg. Self review, peer selection, etc..
+**Rationale**: [Why this approach was the right trade-off — what did it enable that simpler approaches couldn't? What risk did it mitigate?]
 
-## Deep Dive 2: Peer & Upward Review
+**Result**: [Reusable component system that scaled across review types / reduced admin configuration errors / client feedback, etc.]
 
-### Intro
+### 2. Redesigning for Multi-Review Types
 
-- On the same note, previous designs couldn’t simply be edited to meet demands of these 2 new personas.
-- Challenge: need to redesign in many places: to-do page, review cycle listing and details page.
-- Overcome lack of exploration time by referencing how other softwares did it.
+**Situation**: The original UI was designed for only self and manager reviews. Adding peer and upward review meant up to 5 review types + 2 selection periods per row — the existing 2-column card layout couldn't accommodate this.
 
-### Before
+**Options considered**:
+- [What other layouts or approaches did you explore? Why were they rejected?]
 
-- In the first iteration, there are only self and manager review to consider for each row item.
-- Chip used incorrectly to display the period of the review type.
-- Review cards are not fully utilising the available space.
+**Decision**: Revised to a 2-row card layout:
+- Row 1: essential performance cycle details
+- Row 2: statuses of selected review types for the cycle
 
-### After
+Other changes:
+- Introduced a progress bar combining absolute numbers and completion percentage on the event details page — giving admins both the "how many" and "how far along" at a glance.
+- Increased spacing between review period and status for better scannability.
+- Split the task page into "My Review" (reviews and responses about me) and "Team Review" (reviews and responses for subordinates, peers, and direct managers) — separating personal and managerial contexts.
 
-- We need to show the statuses of a max of 5 review types + 2 selection periods.Instead of the 2-col layout, so we revised it to a 2-row layout instead. Row 1: displays essential performance cycle details. Row 2: displays the statuses of the selected reviews for this cycle.
-- In event details page, we introduced a progress bar to balance the absolute number and percentage of completion.
-- More gap between review period and status -> easier to read.
-- New in task page: "My Review" tab to do reviews and view responses that are related to “me”. "Team Review" tab to do reviews and view responses outside of “me” – my subordinates, my peers, my direct manager.
+**Rationale**: [Why the 2-row layout won over alternatives. What user need or usability principle drove the My Review / Team Review split?]
+
+**Result**: [How this performed — admin feedback, reduced confusion, scalability for future review types, etc.]
 
 ## Reflection
 
-- What you'd do differently:
-  - Use a different layout for the My Review and Team Review cards to reduce the wasted space.
-- What the system still can't do cleanly:
-  - Handle the cases where employees fail to submit before deadlines and to extend deadline for specific ones; required the dev to manipulate via backend.
+- **What I'd do differently**:
+  - Use a different layout for the My Review and Team Review cards to reduce wasted space.
+  - [Any other process or collaboration changes?]
+- **What the system still can't do cleanly**:
+  - Handle cases where employees miss deadlines or need individual deadline extensions — this still requires backend intervention. [What would you propose to fix this? This shows forward-thinking.]
+- **What I learned**:
+  - [Key takeaway about designing configurable systems, balancing admin power vs. end-user simplicity, working within strategic constraints, etc.]
 
 ## Assets
