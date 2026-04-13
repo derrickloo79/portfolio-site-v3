@@ -485,6 +485,7 @@ ul { list-style: none; }
   width: 1.3em;
   flex-shrink: 0;
   cursor: pointer;
+  animation: avatar-bounce 3s ease-in-out infinite;
 }
 .about-avatar {
   height: 100%;
@@ -522,6 +523,10 @@ ul { list-style: none; }
 }
 .about-avatar-wrap.is-swapped::after {
   opacity: 1;
+}
+@keyframes avatar-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-0.15em); }
 }
 .about-body {
   max-width: 800px;
