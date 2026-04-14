@@ -579,6 +579,9 @@ ul { list-style: none; }
   font-size: var(--text-base);
   color: var(--black);
 }
+.career-timeline-link--mobile {
+  display: none;
+}
 .exp-role {
   font-size: var(--text-sm);
   font-weight: 500;
@@ -831,7 +834,8 @@ ul { list-style: none; }
 
 
   .exp-item { grid-template-columns: 1fr; }
-  .career-timeline-link { display: none; }
+  .career-timeline-link--desktop { display: none; }
+  .career-timeline-link--mobile { display: inline-block; }
   .exp-dates { grid-column: 1; grid-row: auto; text-align: left; }
 
   .work-item { grid-template-columns: 1.75rem 1fr; gap: 0.625rem; }
