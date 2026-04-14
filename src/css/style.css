@@ -54,6 +54,7 @@
   --text-xl:  2.25rem;    /* 36px */
   --text-2xl: 3rem;       /* 48px */
   --text-3xl: 4rem;       /* 64px */
+  --text-about-mobile: 2rem; /* 32px */
 
   --content-width: 1200px;
   --page-padding: 2rem;
@@ -473,7 +474,7 @@ ul { list-style: none; }
   margin-bottom: 4.5rem;
 }
 .about-intro h1 {
-  font-size: clamp(var(--text-xl), 4vw, var(--text-2xl));
+  font-size: clamp(var(--text-about-mobile), 4vw, var(--text-2xl));
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.15;
