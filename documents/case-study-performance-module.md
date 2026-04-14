@@ -22,10 +22,10 @@
 ## Process & Collaboration
 
 - Started with competitive analysis across 3 appraisal tools — identified gaps we could exploit (e.g. all those that we've analysed [1] required the review cycle to run at a fixed order, and [2] display the review form in a particular sequence; we made ours 100% flexible) and features we needed to match to be credible (e.g. the ability for the managers to lock the peer selection from further editing).
-- Defined scope for each iteration collaboratively with PMs and stakeholders. For example, in the first 2 releases, I proposed to keep sections like competencies and goal setting out of scope. These were dedicated sections in the tools that we analysed with their own step in the review cycle creation flow. And they typically happened at the beginning of the review cycle.
-- It was because we were not yet familiar with the mechanics of running a review cycle that included a period – goal setting and competencies selection – that was separated from the rest of the phases. I termed them as rabbit holes with unknown complexities that would affect the deadlines dramatically.
+- Defined scope for each iteration collaboratively with PMs and stakeholders. For example, in the first 2 releases, I proposed to keep sections like competencies and goal setting out of scope. Those were dedicated sections with their own step in the review cycle creation flow, which typically happened at the beginning of the cycle.
+- These unknown complexities around their placement in the cycle would have delayed release.
 - Mapped end-to-end user journeys for all personas before jumping into screens. This surfaced edge cases early — particularly around visibility timing — and saved rework downstream.
-- [Describe how you validated designs — usability testing, client feedback, support ticket analysis, PM reviews, beta rollouts, etc.]
+- Validated designs by reviewing with PMs and FE devs early to ensure the logic is sound and solution is reasonable for the timeline. Ran usability test with colleagues to run through the flows with fresh pairs of eyes to surface areas that are confusing.
 - Moved to hi-fi designs and created dev handoff presentations to align on interaction details and reduce back-and-forth during implementation.
 
 ## Key Design Decisions
@@ -51,7 +51,7 @@ Option B: display all the options in a 2 column-matrix, grouped by user roles. I
 
 **Rationale**: It helped to visually explain how the configurations impacted the downstream displays instead of using text and tables, and also demonstrate the state changes over time for each of the user roles. It mitigated the risk of misinterpretation of the fields.
 
-**Result**: Reusable component system that scaled across review types, reduced development and QA time, and reduced admin configuration
+**Result**: Reusable component system that scaled across review types, reduced development and QA time, and reduced admin configuration.
 
 ### 2. Redesigning for Multi-Review Types
 
@@ -59,8 +59,8 @@ Option B: display all the options in a 2 column-matrix, grouped by user roles. I
 
 **Options considered**:
 
-- While I got a general sense that 2-row layout was the way to go, I played around with various format for the row displaying the status and progress. Eg. one version focused on the active phase, another one visualized as a steppers.
-- Those earlier variations were rejected as they lack clarity on the period and progress. The phases were displayed in a particular sequence didn't mean the actual cycle ran in that same order, so it was important that the design carried all the essential details so it would make sense to the admin even if she was just skimming over them.
+- While I got a general sense that 2-row layout was the way to go, I played around with various format for the row displaying the status and progress. E.g. one version focused on the active phase, another one visualized as a steppers.
+- Those earlier variations were discarded as they lack clarity on the period and progress. The fact that the phases were displayed in a particular sequence didn't mean the actual cycle ran in that same order, so it was important that the design carried all the essential details so it would make sense to the admin even if she was just skimming over them.
 
 **Decision**: Revised to a 2-row card layout:
 
@@ -72,19 +72,25 @@ Other changes:
 - Introduced a progress bar combining absolute numbers and completion percentage on the event details page — giving admins both the "how many" and "how far along" at a glance.
 - Increased spacing between review period and status for better scannability.
 - Split the task page into "My Review" (reviews and responses about me) and "Team Review" (reviews and responses for subordinates, peers, and direct managers) — separating personal and managerial contexts.
+- Within each tab, the review cards are stacked vertically for each persona.
 
-**Rationale**: [Why the 2-row layout won over alternatives. What user need or usability principle drove the My Review / Team Review split?]
+**Rationale**:
+- 2-row layout with all essential details: Admin needs to feel they are on top of every aspect of a performance cycle, and by providing them with those information, they know they are in control.
+- My Review / Team Review split: It was driven by the fact the two tabs handled two different scopes, thus the need to split them up. It worked well with the user's mental mode of "myself" vs "others". "Others" in this case is all employees within my team – my direct reports, my peers, my direct manager.
+- Vertical stacking of review types: Better scannability of the different review types, employees involved, the status and CTAs, as the columns are aligned. All they need to do is to look to the right side for the primary buttons to know which reviews required their actions.
 
-**Result**: [How this performed — admin feedback, reduced confusion, scalability for future review types, etc.]
+**Result**:
+- By designing with the all the review types and selection phases in mind, we ensured that the design worked also for the worst-case scenario. Vertical stacking of review types allowed scalability for future review types, like secondary manager review, goal setting phase, etc., with minimal effort.
 
 ## Reflection
 
 - **What I'd do differently**:
   - Use a different layout for the My Review and Team Review cards to reduce wasted space.
-  - [Any other process or collaboration changes?]
 - **What the system still can't do cleanly**:
-  - Handle cases where employees miss deadlines or need individual deadline extensions — this still requires backend intervention. [What would you propose to fix this? This shows forward-thinking.]
+  - Handle cases where employees miss deadlines or need individual deadline extensions — this still requires backend intervention.
+  - By providing admin the function to extend the deadlines, either individually or in bulk, we could free up the backend developer's time.
 - **What I learned**:
-  - [Key takeaway about designing configurable systems, balancing admin power vs. end-user simplicity, working within strategic constraints, etc.]
+  - Key takeaway: designing the performance module required me to work within strategic constraints to balance admin power vs. end-user simplicity. 
+  - Implementing the visibility matrix allowed the admin to have full control over who see what and when, enabled the success of this module.
+  - By keeping goal setting and competencies out of scope, we were able to focus on the complexities of the crucial review cycle and meet the timeline.
 
-## Assets
