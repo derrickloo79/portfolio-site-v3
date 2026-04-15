@@ -10,146 +10,184 @@ team: 1 Designer, 2 PMs, 4 Devs, 2 QAs
 ---
 
 <section class="cs-section">
-  <h2 class="cs-section-title">Overview</h2>
+  <h2 class="cs-section-title">Context & Challenge</h2>
   <div class="cs-section-body">
-    <p>The performance module allows organisations to conduct reviews of their employees' performance. The system is built around three key entities: <strong>Templates, Cycles,</strong> and <strong>Review phases</strong>.</p>
-    <p>Three personas interact with the system — Admins who configure reviews, Reviewees (employees being reviewed), and Reviewers (managers, peers, subordinates). The core design tension: <strong>power for admins vs. clarity for end users</strong>.</p>
-    <p>What makes this uniquely difficult is the visibility matrix — who sees what, and when. A reviewee or reviewer seeing the wrong thing at the wrong moment breaks trust in the entire system.</p>
+    <p>OmniHR needed a performance review module to give organisations a reason to consolidate onto the platform — both as a <strong>migration incentive</strong> for new clients and a <strong>retention lever</strong> for existing ones.</p>
+    <p>The module allows organisations to create review templates, launch review cycles, and manage multi-directional feedback across employees, managers, peers, and subordinates.</p>
+    <ul class="cs-list">
+      <li><strong>Key entities</strong>: Templates → Cycles → Review phases</li>
+      <li><strong>Personas</strong>: Admin, Reviewee (Employee), Reviewers (Manager, Peers, Subordinates)</li>
+    </ul>
+    <p><strong>The core design tension</strong>: giving admins powerful configuration options while keeping the experience clear and trustworthy for end users. A reviewee or reviewer seeing the wrong information at the wrong moment breaks trust in the entire system.</p>
+    <p><strong>Strategic constraint</strong>: this module needed to meet the majority of use cases without becoming a standalone appraisal product — so every feature decision was a trade-off between depth and simplicity.</p>
   </div>
 </section>
 
 <section class="cs-section">
-  <h2 class="cs-section-title">Business Objectives</h2>
+  <h2 class="cs-section-title">My Role & Impact</h2>
   <div class="cs-section-body">
     <ul class="cs-list">
-      <li><strong>Acquisition:</strong> Incentivise organisations to switch to OmniHR by offering an integrated performance module.</li>
-      <li><strong>Retention:</strong> Encourage stickiness — no need to get a separate appraisal software.</li>
-      <li><strong>Design outcome:</strong> Good enough features to meet the majority of needs. Not aiming to be the best appraisal software — it's not the key differentiation factor.</li>
+      <li><strong>Role</strong>: Led design end-to-end — research, competitive analysis, wireframing, interaction design, UI design</li>
+      <li><strong>Duration</strong>: 5 iterations over 2 years, scaling from 2 review types to 4, then integrating with Goal Setting</li>
+      <li><strong>Team</strong>: 1 Designer (me), 2 PMs, 4 Devs, 2 QAs</li>
+    </ul>
+    <h3 class="cs-subsection-title">Key contributions</h3>
+    <ul class="cs-list">
+      <li>Drove the visibility rules framework that became the foundation for how all review responses are surfaced — using checkboxes and switches just weren't enough for admins to easily comprehend and set up; the final matrix layout was the outcome after numerous design iterations and reviews.</li>
+      <li>Proposed to keep goal setting and competencies selection out of the first 2 iterations as they were complex already; including them would delay release deadlines to meet the year-end quarter when most annual reviews occur.</li>
+      <li>While I wasn't able to ascertain the exact number of new logos that signed up with OmniHR due to this module, I gathered from the sales team that the improved appraisal module incentivised them hugely.</li>
     </ul>
   </div>
 </section>
 
 <section class="cs-section">
-  <h2 class="cs-section-title">Process</h2>
+  <h2 class="cs-section-title">Process & Collaboration</h2>
   <div class="cs-section-body">
-    <ol class="cs-list cs-list--ordered">
-      <li>Competitive research across appraisal softwares — noting what we liked, what was missing, and what features we could match or surpass.</li>
-      <li>Defined scope for each iteration with stakeholders.</li>
-      <li>Mapped user journeys for the end-to-end performance cycle: templates and cycles, launching reviews, and viewing results. Key wireframes for initial ideas.</li>
-      <li>Once aligned on strategy, moved to hi-fi designs and dev hand-off presentations.</li>
-    </ol>
+    <ul class="cs-list">
+      <li>Started with competitive analysis across 3 appraisal tools — identified gaps we could exploit (all required the review cycle to run at a fixed order and display the review form in a particular sequence; we made ours 100% flexible) and features we needed to match to be credible (e.g. the ability for managers to lock the peer selection from further editing).</li>
+      <li>Defined scope for each iteration collaboratively with PMs and stakeholders. For example, in the first 2 releases, I proposed to keep sections like competencies and goal setting out of scope. Those were dedicated sections with their own step in the review cycle creation flow, which typically happened at the beginning of the cycle. These unknown complexities around their placement in the cycle would have delayed release.</li>
+      <li>Mapped end-to-end user journeys for all personas before jumping into screens. This surfaced edge cases early — particularly around visibility timing — and saved rework downstream.</li>
+      <li>Validated designs by reviewing with PMs and frontend developers early to ensure the logic is sound and solution is reasonable for the timeline. Ran usability tests with colleagues to run through the flows with fresh pairs of eyes to surface confusing areas.</li>
+      <li>Moved to hi-fi designs and created dev handoff presentations to align on interaction details and reduce back-and-forth during implementation.</li>
+    </ul>
   </div>
 </section>
 
 <section class="cs-section">
-  <h2 class="cs-section-title">Deep Dive: Visibility Rules</h2>
+  <h2 class="cs-section-title">Key Design Decisions</h2>
   <div class="cs-section-body">
-    <p>When expanding from Self &amp; Manager Review to include Peer &amp; Upward Review, we introduced visibility rules. The key questions: whose responses can the reviewee and manager see, and when? Are peer and subordinate identities anonymous or visible?</p>
-    <p>The challenge was covering all scenarios for two main user roles. We solved it by mapping every combination, and sped up the process by reusing components.</p>
+    <h3 class="cs-subsection-title">1. Visibility Rules Framework</h3>
 
-    <h3 class="cs-subsection-title">How it works</h3>
-    <p>A new step in the review cycle creation: <strong>Step visibility rules</strong></p>
+    <p><strong>Situation</strong>: Expanding from Self & Manager Review to include Peer & Upward Review introduced a new problem — whose responses can the reviewee and manager see, when, and whether reviewer identities are anonymous.</p>
+
+    <p><strong>Options considered</strong>:</p>
+    <ul class="cs-list">
+      <li><strong>Option A</strong>: Using checkboxes and toggles with progressive disclosures per user role. This resulted in a very long form with repetitive labels which weren't clear and intuitive enough for admins to configure easily.</li>
+      <li><strong>Option B</strong>: Display all the options in a 2-column matrix, grouped by user roles. It removed repetitive labels and the admin could see how one field influenced the other.</li>
+    </ul>
+
+    <p><strong>Decision</strong>: Introduced a two-layer visibility configuration in the review cycle creation flow:</p>
     <ol class="cs-list">
-      <li><strong>"Can they view results"</strong> lets admins choose if the reviewee and manager can see each persona's responses, and if so, when.</li>
-      <li><strong>"Can they view the name of the reviewer"</strong> controls whether respondent identities are visible.</li>
+      <li>"Can they view results" — lets the admin choose whether reviewee and manager can view each persona's responses, and when.</li>
+      <li>"Can they view the name of the reviewer" — controls identity anonymity per persona.</li>
     </ol>
+    <p>For certain persona combinations, the first setting constrains the options of the second — reducing admin error.</p>
 
     <figure class="cs-figure">
       <img src="/assets/perf-module-1.png" alt="Set visibility rules step">
       <figcaption class="cs-caption">Set visibility rules step</figcaption>
     </figure>
 
-    <p>For certain personas, the first option's selection constrains the second — creating dependent logic.</p>
-
     <figure class="cs-figure">
-      <img src="/assets/perf-module-2.png" alt="Options on the left side affect the right side">
+      <img src="/assets/perf-module-2.png" alt="Options on left side affect the right side">
       <figcaption class="cs-caption">Options on the left side affect the right side</figcaption>
     </figure>
 
-    <p>We mapped all visibility rule combinations and used them to align on interactions and views across user roles, and sped up the process by reusing components.</p>
-    <p>Two examples of the visibility rules mapping. We used them also to agree on the interactions and views for the various user roles.</p>
+    <p><strong>How we got there</strong>: Mapped out all visibility scenarios across the 2 main user roles (reviewee and reviewing managers). These maps doubled as alignment tools with PMs and devs — we used them to agree on interactions and views before building.</p>
+
+    <p><strong>Rationale</strong>: It helped to visually explain how the configurations impacted the downstream displays instead of using text and tables, and also demonstrate the state changes over time for each of the user roles. It mitigated the risk of misinterpretation of the fields.</p>
 
     <figure class="cs-figure">
       <img src="/assets/perf-module-3.png" alt="Mapping of all visibility scenarios">
       <figcaption class="cs-caption">Mapping of all visibility scenarios</figcaption>
     </figure>
 
-    <p>Example of all possible variants of the right-side component, which is nested within the card component.</p>
-    <p>It covers all the scenarios for the various review types, eg. Self review, peer selection, etc..</p>
-
     <figure class="cs-figure">
       <img src="/assets/perf-module-4.png" alt="Variants of the right-side nested component">
       <figcaption class="cs-caption">Variants of the right-side nested component</figcaption>
     </figure>
-  </div>
-</section>
 
-<section class="cs-section">
-  <h2 class="cs-section-title">Deep Dive: Peer & Upward Review</h2>
-  <div class="cs-section-body">
-    <p>The introduction of peer and upward review meant previous designs couldn't simply be edited. We needed to redesign the to-do page, review cycle listing, and details page. We overcame the lack of exploration time by referencing how competitor softwares handled it.</p>
+    <p><strong>Result</strong>: Reusable component system that scaled across review types, reduced development and QA time, and reduced admin configuration errors.</p>
 
-    <h3 class="cs-subsection-title">Before</h3>
-  
-    <p>At the performance cycle listing page, there was only self and manager review to consider for each row item.</p>
+    <h3 class="cs-subsection-title">2. Redesigning for Multi-Review Types</h3>
+
+    <p><strong>Situation</strong>: The original UI was designed for only self and manager reviews. Adding peer and upward review meant up to 5 review types + 2 selection periods per row — the existing 2-column card layout couldn't accommodate this.</p>
+
+    <p><strong>Options considered</strong>:</p>
+    
+    <p>While I got a general sense that a 2-row layout was the way to go, I played around with various formats for the row displaying status and progress. One version focused on the active phase, another visualized as a stepper. Those earlier variations were discarded as they lacked clarity on the period and progress.</p>
+    
+    <figure class="cs-figure">
+      <img src="/assets/perf-module-11.png" alt="Variants of the right-side nested component">
+      <figcaption class="cs-caption">Early exploration of performance cycle listing row item</figcaption>
+    </figure>
+ 
+    <p>The fact that phases were displayed in a particular sequence didn't mean the actual cycle ran in that same order, so it was important that the design carried all the essential details to make sense to the admin even if she was just skimming over them.</p>
+
+    <p><strong>Decision</strong>: Revised to a 2-row card layout:</p>
+    <ul class="cs-list">
+      <li>Row 1: essential performance cycle details</li>
+      <li>Row 2: statuses of selected review types for the cycle</li>
+    </ul>
+
+    <p><strong>Other changes</strong>:</p>
+    <ul class="cs-list">
+      <li>Introduced a progress bar combining absolute numbers and completion percentage on the event details page — giving admins both the "how many" and "how far along" at a glance.</li>
+      <li>Increased spacing between review period and status for better scannability.</li>
+      <li>Split the task page into "My Review" (reviews and responses about me) and "Team Review" (reviews and responses for subordinates, peers, and direct managers) — separating personal and managerial contexts.</li>
+      <li>Within each tab, the review cards are stacked vertically for each persona.</li>
+    </ul>
 
     <figure class="cs-figure">
-      <img src="/assets/perf-module-5.png" alt="Performance cycle listing page with only self and manager review">
+      <img src="/assets/perf-module-5.png" alt="Variants of the right-side nested component">
       <figcaption class="cs-caption">Performance cycle listing page (BEFORE)</figcaption>
     </figure>
 
-    <p>At the performance details page, review summary cards are not fully utilising the available space; columns showing status for each participant’s self and manager review.</p>
-
     <figure class="cs-figure">
-      <img src="/assets/perf-module-6.png" alt="Performance cycle listing page with only self and manager review">
+      <img src="/assets/perf-module-6.png" alt="Variants of the right-side nested component">
       <figcaption class="cs-caption">Performance cycle details page (BEFORE)</figcaption>
     </figure>
-    
-    <p>We initially built a dedicated page for the performance reviews tasks which was not consistent with other tasks, and caused some confusion for the users. Also, there was no more space to fit in the new reviewer types with this design.</p>
-    
+
     <figure class="cs-figure">
-      <img src="/assets/perf-module-7.png" alt="My Reviews page for reviewing managers">
+      <img src="/assets/perf-module-7.png" alt="Variants of the right-side nested component">
       <figcaption class="cs-caption">My Reviews page for reviewing managers (BEFORE)</figcaption>
     </figure>
 
-    <h3 class="cs-subsection-title">After</h3>
-
-    <p>In order to display statuses for up to 5 review types + 2 selection periods, we'd decided to switched from a inline view to a stacked layout — Row 1 for essential cycle details, Row 2 for review statuses.</p>
-    
     <figure class="cs-figure">
-      <img src="/assets/perf-module-8.png" alt="My Reviews page for reviewing managers">
+      <img src="/assets/perf-module-8.png" alt="Variants of the right-side nested component">
       <figcaption class="cs-caption">Performance cycle listing page (AFTER)</figcaption>
     </figure>
 
-    <p>One of the most important change we did was to make the review status cards similar between the listing and details page, such as the position and style of the review type title, period and status badge.</p>
-
-    <p>For better clarity of progress, we moved the manager to its own column, and used icons for the statuses instead of badges.</p>
-    <p>The counter allowed the admin and HR manager to see progress of review types with multiple parties.</p>
-   
     <figure class="cs-figure">
-      <img src="/assets/perf-module-9.png" alt="My Reviews page for reviewing managers">
+      <img src="/assets/perf-module-9.png" alt="Variants of the right-side nested component">
       <figcaption class="cs-caption">Performance cycle details page (AFTER)</figcaption>
     </figure>
 
-    <p>New task page tabs: <strong>"My Review"</strong> for reviews and responses related to me, and <strong>"Team Review"</strong> for everything outside of me — subordinates, peers, direct manager.</p>
-
-    <p>By stacking the review type cards, it made skimming lot easier. For each review type, the user is able to know the person(s) involved, and the statuses and CTAs.</p>
-    <p> For the CTAs, we used primary button for strong ones like Take Review, Outline button for weak ones like viewing the responses.</p>
-
     <figure class="cs-figure">
-      <img src="/assets/perf-module-10.png" alt="My Reviews page for reviewing managers">
-      <figcaption class="cs-caption">New performance review task page with tabs for Me Review and Team Review (AFTER)</figcaption>
+      <img src="/assets/perf-module-10.png" alt="Variants of the right-side nested component">
+      <figcaption class="cs-caption">New performance review task page with tabs for My Review and Team Review (AFTER)</figcaption>
     </figure>
 
+    <p><strong>Rationale</strong>:</p>
+    <ul class="cs-list">
+      <li><strong>2-row layout with all essential details</strong>: Admin needs to feel they are on top of every aspect of a performance cycle, and by providing them with that information, they know they are in control.</li>
+      <li><strong>My Review / Team Review split</strong>: It was driven by the fact the two tabs handled two different scopes, thus the need to split them up. It worked well with the user's mental model of "myself" vs "others". "Others" in this case is all employees within my team – my direct reports, my peers, my direct manager.</li>
+      <li><strong>Vertical stacking of review types</strong>: Better scannability of the different review types, employees involved, the status and CTAs, as the columns are aligned. All they need to do is look to the right side for the primary buttons to know which reviews required their actions.</li>
+    </ul>
+
+    <p><strong>Result</strong>: By designing with all the review types and selection phases in mind, we ensured that the design worked also for the worst-case scenario. Vertical stacking of review types allowed scalability for future review types, like secondary manager review, goal setting phase, etc., with minimal effort.</p>
   </div>
 </section>
 
 <section class="cs-section">
   <h2 class="cs-section-title">Reflection</h2>
   <div class="cs-section-body">
+    <h3 class="cs-subsection-title">What I'd do differently</h3>
     <ul class="cs-list">
-      <li><strong>Would do differently:</strong> Use a different layout for the My Review and Team Review cards to reduce wasted space.</li>
-      <li><strong>Current limitation:</strong> The system still can't cleanly handle employees who miss submission deadlines or extend deadlines for specific individuals — this requires backend manipulation by developers.</li>
+      <li>Use a different layout for the My Review and Team Review cards to reduce wasted space.</li>
+    </ul>
+
+    <h3 class="cs-subsection-title">What the system still can't do cleanly</h3>
+    <ul class="cs-list">
+      <li>Handle cases where employees miss deadlines or need individual deadline extensions — this still requires backend intervention.</li>
+      <li>By providing admins the function to extend deadlines, either individually or in bulk, we could free up the backend developer's time.</li>
+    </ul>
+
+    <h3 class="cs-subsection-title">What I learned</h3>
+    <ul class="cs-list">
+      <li><strong>Key takeaway</strong>: Designing the performance module required me to work within strategic constraints to balance admin power vs. end-user simplicity.</li>
+      <li>Implementing the visibility matrix allowed the admin to have full control over who sees what and when, which enabled the success of this module.</li>
+      <li>By keeping goal setting and competencies out of scope, we were able to focus on the complexities of the crucial review cycle and meet the timeline.</li>
     </ul>
   </div>
 </section>
