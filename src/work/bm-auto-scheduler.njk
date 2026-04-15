@@ -10,18 +10,32 @@ team: 1 Designer, 2 Full-Stack Devs, 1 Data Scientist
 ---
 
 <section class="cs-section">
-  <h2 class="cs-section-title">Overview</h2>
+  <h2 class="cs-section-title">Context & Challenge</h2>
   <div class="cs-section-body">
     <p>Users had been giving constant feedback that it took too long and too much effort to generate a schedule with our software. By the time a schedule was ready, it was already outdated. Worse, the system was buggy — generating outputs with incorrect values, wasting time, and forcing users back to manual planning.</p>
-    <p>We reworked the system and workflow from scratch, cutting scheduling time from <strong>120 minutes to 40 — a 63% reduction</strong> — with error-free output.</p>
+    <p><strong>Solution:</strong> We reworked the system and workflow from scratch, cutting scheduling time from <strong>120 minutes to 40 minutes — a 63% reduction</strong> — with error-free output.</p>
+
+    <h3 class="cs-subsection-title">What the product does</h3>
+    <p>BunkerMaestro's primary function is for bunker suppliers to optimise their bunkering jobs through a proprietary algorithm called the Automated Scheduler (AS). Its secondary function is a CRM system for managing vessels, customers, and contacts. The main audience: operation personnel.</p>
+    <p>Bunker refers to fuel for vessels (ships). Think of a car visiting a petrol station — but for vessels, it's the other way round: bunker barges visit the vessels to supply them with fuel.</p>
   </div>
 </section>
 
 <section class="cs-section">
-  <h2 class="cs-section-title">The Product</h2>
+  <h2 class="cs-section-title">My Role & Impact</h2>
   <div class="cs-section-body">
-    <p>BunkerMaestro's primary function is for bunker suppliers to optimise their bunkering jobs through a proprietary algorithm called the Automated Scheduler (AS). Its secondary function is a CRM system for managing vessels, customers, and contacts. The main audience: ops personnel.</p>
-    <p>Bunker refers to fuel for vessels. Think of a car visiting a petrol station — but for ships, it's the other way round: bunker vessels visit the ships to supply them with fuel.</p>
+    <ul class="cs-list">
+      <li><strong>Role:</strong> Led end-to-end redesign — discovery, ideation, UX design, data testing, client management</li>
+      <li><strong>Duration:</strong> 2 months</li>
+      <li><strong>Team:</strong> Monika (Full Stack Developer), Pindar (Full Stack Developer), Timothy (Data Scientist)</li>
+    </ul>
+
+    <h3 class="cs-subsection-title">Key contributions</h3>
+    <ul class="cs-list">
+      <li>Proposed and led the redesign of the AS workflow when bug fixes and patches couldn't resolve the issues of incorrect outputs and time-consuming data preparation.</li>
+      <li>Worked with Timothy, the data scientist, on tweaking the AS algorithm to generate the most optimised AS output based on user criteria and actual data.</li>
+      <li>Did intensive data testing with user's actual data after each refinement to ensure the AS would work for all scenarios.</li>
+    </ul>
   </div>
 </section>
 
@@ -40,18 +54,19 @@ team: 1 Designer, 2 Full-Stack Devs, 1 Data Scientist
   <div class="cs-section-body">
     <h3 class="cs-subsection-title">Scheduling data entry is time-intensive</h3>
     <ul class="cs-list">
-      <li>Users must manually update ETAs, add new jobs, assign barges, and input actual quantities for completed jobs.</li>
-      <li>Takes 2+ hours to prepare data before running the AS.</li>
-      <li>Double-checking current ROBs adds complexity; errors delay scheduling further.</li>
-      <li>Even experienced users save only 30–40 minutes — indicating poor usability.</li>
+      <li><strong>Manual updates required:</strong> Users must update ETAs, add new jobs, assign barges, and input actual quantities for completed jobs.</li>
+      <li><strong>High effort:</strong> Takes 2+ hours to prepare data before running the AS.</li>
+      <li><strong>Error-prone:</strong> Double-checking current ROBs adds complexity; errors delay scheduling further.</li>
+      <li><strong>Poor usability:</strong> Even experienced users save only 30–40 minutes, indicating the system wasn't serving their needs well.</li>
+      <li><strong>User frustration:</strong> Negative feedback due to increased workload and time, reducing system value.</li>
     </ul>
 
     <h3 class="cs-subsection-title">"Time-travel" ROB disrupts schedule accuracy</h3>
     <ul class="cs-list">
-      <li><strong>ROB</strong> (Remaining On Board): bunker remaining after a supply job.</li>
-      <li>ROB values used when applying the AS output reflected the <em>application</em> time, not the <em>run</em> time — leading to negative ROBs for some jobs and over-capacity for others.</li>
-      <li>Schedules became unusable, forcing manual rescheduling and eroding user trust.</li>
-      <li>An attempted fix — locking jobs based on time since schedule run — failed to cover all edge cases. Daily new edge cases triggered client complaints.</li>
+      <li><strong>The problem:</strong> ROB (Remaining On Board) refers to bunker remaining after a supply job. When users applied the AS output, ROB values reflected the application time, not the run time.</li>
+      <li><strong>Impact:</strong> This led to negative ROBs for some jobs and over-capacity for others, rendering schedules unusable.</li>
+      <li><strong>Eroding trust:</strong> Users were forced to manually reschedule, losing confidence in the system.</li>
+      <li><strong>Failed patch:</strong> An attempted fix — locking jobs based on time since schedule run — failed to cover all edge cases. Daily new edge cases triggered client complaints about inaccurate schedules.</li>
     </ul>
   </div>
 </section>
@@ -59,33 +74,40 @@ team: 1 Designer, 2 Full-Stack Devs, 1 Data Scientist
 <section class="cs-section">
   <h2 class="cs-section-title">Rethinking the System</h2>
   <div class="cs-section-body">
-    <p>Previous fixes were reactive — patching issues without addressing core user needs. We needed a deep dive into root causes.</p>
-    <p>The user outcome we were designing for: <strong>"As a planner, I want to run the AS using only current ROB values and upcoming jobs to quickly update stakeholders with the new plan."</strong></p>
-    <p>The goal: minimise manual data entry, reduce errors, and ensure accurate, timely schedules.</p>
+    <p><strong>Problem:</strong> Previous fixes were reactive — patching issues without addressing core user needs. We needed a deep dive into root causes.</p>
+    <p><strong>User outcome:</strong> "As a planner, I want to run the AS using only current ROB values and upcoming jobs to quickly update stakeholders with the new plan."</p>
+    <p><strong>Goal:</strong> Minimise manual data entry, reduce errors, and ensure accurate, timely schedules.</p>
   </div>
 </section>
 
 <section class="cs-section">
   <h2 class="cs-section-title">Approach</h2>
   <div class="cs-section-body">
-    <p>We broke this project into small workable chunks, starting from the point of entry to getting an AS output. Each test built on the last until the entire redesign was complete.</p>
+    <p>We broke this project into small workable chunks to test a core hypothesis based on the challenges above, starting from the point of entry to getting an AS output.</p>
+
+    <p><strong>The hypothesis:</strong> Do users really need to update all completed jobs to generate new ROB values for the AS? Can we just use the most current values they have from operators on the ground?</p>
+
+    <p>Turned out we could — and everything we tested from then on revolved around that insight. We stress-tested the redesigned system using live client data before deploying to production.</p>
 
     <h3 class="cs-subsection-title">1. One manual ROB entry per barge</h3>
-    <p>Each time the user ran the AS, there was just one ROB entry per barge, and its timestamp got updated. Values in between no longer mattered — those jobs were completed. ROB values were crucial only for upcoming jobs.</p>
-    <!-- TODO: Add screenshot -->
+    <p><strong>Before:</strong> Each time the user manually updated a barge's ROB entry, the system logged it with a timestamp. Sometimes the entry was meant for a future event, e.g. the end of a job one day later. All these entries were pulled into the algorithm when the user ran the AS, messing up the output.</p>
+    <p><strong>After:</strong> There was just one entry per barge at the point when the user ran the AS, and its timestamp got updated each time. Users no longer needed to fill in details for completed jobs — huge time savings. Values in between no longer mattered because those jobs were completed; ROB values were crucial only for upcoming jobs.</p>
+    <!-- [IMAGE: One manual ROB entry per barge] -->
 
     <h3 class="cs-subsection-title">2. Tackling ongoing jobs</h3>
-    <p>We had users supply the pre-job ROB values of ongoing jobs. They didn't even need to enter the timestamp — the system grabbed the vessel's ETA timing automatically.</p>
-    <p>Why not use the post-job ROB value? Because it required a future timestamp, which would mess up the algorithm and generate errors.</p>
-    <!-- TODO: Add screenshot -->
+    <p><strong>Before:</strong> Many issues stemmed from ongoing jobs. When a user prepared data to run the AS with an ongoing job, they would provide the estimated post-job ROB with a future timestamp. This messed up the algorithm and generated incorrect output.</p>
+    <p><strong>After:</strong> We had users supply the pre-job ROB values of ongoing jobs. They didn't even need to enter the timestamp — the system grabbed the vessel's ETA timing automatically. Why not use the post-job ROB value? Because it required a future timestamp, which would mess up the algorithm and generate errors.</p>
+    <!-- [IMAGE: Tackling ongoing jobs] -->
 
     <h3 class="cs-subsection-title">3. "Freeze" the AS output</h3>
-    <p>If a user ran the output today and only applied it the next day, the system would overwrite the schedule from the time it was <em>run</em>, not the time it was <em>applied</em>. The schedule and output were frozen in time.</p>
-    <!-- TODO: Add screenshot -->
+    <p><strong>Before:</strong> When a user applied the AS output that was generated 4 hours ago, the system started applying the data to upcoming jobs from the point of application. The whole schedule became a mess.</p>
+    <p><strong>After:</strong> Regardless of the delay between when the AS was run and applied, the system would always apply the output to the schedule from the time it was run, not the time it was applied. It was as though the schedule and output were frozen in time.</p>
+    <!-- [IMAGE: Freeze the AS output] -->
 
     <h3 class="cs-subsection-title">4. Surface errors pre-run</h3>
-    <p>The system would check ROBs before the AS run for ongoing and next upcoming jobs of each barge — validating immediately for insufficient ROBs, max capacity breaches, and other issues. Since an AS run could take 20+ minutes, catching errors upfront meant huge time savings.</p>
-    <!-- TODO: Add screenshot -->
+    <p><strong>Before:</strong> Errors were highlighted only after the AS started processing and discovered them. By then, 20–30 minutes was already wasted.</p>
+    <p><strong>After:</strong> The system would check and validate all ROBs before the AS run for things like having insufficient ROBs or exceeding max capacity. Since an AS run could take 20+ minutes, catching errors upfront meant huge time savings for users.</p>
+    <!-- [IMAGE: Surface errors pre-run] -->
   </div>
 </section>
 
@@ -94,27 +116,27 @@ team: 1 Designer, 2 Full-Stack Devs, 1 Data Scientist
   <div class="cs-section-body">
     <p>After weeks of testing and bug fixing, we pushed to production. I sent the client a Loom video and PowerPoint presentation of the new procedure. Then we waited.</p>
     <p>The email came eventually. They were very pleased with how the new procedure allowed them to generate output so much faster — and more importantly, <strong>without errors</strong>.</p>
-    <p>Our hypothesis worked. As a result of the redesign, users could get an output in about <strong>40 minutes — a savings of over 60%</strong> from the 120 minutes it previously took.</p>
+    <p>Our hypothesis worked and our efforts finally paid off! As a result of the redesign, users could get an output in about <strong>40 minutes — a savings of over 60%</strong> from the 120 minutes it previously took.</p>
+    <p>On top of that, a few other logos started expressing interest in our software, including Shell and Wilhelmsen Ship Management. We eventually conducted a proof-of-concept with Wilhelmsen on an expanded module of BunkerMaestro.</p>
   </div>
 </section>
 
 <section class="cs-section">
   <h2 class="cs-section-title">Reflection</h2>
   <div class="cs-section-body">
-    <ul class="cs-list">
-      <li>When fixes aren't working, look into the problem deeper.</li>
-      <li>Don't be afraid to make major overhauls when absolutely necessary.</li>
-      <li>I don't have the solution — I only have a hypothesis of the solution.</li>
-      <li>Start with small, manageable steps and build upon them.</li>
-      <li>Help the team see the big picture and the positive impact they'd be making.</li>
-    </ul>
-  </div>
-</section>
+    <h3 class="cs-subsection-title">In order to locate the source of the problem</h3>
+    <p>We need to trace back to every step of the AS workflow, questioning each of them using first principles. This is what led us to the core hypothesis about ROB values and how they should flow through the system.</p>
 
-<section class="cs-section">
-  <h2 class="cs-section-title">Conclusion</h2>
-  <div class="cs-section-body">
-    <p>This is one of the most important and challenging projects I've worked on. It required deep research to discover root causes, and it provided real value for the users.</p>
-    <p>I was very fortunate to have the developers' trust and my management team's backing to pull it off.</p>
+    <h3 class="cs-subsection-title">When fixes create more bugs</h3>
+    <p>It's time for a major overhaul. Band-aid patches to the time-travel ROB problem kept failing and introducing new edge cases. It was a signal that the entire approach needed rethinking.</p>
+
+    <h3 class="cs-subsection-title">I don't have the solution — I only have a hypothesis</h3>
+    <p>Once that hypothesis is proved, everything else tested builds on that foundation. Validation is key. We validated our ROB hypothesis and then built the four solutions around it.</p>
+
+    <h3 class="cs-subsection-title">Start with small, manageable steps</h3>
+    <p>Breaking the project into small chunks meant we could test each piece incrementally without risking the entire system. Each test built up to the next until the entire redesign was complete.</p>
+
+    <h3 class="cs-subsection-title">Help the team see the big picture</h3>
+    <p>Getting buy-in from Monika, Pindar, and Timothy was crucial. Showing them the user impact and the positive outcome they'd enable kept everyone aligned and motivated throughout the project.</p>
   </div>
 </section>
