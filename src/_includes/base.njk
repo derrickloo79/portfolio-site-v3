@@ -71,7 +71,8 @@
       });
 
       // Close modal on overlay click
-      overlay.addEventListener('click', function() {
+      overlay.addEventListener('click', function(e) {
+        e.stopPropagation();
         modal.classList.remove('active');
         document.body.style.overflow = 'auto';
       });
