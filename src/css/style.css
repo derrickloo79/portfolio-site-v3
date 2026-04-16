@@ -723,6 +723,13 @@ ul { list-style: none; }
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  flex: 1;
+}
+.cs-meta-item:first-child {
+  flex: 2;
+}
+.cs-meta-item:first-child:nth-last-child(2) {
+  flex: 1;
 }
 .cs-meta-label {
   font-size: var(--text-xs);
