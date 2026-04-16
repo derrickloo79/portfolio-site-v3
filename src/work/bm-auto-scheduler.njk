@@ -103,16 +103,18 @@ team: 1 Designer, 2 Full-Stack Devs, 1 Data Scientist
       <figcaption class="cs-caption">Every manual ROB update created a timestamped entry, messing up the algorithm</figcaption>
     </figure>
 
-    <p><strong>Before:</strong> Each time the user manually updated a barge's ROB entry, the system logged it with a timestamp. Sometimes the entry was meant for a future event, e.g. the end of a job one day later. All these entries were pulled into the algorithm when the user ran the AS, messing up the output.</p>
+    <p><strong>Before:</strong> Each time the user manually updated a barge's ROB entry, the system logged it with a timestamp. Sometimes the entry was meant for a future event, e.g. the end of a job one day later.</p>
+    <p>All these entries were pulled into the algorithm when the user ran the AS, messing up the output.</p>
 
     <figure class="cs-figure">
       <img src="/assets/autoscheduler-redesign-3.png" alt="Only 1 ROB entry per barge; only timestamp is changed.">
       <figcaption class="cs-caption">Only 1 ROB entry per barge; only timestamp is changed</figcaption>
     </figure>
 
-    <p><strong>After:</strong> There was just one entry per barge at the point when the user ran the AS, and its timestamp got updated each time. Values in between no longer mattered because those jobs were completed; ROB values were crucial only for upcoming jobs.</p>
+    <p><strong>After:</strong> There was just one entry per barge at the point when the user ran the AS, and its timestamp got updated each time.</p>
+    <p>Values in between no longer mattered because those jobs were completed; ROB values were crucial only for upcoming jobs.</p>
     
-    <p><strong>The Real Game Changer:</strong> users no longer had to update ETAs and fill in details for those all past jobs just to run the AS — <strong>huge time savings of at least 40 mins!</strong></p>
+    <p>Here's the <strong>Real Game Changer:</strong> users no longer had to update ETAs and fill in details for those all past jobs just to run the AS — <strong>huge time savings of at least 40 mins!</strong></p>
 
     <h3 class="cs-subsection-title">2. Tackling ongoing jobs</h3>
 
@@ -128,7 +130,8 @@ team: 1 Designer, 2 Full-Stack Devs, 1 Data Scientist
       <figcaption class="cs-caption">Users just needed to fill up with pre-job ROB values</figcaption>
     </figure>
 
-    <p><strong>After:</strong> We had users supply the pre-job ROB values of ongoing jobs. They didn't even need to enter the timestamp — the system grabbed the vessel's ETA timing automatically. Why not use the post-job ROB value? Because it required a future timestamp, which would mess up the algorithm and generate errors.</p>
+    <p><strong>After:</strong> We had users supply the pre-job ROB values of ongoing jobs. They didn't even need to enter the timestamp — the system grabbed the vessel's ETA timing automatically.</p>
+    <p>Why not use the post-job ROB value? Because it required a future timestamp, which would mess up the algorithm and generate errors.</p>
 
     <h3 class="cs-subsection-title">3. "Freeze" the AS output</h3>
     <p><strong>Before:</strong> When a user applied the AS output that was generated 4 hours ago, the system started applying the data to upcoming jobs from the point of application. The whole schedule became a mess.</p>
