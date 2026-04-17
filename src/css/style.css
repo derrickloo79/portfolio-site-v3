@@ -923,12 +923,9 @@ ul { list-style: none; }
   justify-content: center;
   opacity: 0.8;
 }
-a.back-to-top {
-
-  text-decoration: none;
-}
 
 .back-to-top {
+  text-decoration: none;
   position: fixed;
   bottom: 6.4rem;
   right: 2rem;
@@ -937,7 +934,7 @@ a.back-to-top {
   font-size: 1.125rem;
   line-height: 1;
 
-  animation: progress ease-in;
+  animation: progress ease-in-out;
   animation-timeline: scroll();
 }
 
