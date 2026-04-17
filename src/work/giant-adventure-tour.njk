@@ -13,6 +13,12 @@ duration: 1 week
   <div class="cs-section-body">
     <p>I came across this website when I joined my friends on a cycling trip in Taiwan a couple of years back.</p>
     <p>Giant Adventure is the tour arm of Giant Bicycles, organising cycling tours within and beyond Taiwan for tourists and cycling enthusiasts. Visitors can search for and book tours through their website.</p>
+
+    <figure class="cs-figure">
+      <img src="/assets/giant-adventure-tour-1.png" alt="Giant adventure tour website">
+      <figcaption class="cs-caption">The current Giant Adventure website as of this writing</figcaption>
+    </figure>
+
     <p>The site worked fine, but the search controls took up a big chunk of the screen real estate. I felt the whole experience of searching and filtering tours could be improved with some UX and visual tweaks.</p>
 
     <h3 class="cs-subsection-title">Design goals</h3>
@@ -27,11 +33,26 @@ duration: 1 week
 <section class="cs-section">
   <h2 class="cs-section-title">Problem 1: Confusing and Unscalable Tour Categories</h2>
   <div class="cs-section-body">
+
+    <figure class="cs-figure">
+      <img src="/assets/giant-adventure-tour-2.png" alt="Tour categories were confusing">
+      <figcaption class="cs-caption">Tour categories were confusing</figcaption>
+    </figure>
+
     <p>The cycling tours were classified by categories and sub-categories. For example, there was a category called "Tour de Taiwan" where you cycle the circumference of Taiwan in 9 days. Within it were sub-categories — <em>From Taipei</em>, <em>From Kaohsiung</em>, <em>From Taichung</em>, etc. — that indicated the flag-off locations.</p>
     <p>Each category was listed as a radio-select field with a radio button beside it, meaning you could only select one category at a time. Within the dropdown options were the sub-categories with an "All" option selected by default.</p>
+
+    <figure class="cs-figure">
+      <img src="/assets/giant-adventure-tour-3.png" alt="Breakdown of dropdown options of all categories">
+      <figcaption class="cs-caption">Breakdown of dropdown options of all categories</figcaption>
+    </figure>
+
     <p>There were 6 categories already taking up 2 rows. If they expanded their categories, it would take up even more rows.</p>
 
-    <!-- TODO: Add screenshot of original category filters -->
+    <figure class="cs-figure">
+      <img src="/assets/giant-adventure-tour-4.png" alt="Current layout would not scale well for expansion">
+      <figcaption class="cs-caption">Current layout would not scale well for expansion</figcaption>
+    </figure>
 
     <h3 class="cs-subsection-title">Solution A: Single combined dropdown</h3>
     <p>Before sketching out ideas, I listed down the main outcomes for category selection:</p>
@@ -41,50 +62,81 @@ duration: 1 week
       <li>When a sub-category is selected, display just the tours under that sub-category.</li>
     </ol>
     <p>The first idea was to group all the categories and sub-categories under one long single-select field, with the categories acting as dividers to visually separate them.</p>
+   
+   <figure class="cs-figure">
+      <img src="/assets/giant-adventure-tour-5.png" alt="Solution A for tour categories is a single combined dropdown">
+      <figcaption class="cs-caption">Solution A: single combined dropdown</figcaption>
+    </figure>
+
     <p>The problem: this list would be very long (11 + 5 + 1 + 2 + 4 + 11 + 3 = 37 items). Scrolling through it would be tedious.</p>
     <p>I considered adding a search field inside the dropdown, but I think visitors — like myself — prefer to browse available options rather than search for a specific sub-category, especially when unsure what to look for.</p>
 
-    <!-- TODO: Add wireframe of Solution A -->
-
     <h3 class="cs-subsection-title">Solution B: Cascading dropdowns</h3>
     <p>The second idea is to have 2 single-select fields: the first for the main category ("Tour Type") and the second for the sub-category ("Tour Option").</p>
+
+    <figure class="cs-figure">
+      <img src="/assets/giant-adventure-tour-6.png" alt="Solution B for tour categories is cascading dropdowns">
+      <figcaption class="cs-caption">Solution B: cascading dropdowns</figcaption>
+    </figure>
+
     <p>When no category is selected, the sub-category field is disabled. When a category is selected, the sub-category field becomes active and the visitor can browse its options.</p>
     <p>This works better than Solution A as the list becomes manageable — not tediously long and no search field required.</p>
     <p>We will always have only 2 select fields even when the organisation adds more categories, making it very scalable. We could even make the sub-category a multi-select field, allowing visitors to view tours from multiple sub-categories at once.</p>
 
-    <!-- TODO: Add wireframe of Solution B -->
   </div>
 </section>
 
 <section class="cs-section">
   <h2 class="cs-section-title">Problem 2: Conflicting Trip Duration Filter</h2>
   <div class="cs-section-body">
+
+    <figure class="cs-figure">
+      <img src="/assets/giant-adventure-tour-7.png" alt="Dropdown options for trip duration">
+      <figcaption class="cs-caption">Dropdown options for trip duration</figcaption>
+    </figure>
+
     <p>The trip duration filter offered fixed options like "< 3 days", "3–5 days", "> 8 days", etc., which worked fine on its own.</p>
     <p>The problem arose when combining filters. Selecting "Tour de Taiwan" and then "3 to 5 days" returned no results because the two conditions conflicted: all Tour de Taiwan tours are 9 days long.</p>
 
-    <!-- TODO: Add screenshot of conflicting filter state -->
+    <figure class="cs-figure">
+      <img src="/assets/giant-adventure-tour-8.png" alt="Conflicting conditions generated 0 results">
+      <figcaption class="cs-caption">Conflicting conditions generated 0 results</figcaption>
+    </figure>
 
     <h3 class="cs-subsection-title">Solution: Range slider</h3>
     <p>Instead of a dropdown, I propose a range slider. This lets visitors fine-tune the minimum and maximum number of days, rather than being restricted by fixed options.</p>
+
+    <figure class="cs-figure">
+      <img src="/assets/giant-adventure-tour-9.png" alt="Range slider for trip duration">
+      <figcaption class="cs-caption">Range slider for trip duration</figcaption>
+    </figure>
+
     <p>When no category is selected or if the category is "Overseas", the slider remains active — overseas tours vary widely in duration, so visitors need that flexibility.</p>
     <p>When a category with fixed durations is selected (e.g., "Tour de Taiwan"), the slider becomes disabled since all tours in that category share the same duration. This assumes tour durations remain fixed per category; if that changes, the slider could stay enabled for all.</p>
 
-    <!-- TODO: Add wireframe of range slider states -->
   </div>
 </section>
 
 <section class="cs-section">
-  <h2 class="cs-section-title">Problem 3: Level Checkboxes Consuming Too Much Space</h2>
+  <h2 class="cs-section-title">Problem 3: Intensity Checkboxes Consuming Too Much Space</h2>
   <div class="cs-section-body">
-    <p>The level options as checkboxes took up lots of horizontal space as the icons themselves were wide.</p>
+    <p>The intensity options as checkboxes took up lots of horizontal space as the icons themselves were wide.</p>
 
-    <!-- TODO: Add screenshot of original level checkboxes -->
+    <figure class="cs-figure">
+      <img src="/assets/giant-adventure-tour-10.png" alt="Current intensity options consumed too much space">
+      <figcaption class="cs-caption">Current intensity options consumed too much space</figcaption>
+    </figure>
 
     <h3 class="cs-subsection-title">Solution: Multi-select dropdown with icons</h3>
     <p>Turn them into a multi-select field with shorter icons or simple illustrations. The illustrations are unique to this website and should stay.</p>
+
+    <figure class="cs-figure">
+      <img src="/assets/giant-adventure-tour-11.png" alt="Multi-select trip duration field">
+      <figcaption class="cs-caption">Multi-select trip duration field</figcaption>
+    </figure>
+
     <p>When only 1 option is selected, the field displays its name; when multiple are selected, it displays "X selected". This keeps the field compact without needing to display all the options at once.</p>
 
-    <!-- TODO: Add wireframe of multi-select level dropdown -->
   </div>
 </section>
 
@@ -93,11 +145,22 @@ duration: 1 week
   <div class="cs-section-body">
     <p>The existing layout gave up lots of space at the top and both sides.</p>
 
-    <!-- TODO: Add screenshot of original layout -->
+    <figure class="cs-figure">
+      <img src="/assets/giant-adventure-tour-12.png" alt="Wasted layout space around the page">
+      <figcaption class="cs-caption">Wasted layout space around the page</figcaption>
+    </figure>
 
     <h3 class="cs-subsection-title">Solution: Horizontal filter bar</h3>
     <p>I initially wanted to move the logo up to the top nav, but that meant tweaking the logo colour because it blended into the background.</p>
+
+    <figure class="cs-figure">
+      <img src="/assets/giant-adventure-tour-13.png" alt="Initial idea caused logo to blend into the background">
+      <figcaption class="cs-caption">Initial idea caused logo to blend into the background</figcaption>
+    </figure>
+    
     <p>Instead, I kept the logo and background illustration but increased its width and reduced the top padding of the white container. I also pulled the tabs out of the search group so it is clear they are not directly related to the filters, and each tab could have different filter options.</p>
+
+
     <p>I explored various ways of displaying the new options but was not quite satisfied — until I saw how Carousell lined up their filter options horizontally in a single row.</p>
     <p>The final version:</p>
     <ol class="cs-list cs-list--ordered">
