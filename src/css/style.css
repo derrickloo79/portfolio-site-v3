@@ -909,6 +909,44 @@ ul { list-style: none; }
   transform: scale(1.1);
 }
 
+/* ── BACK TO TOP BUTTON ─────────────────────────────────────── */
+.back-to-top {
+  position: fixed;
+  bottom: 6.4rem;
+  right: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: transparent;
+  border: 1px solid var(--mid);
+  border-radius: 50%;
+  color: var(--mid);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, color 0.12s ease, border-color 0.12s ease;
+  z-index: 999;
+  font-size: 1.125rem;
+  line-height: 1;
+}
+
+.back-to-top::before {
+  content: '↑';
+}
+
+.back-to-top.visible {
+  opacity: 0.6;
+  pointer-events: auto;
+}
+
+.back-to-top:hover {
+  color: var(--red);
+  border-color: var(--red);
+  opacity: 1;
+}
+
 
 /* ════════════════════════════════════════════════════════════
    RESPONSIVE
@@ -944,4 +982,6 @@ ul { list-style: none; }
   .cs-header { margin-bottom: 2rem; }
   .cs-section { margin-bottom: 3rem; }
   .cs-caption { font-size: var(--text-2xs); }
+
+  .back-to-top { bottom: 1.5rem; right: 1.5rem; }
 }
