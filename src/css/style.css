@@ -58,6 +58,9 @@
 
   --content-width: 1200px;
   --page-padding: 2rem;
+
+  --logo-desktop: 2.25rem;  /* 36px */
+  --logo-mobile: 2rem;      /* 32px */
 }
 
 /* ── RESET ──────────────────────────────────────────────────── */
@@ -113,7 +116,7 @@ ul { list-style: none; }
 .nav-inner {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
 }
 .nav-logo {
   text-decoration: none;
@@ -121,7 +124,7 @@ ul { list-style: none; }
   align-items: center;
 }
 .nav-logo img {
-  height: 20px;
+  height: var(--logo-desktop);
   width: auto;
   transition: opacity 0.15s;
 }
