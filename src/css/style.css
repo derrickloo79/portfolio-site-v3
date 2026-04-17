@@ -1005,5 +1005,23 @@ a.back-to-top {
   .cs-section { margin-bottom: 3rem; }
   .cs-caption { font-size: var(--text-2xs); }
 
-  .back-to-top { bottom: 1.5rem; right: 1.5rem; }
+  .back-to-top { bottom: 8.2rem; right: 1.5rem; }
+
+  @keyframes progress {
+  0% {
+    bottom: -120px; opacity: 0;
+  }
+  18% {
+    bottom: -120px; opacity: 0;
+  }
+  19% {
+    bottom: 0px; opacity: 0;
+  }
+  20% {
+    bottom: 8.2rem; opacity: 0.8;
+  }
+  100% {
+    bottom: 8.2rem; opacity: 0.8;
+  }
+}
 }
