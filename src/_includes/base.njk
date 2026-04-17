@@ -47,7 +47,13 @@
   </div>
 
   <!-- Back to Top Button -->
+  <!--
   <button class="back-to-top" id="backToTopBtn" aria-label="Back to top" title="Back to top"></button>
+  -->
+  <a class="back-to-top" href="#">
+    <div class="top-button">
+    </div>
+  </a>
 
   <script>
     (function() {
@@ -89,37 +95,6 @@
       });
     })();
 
-    // Back to top button
-    (function() {
-      const backToTopBtn = document.getElementById('backToTopBtn');
-
-      window.addEventListener('scroll', function() {
-        if (window.scrollY > 300) {
-          backToTopBtn.classList.add('visible');
-        } else {
-          backToTopBtn.classList.remove('visible');
-        }
-      });
-
-      backToTopBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const startPos = window.scrollY;
-        const startTime = Date.now();
-        const duration = 300;
-
-        function animateScroll() {
-          const elapsed = Date.now() - startTime;
-          const progress = Math.min(elapsed / duration, 1);
-          window.scrollTo(0, startPos * (1 - progress));
-
-          if (progress < 1) {
-            requestAnimationFrame(animateScroll);
-          }
-        }
-
-        animateScroll();
-      });
-    })();
   </script>
 
 </body>
