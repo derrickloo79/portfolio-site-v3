@@ -909,64 +909,6 @@ ul { list-style: none; }
   transform: scale(1.1);
 }
 
-/* ── BACK TO TOP BUTTON ─────────────────────────────────────── */
-.top-button {
-  width: 2.5rem;
-  height: 2.5rem;
-  background: transparent;
-  border: 1px solid var(--mid);
-  border-radius: 50%;
-  color: var(--mid);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0.8;
-}
-
-.back-to-top {
-  text-decoration: none;
-  position: fixed;
-  bottom: 6.4rem;
-  right: 2rem;
-  transition: opacity 0.3s ease-in, color 0.12s ease-in, border-color 0.12s ease-in;
-  z-index: 999;
-  font-size: 1.125rem;
-  line-height: 1;
-
-  animation: progress ease-in-out;
-  animation-timeline: scroll();
-}
-
-@keyframes progress {
-  0% {
-    bottom: -120px; opacity: 0;
-  }
-  18% {
-    bottom: -120px; opacity: 0;
-  }
-  19% {
-    bottom: 0px; opacity: 0;
-  }
-  20% {
-    bottom: 6.4rem; opacity: 0.8;
-  }
-  100% {
-    bottom: 6.4rem; opacity: 0.8;
-  }
-}
-
-.top-button::before {
-  content: '↑';
-}
-
-/* 
-.back-to-top.visible {
-  opacity: 0.6;
-  pointer-events: auto;
-} */
-
-
 /* ════════════════════════════════════════════════════════════
    RESPONSIVE
    ════════════════════════════════════════════════════════════ */
@@ -1001,24 +943,4 @@ ul { list-style: none; }
   .cs-header { margin-bottom: 2rem; }
   .cs-section { margin-bottom: 3rem; }
   .cs-caption { font-size: var(--text-2xs); }
-
-  .back-to-top { bottom: 8.2rem; right: 1.5rem; }
-
-  @keyframes progress {
-  0% {
-    bottom: -120px; opacity: 0;
-  }
-  18% {
-    bottom: -120px; opacity: 0;
-  }
-  19% {
-    bottom: 0px; opacity: 0;
-  }
-  20% {
-    bottom: 8.2rem; opacity: 0.8;
-  }
-  100% {
-    bottom: 8.2rem; opacity: 0.8;
-  }
-}
 }
