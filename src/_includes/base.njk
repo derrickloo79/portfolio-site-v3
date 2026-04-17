@@ -101,8 +101,23 @@
         }
       });
 
-      backToTopBtn.addEventListener('click', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+      backToTopBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const startPos = window.scrollY;
+        const startTime = Date.now();
+        const duration = 300;
+
+        function animateScroll() {
+          const elapsed = Date.now() - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          window.scrollTo(0, startPos * (1 - progress));
+
+          if (progress < 1) {
+            requestAnimationFrame(animateScroll);
+          }
+        }
+
+        animateScroll();
       });
     })();
   </script>
