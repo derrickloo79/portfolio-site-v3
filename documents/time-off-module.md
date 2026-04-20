@@ -1,78 +1,118 @@
-# Performance Module
+# Time Off Module
 
-## Overview
+## Context & Challenge
 
-- Enhance the time off module with multi-level parallel approvers + redesign of time off tab
-- Key entities: Approval flows → Submissions → Approvals
-- The personas: Admin, Employee, Manager
+- OmniHR needed to enhance the time off module with multi-level parallel approvers and a redesigned time off tab.
+- Since the release of the first iteration, clients had been requesting for more features in the time off module, with parallel approval flows at the top of the list. Some deals were lost due to the lack of this too. Time was ripe for the 2nd iteration.
+- **Key entities**: Approval flows → Submissions → Approvals
+- **Personas**: Admin (configures approval flows), Employee (submits time off, tracks approval status), Manager (approves requests)
+- **The core design tension**: giving the employees the clarity of their time off balances while maintaining the flexibility to view their time offs visually or not.
+- **Strategic constraint**: this module's release needs to meet the timeline pressure and stay consistent with exisitng approval elements - so the tradeoff is the exploration time .
 
-## Business Objectives & Design Outcome
+## My Role & Impact
 
-- **User case 1**: Demonstrate that OmniHR is constantly enhancing its core modules and address customer requests for the parallel approver feature.
-- **Design outcome**: On top of revamping the existing pages to meet the needs of the augmented features, we also took the chance to refine them: surface up what’s essential and tone down what’s not.
-
-## Role & Timeline
-
-- **My Role**: research, wireframing, interaction design, UI design
+- **Role**: Led design — research, wireframing, interaction design, UI design
 - **Duration**: 3 months
-- **Cross-Functional Team**: 1x Designer, 2x PMs, 3x Devs, 2x QAs
+- **Team**: 1 Designer (me), 2 PMs, 3 Devs, 2 QAs
+- **Key contributions**:
+  - While we used the existing approgval status elements taken from the expense module, I proposed a visual tweak to reduce the component variants to save dev/QA time.
+  - Proposed the redesign of the time off page, which included calendar/listing toggle, time off summary cards, etc.
+  - [YOUR INPUT: Measurable or qualitative outcomes — e.g. did CS tickets about approval confusion drop? Did any customer cite this feature? Did the reduced component variants save dev/QA time? Any adoption data?]
 
-## Process
+## Process & Collaboration
 
-- Audit the current screens and identify those that needed redesigning to meet the new features
-- Explored various layouts and discussed with stakeholders
-- **Important**: to map out all the various approval progress scenarios. Need to cover cases where approvers were deleted / dismissed.
+- Audited all existing time off screens to identify which needed redesigning to support the new parallel approver feature.
+- Mapped out all approval progress scenarios — including edge cases where approvers were deleted or dismissed mid-flow — to surface complexity before jumping into screens.
+- [YOUR INPUT: What inputs informed your designs? E.g. did you review CS feedback, look at competitor implementations, or reference patterns from the Expense module's approval flow?]
+- [YOUR INPUT: How did you validate? E.g. did you review with PMs/devs early? Run through flows with colleagues? Create handoff presentations?]
+- Explored various layouts and discussed trade-offs with stakeholders before converging on the final direction.
 
-## Deep Dive 1: Parallel Approvers
+## Key Design Decisions
 
-### Intro
+### 1. Safety Net for Approval Scoping
 
-- When bringing over parallel approvers to time off module, we did too the approval scope. It allows the admin to define the scope of employees who will be funnelled into a specific approval flow.
-- The challenge here is to come up with a solution – **a safety net** – that’s able to catch any employees who managed to fall through all the approval scopes.
+**Situation**: Introducing parallel approvers also meant introducing approval scopes — letting admins define which employees are funnelled into which approval flow. This created a new risk: employees who don't match any defined scope would have no approval flow at all.
 
-### Before
+**Options considered**:
 
-- Admin was able to only create one approval flow that has single approver for multi levels.
+- [YOUR INPUT: What alternatives did you consider? E.g. auto-assigning unscoped employees to a default manager? Blocking submission if no flow matched? Requiring admins to manually cover all employees?]
 
-### After
+**Decision**: Created a priority-ordered rule system where each row in the approval flow listing represents a scoped rule. Admins can drag to reorder priority (top = highest). At the bottom sits a permanent "safety net" rule — it catches any employee not matched by the rules above. It cannot be deleted or moved.
 
-- Expanded function to define the employee scope of the approval rule.
-- Stacking the conditions to define the criteria for the employee scope.
-- While admin can define multiple approvers for each level, where only one is required to approve for that level.
-- At the approval flow listing page, each row is a rule that admin can move around to change its priority. Rules at the top has higher priority.
-- At the bottom is the "safety net" rule for any employee who doesn’t belong to any of the rules defined above. It can neither be deleted nor moved around.
+**Rationale**:
 
-## Deep Dive 2: Redesign the Time Off Page
+- [YOUR INPUT: Why this pattern over the alternatives? E.g. did it reduce admin cognitive load? Was it inspired by how firewall rules or CSS cascading work? Did it align with how admins already thought about exceptions?]
 
-### Intro
+**Result**:
 
-- Challenge for the upgraded approval flow: Provide the employees a way to see the approval status details apart from the calendar view, and at the same time, optimise the space for the calendar.
+- [YOUR INPUT: How was this received? Did it eliminate a class of support tickets? Did admins find it intuitive?]
 
-### Before
+### 2. Calendar vs. Listing View Toggle
 
-- Space for calendar wasn’t optimised; they were taken up by the balance cards.
-- There's no place to display the approval status of the time off submissions.
-- The “work schedule” and “holiday config” looked out of place.
-- The “add time off type” is pushed out of screen as more cards are added.
-- At the Expense module, there were several variants for different # of approvers. It also meant we needed to maintain a component with lots of variants.
-- In the time off details card, the employee wasn't able to see the progress of the approval flow.
+**Situation**: The upgraded approval flow meant employees now needed to see approval status details — but the existing calendar view had no room for this, and the calendar space itself was already compromised by balance cards.
 
-### After
+**Options considered**:
 
-- Time off balance cards are pretty essential: they are moved to the top with refreshed visual style.
+- [YOUR INPUT: What alternatives did you explore? E.g. a side panel for status details? Tabs instead of a toggle? An always-visible list below the calendar? Inline status on calendar events?]
+
+**Decision**: Introduced a toggle to switch between calendar and listing views. The calendar view was fully optimised for available space, while the new listing view showed all active (ongoing or upcoming) time off applications with approval status, approver details, and progress.
+
+**Rationale**:
+
+- Employees needed two distinct mental modes: "when am I off" (calendar) vs. "what's the status of my requests" (listing). A toggle lets them switch contexts cleanly rather than cramming both into one view.
+- [YOUR INPUT: Any additional reasoning — e.g. did this mirror patterns elsewhere in OmniHR? Was the listing view also useful for managers?]
+
+**Result**:
+
+- Employees now have visibility into the full approval flow — who the approvers are, where it's stuck, and who to follow up with.
+- [YOUR INPUT: Any feedback or adoption data?]
+
+### 3. Streamlining the Approver Component
+
+**Situation**: In the Expense module, the approver column had several component variants for different numbers of approvers, creating a maintenance burden for design and development.
+
+**Options considered**:
+
+- [YOUR INPUT: Did you consider keeping the existing multi-variant approach? A fully dynamic/generic component? Something else?]
+
+**Decision**: Streamlined to only 2 variants: single approver and multiple approvers. Pending approvals show the number of approvers and a purple badge on the avatar.
+
+**Rationale**: Two variants cover all cases without the combinatorial explosion of the previous approach. This reduced the maintenance surface for both the design system and front-end code.
+
+- [YOUR INPUT: Any additional reasoning — e.g. did you validate that these 2 variants handled all edge cases across modules?]
+
+**Result**:
+
+- [YOUR INPUT: Did this reduce dev/QA effort? Was the pattern adopted back into the Expense module too?]
+
+### 4. Time Off Page Layout Redesign
+
+**Situation**: The existing time off page had several usability issues: balance cards consumed calendar space, action buttons were hidden below the fold, the calendar legend was hard to reference, and secondary items like "work schedule" and "holiday config" looked out of place.
+
+**Decision**:
+
+- Moved time off balance cards to the top with a refreshed visual style — they're essential context before any action.
 - Calendar legend moved up for easier reference.
-- Action buttons are grouped together now (no more hiding below).
-- We introduced a toggle to switch between calendar and listing views.
-  Calendar fully optimised for the space available (also for the listing view).
-- The new listing view of all active time off applications. Active means ongoing or upcoming time offs.
-- Pending approvals shows the # of approvers and the purple badge at the avatar.
-- We took the chance to streamline the approver col to only 2 variants: single / multiple approvers. Meaning it's now easier to maintain.
-- Employee now has visibility of the status of approval flow, and who the approvers are. If the flow is stuck at a level, they can now look for the relevant approvers.
+- Action buttons grouped together and made visible (no more hiding below the fold).
+- [YOUR INPUT: How did you handle "work schedule" and "holiday config"? Where did they go?]
+
+**Rationale**:
+
+- Surfaced what's essential (balance, calendar, actions) and toned down what's not — so the page hierarchy matches how employees actually use it.
+- [YOUR INPUT: Any additional reasoning — e.g. did you base the hierarchy on usage data or CS feedback?]
+
+**Result**:
+
+- [YOUR INPUT: Any feedback from users, PMs, or CS?]
 
 ## Reflection
 
-- Things we hope to do in the next iteration:
-  - Handle the scenario where the approvers were deleted and got the submission stuck at his level. At that time, we decided to leave it stuck with no recourse; employees need to apply for a new time off.
-  - Cater for unlimited leave type. Instead of showing # of days available, we need to show # of days taken.
+- **What I'd do differently**:
+  - Handle the scenario where approvers are deleted mid-flow, leaving submissions stuck with no recourse. At the time, we decided employees would need to reapply — a known gap we accepted due to [YOUR INPUT: why was this deferred? Timeline? Complexity? Awaiting backend support?].
+  - [YOUR INPUT: Anything else you'd approach differently in hindsight?]
+- **What the system still can't do cleanly**:
+  - Cater for unlimited leave types — instead of showing days available, these should show days taken. This requires a different card treatment.
+- **What I learned**:
+  - [YOUR INPUT: What's the design principle or insight you took away? E.g. "Designing approval systems taught me that the hardest UX problem isn't the happy path — it's making failure states (deleted approvers, unmatched scopes) visible and recoverable instead of silently broken."]
 
 ## Assets
