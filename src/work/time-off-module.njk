@@ -10,96 +10,154 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
 ---
 
 <section class="cs-section">
-  <h2 class="cs-section-title">Overview</h2>
+  <h2 class="cs-section-title">Context & Challenge</h2>
   <div class="cs-section-body">
-    <p>The time off module needed a significant upgrade — adding multi-level parallel approvers while redesigning the time off tab to surface what's essential and tone down what's not.</p>
-    <p>The system revolves around three key entities: <strong>Approval flows, Submissions,</strong> and <strong>Approvals</strong> — serving three personas: Admins who configure approval rules, Employees who submit leave, and Managers who approve them.</p>
+    <p>OmniHR needed to enhance the time off module with multi-level parallel approvers and a redesigned time off tab. Since the release of the first iteration, clients had been requesting more features in the time off module, with parallel approval flows at the top of the list. Some deals were lost due to the lack of this feature — time was ripe for the 2nd iteration.</p>
+    <p><strong>Key entities:</strong> Approval flows → Submissions → Approvals</p>
+    <p><strong>Personas:</strong> Admin (configures approval flows), Employee (submits time off, tracks approval status), Manager (approves requests)</p>
+    <p><strong>The core design tension:</strong> giving employees clarity of their time off balances while maintaining the flexibility to view their time offs either in visual or listing mode.</p>
+    <p><strong>Strategic constraint:</strong> this module's release needed to meet timeline pressure and stay consistent with existing approval elements — so the tradeoff was exploration and execution time.</p>
   </div>
 </section>
 
 <section class="cs-section">
-  <h2 class="cs-section-title">Business Objectives</h2>
+  <h2 class="cs-section-title">My Role & Impact</h2>
   <div class="cs-section-body">
+    <p><strong>Role:</strong> Led design — research, wireframing, interaction design, UI design</p>
+    <p><strong>Duration:</strong> 3 months | <strong>Team:</strong> 1 Designer (me), 2 PMs, 3 Devs, 2 QAs</p>
+    <p><strong>Key contributions:</strong></p>
     <ul class="cs-list">
-      <li><strong>Demonstrate progress:</strong> Show that OmniHR is constantly enhancing its core modules and address customer requests for the parallel approver feature.</li>
-      <li><strong>Design outcome:</strong> Beyond meeting the new feature requirements, we took the chance to refine existing pages — surface what's essential, tone down what's not.</li>
+      <li>Although we used existing approval status elements from the expense module, I proposed visual tweaks to reduce component variants and save dev/QA time.</li>
+      <li>Proposed the redesign of the time off page, which included calendar/listing toggle, time off summary cards, and improved layout hierarchy.</li>
+      <li>After shipping this iteration, we got positive feedback from customers citing the upgraded approval flows and refreshed UIs in the time off tab during bi-weekly calls with the sales and customer success team — a good indication that we were shipping features that met customers' needs.</li>
     </ul>
   </div>
 </section>
 
 <section class="cs-section">
-  <h2 class="cs-section-title">Process</h2>
+  <h2 class="cs-section-title">Process & Collaboration</h2>
   <div class="cs-section-body">
-    <ol class="cs-list cs-list--ordered">
-      <li>Audited current screens and identified those needing redesign to support the new features.</li>
-      <li>Explored various layouts and discussed trade-offs with stakeholders.</li>
-      <li>Mapped out all approval progress scenarios — including edge cases where approvers were deleted or dismissed.</li>
-    </ol>
+    <ul class="cs-list">
+      <li>Audited all existing time off screens to identify which needed redesigning to support the new parallel approver feature.</li>
+      <li>Mapped out all approval progress scenarios — including edge cases where approvers were deleted or dismissed mid-flow — to surface complexity before jumping into screens.</li>
+      <li>Looked at competitor implementations for the summary cards, or referenced patterns from the Expense module for the approval statuses in the row items and the details page.</li>
+      <li>Explored various layouts and discussed trade-offs with PMs and stakeholders before converging on the final direction. Conducted usability tests with colleagues when deciding between options.</li>
+    </ul>
   </div>
 </section>
 
 <section class="cs-section">
-  <h2 class="cs-section-title">Deep Dive: Parallel Approvers</h2>
+  <h2 class="cs-section-title">Decision 1: Calendar vs. Listing View Toggle</h2>
   <div class="cs-section-body">
-    <p>When bringing parallel approvers to the time off module, we also introduced approval scope — allowing admins to define which employees get funnelled into a specific approval flow.</p>
-    <p>The challenge: designing a <strong>safety net</strong> that catches any employees who fall through all the defined approval scopes.</p>
+    <h3 class="cs-subsection-title">Situation</h3>
+    <p>The upgraded approval flow meant employees now needed to see approval status details — but the existing calendar view had no room for this, and the calendar space itself was already compromised by balance cards.</p>
 
-    <h3 class="cs-subsection-title">Before</h3>
+    <h3 class="cs-subsection-title">Options Considered</h3>
     <ul class="cs-list">
-      <li>Admins could only create one approval flow with a single approver per level.</li>
+      <li><strong>Always-visible list below the calendar:</strong> Users would need to scroll down every time to see the statuses, which defeated the purpose of surfacing important things to the top.</li>
+      <li><strong>Inline status on calendar events:</strong> Required additional dev effort for customization, which wasn't possible with a tight timeline.</li>
+      <li><strong>Tabs instead of toggle:</strong> Using tabs meant changing the section below the tab element, which wasn't possible as other sections needed to persist below the calendar.</li>
+      <li><strong>Side panel for status details:</strong> Users would need to click on time off requests to view details. Not useful for events months into the future; toggling the calendar forward was a hassle just to view the status.</li>
     </ul>
-    <!-- TODO: Add before screenshot -->
 
-    <h3 class="cs-subsection-title">After</h3>
+    <h3 class="cs-subsection-title">Decision</h3>
+    <p>Introduced a toggle to switch between calendar and listing views. The calendar view was fully optimised for available space, while the new listing view showed all active (ongoing or upcoming) time off applications with approval status, approver details, and progress.</p>
+
+    <h3 class="cs-subsection-title">Rationale</h3>
     <ul class="cs-list">
-      <li>Expanded function to define the employee scope of each approval rule.</li>
-      <li>Stackable conditions to define criteria for the employee scope.</li>
-      <li>Multiple approvers per level — only one is required to approve for that level to pass.</li>
-      <li>At the approval flow listing, each row is a rule that admins can reorder to change priority. Top rules take precedence.</li>
-      <li>A "safety net" rule at the bottom catches any employee who doesn't match the rules above. It cannot be deleted or reordered.</li>
+      <li>Employees needed two distinct mental modes: "when am I off" (calendar) vs. "what's the status of my requests" (listing). A toggle lets them switch contexts cleanly rather than the other options.</li>
+      <li>With the calendar view, users can see upcoming time off for the current month at a glance, and for the next few months a couple of clicks away.</li>
+      <li>With the listing view, users can see the statuses of all upcoming events on a single page, even if the request is months away.</li>
     </ul>
-    <!-- TODO: Add after screenshot -->
+
+    <h3 class="cs-subsection-title">Result</h3>
+    <ul class="cs-list">
+      <li>Admins now have access to more powerful approval flows, and employees have control over what they wish to see — who the approvers are, where it's stuck, and who to follow up with.</li>
+      <li>When doing internal testing with colleagues pre-deployment, the feedback was that they had better clarity about their time off balances and statuses of the upcoming requests.</li>
+    </ul>
+
+    <!-- TODO: Add toggle interaction mockup or screenshot -->
   </div>
 </section>
 
 <section class="cs-section">
-  <h2 class="cs-section-title">Deep Dive: Redesigning the Time Off Page</h2>
+  <h2 class="cs-section-title">Decision 2: Streamlining the Approver Component</h2>
   <div class="cs-section-body">
-    <p>The upgraded approval flow needed a way for employees to see approval status details beyond the calendar view — while simultaneously optimising space for the calendar itself.</p>
+    <h3 class="cs-subsection-title">Situation</h3>
+    <p>In the Expense module, the approver column had several component variants for different numbers of approvers, creating a maintenance burden for design and development. Also, it made the column look cluttered without added value.</p>
 
-    <h3 class="cs-subsection-title">Before</h3>
+    <h3 class="cs-subsection-title">Options Considered</h3>
     <ul class="cs-list">
-      <li>Calendar space wasn't optimised — balance cards took up too much room.</li>
-      <li>No place to display the approval status of time off submissions.</li>
-      <li>"Work schedule" and "holiday config" looked out of place.</li>
-      <li>"Add time off type" button was pushed off-screen as more cards were added.</li>
-      <li>In the Expense module, there were several component variants for different numbers of approvers — too many to maintain.</li>
-      <li>Employees couldn't see the progress of the approval flow in the time off details card.</li>
+      <li><strong>Keep the existing multi-variant approach:</strong> It would be visually consistent with what existed, but the maintenance burden would continue and the visual clutter would persist.</li>
     </ul>
-    <!-- TODO: Add before screenshot -->
 
-    <h3 class="cs-subsection-title">After</h3>
+    <h3 class="cs-subsection-title">Decision</h3>
+    <p>Streamlined to only 2 variants: single approver and multiple approvers. Pending approvals show the number of approvers and a purple badge on the avatar.</p>
+
+    <h3 class="cs-subsection-title">Rationale</h3>
     <ul class="cs-list">
-      <li>Time off balance cards moved to the top with a refreshed visual style.</li>
+      <li>Two variants cover all cases without the combinatorial explosion of the previous approach. This reduced the maintenance surface for both the design system and front-end code.</li>
+      <li>The change would be cleaner visually for users and reduce dev/QA effort in the long run since the element would be reused back in Expense and other modules in the future.</li>
+    </ul>
+
+    <h3 class="cs-subsection-title">Validation</h3>
+    <p>Before moving ahead with the change, I tested and validated these 2 variants with extreme situations — users with really long names, approval levels with > 10 parallel approvers, approvers who were later deleted or dismissed, etc. — to make sure they could handle all edge cases.</p>
+
+    <h3 class="cs-subsection-title">Result</h3>
+    <ul class="cs-list">
+      <li>With this update, we managed to reduce dev/QA effort by more than 50%.</li>
+      <li>This pattern was later adopted back into the Expense module in its next iteration.</li>
+    </ul>
+
+    <!-- TODO: Add component variants comparison (before/after) -->
+  </div>
+</section>
+
+<section class="cs-section">
+  <h2 class="cs-section-title">Decision 3: Time Off Page Layout Redesign</h2>
+  <div class="cs-section-body">
+    <h3 class="cs-subsection-title">Situation</h3>
+    <p>The existing time off page had several usability issues: balance cards consumed calendar space, action buttons were hidden below the fold, the calendar legend was hard to reference, and secondary items like "work schedule" and "holiday config" looked out of place.</p>
+
+    <h3 class="cs-subsection-title">Decision</h3>
+    <ul class="cs-list">
+      <li>Moved time off balance cards to the top with a refreshed visual style — they're essential context before any action.</li>
       <li>Calendar legend moved up for easier reference.</li>
-      <li>Action buttons grouped together — no more hiding below the fold.</li>
-      <li>Introduced a toggle to switch between calendar and listing views, with both fully optimised for available space.</li>
-      <li>New listing view shows all active (ongoing or upcoming) time off applications.</li>
-      <li>Pending approvals show the number of approvers with a purple badge on the avatar.</li>
-      <li>Streamlined the approver column to just 2 variants: single or multiple approvers — much easier to maintain.</li>
-      <li>Employees now have visibility into the approval flow status and who the approvers are. If the flow is stuck at a level, they can identify the relevant approvers.</li>
+      <li>Action buttons grouped together and made visible (no more hiding below the fold).</li>
+      <li>"Work schedule" and "holiday config" repositioned below the calendar and revised to be consistent with elements in the Settings module.</li>
     </ul>
-    <!-- TODO: Add after screenshot -->
+
+    <h3 class="cs-subsection-title">Rationale</h3>
+    <ul class="cs-list">
+      <li>Surfaced what's essential (balance, calendar, actions) and toned down what's not — so the page hierarchy matches how employees actually use it.</li>
+      <li>Employees who accessed this page usually had these objectives: check balances, submit new requests, and check request statuses. These should be the centerpiece of the tab.</li>
+    </ul>
+
+    <h3 class="cs-subsection-title">Result</h3>
+    <ul class="cs-list">
+      <li>A more visually and hierarchically balanced page with essential sections at the top, allowing users the sense of control and full visibility immediately.</li>
+    </ul>
+
+    <!-- TODO: Add page layout before/after mockups -->
   </div>
 </section>
 
 <section class="cs-section">
   <h2 class="cs-section-title">Reflection</h2>
   <div class="cs-section-body">
-    <p>Things we hoped to address in the next iteration:</p>
+    <h3 class="cs-subsection-title">What I'd Do Differently</h3>
     <ul class="cs-list">
-      <li><strong>Stuck submissions:</strong> When approvers were deleted, submissions got stuck at their level with no recourse — employees had to reapply. We needed a better fallback mechanism.</li>
-      <li><strong>Unlimited leave type:</strong> Instead of showing days available, we needed to show days taken — a different mental model that the UI didn't yet support.</li>
+      <li>Handle the scenario where approvers are deleted mid-flow, leaving submissions stuck with no recourse. At the time, we decided employees would need to reapply — a known gap we accepted due to time constraint and the low probability of occurrence.</li>
+    </ul>
+
+    <h3 class="cs-subsection-title">What the System Still Can't Do Cleanly</h3>
+    <ul class="cs-list">
+      <li>Cater for unlimited leave types — instead of showing days available, these should show days taken. This requires a different card treatment.</li>
+    </ul>
+
+    <h3 class="cs-subsection-title">What I Learned</h3>
+    <ul class="cs-list">
+      <li>Redesigning modules taught me that the hardest problem isn't just visual refresh – it's about understanding the main outcomes of the user accessing the page and designing for time.</li>
     </ul>
   </div>
 </section>
