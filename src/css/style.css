@@ -218,10 +218,17 @@ ul { list-style: none; }
 }
 
 /* ── PRINCIPLES ─────────────────────────────────────────────── */
-.principles {
+.principles,
+.home-work,
+.work-section,
+.about-body,
+.about-section,
+.cs-content {
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+}
+.principles {
   margin-bottom: 5.5rem;
 }
 .section-heading {
@@ -236,20 +243,25 @@ ul { list-style: none; }
   flex-direction: column;
   gap: 0;
 }
+.principles-list li,
+.home-work-item {
+  padding: 1.125rem 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.principles-list li:first-child,
+.home-work-item:first-child { border-top: none; }
+.principles-list li:last-child,
+.home-work-item:last-child { border-bottom: none; }
 .principles-list li {
   counter-increment: principles;
   display: grid;
   grid-template-columns: 2.25rem 1fr;
   gap: 0.5rem;
-  padding: 1.125rem 0;
-  border-top: 1px solid var(--rule);
   font-size: var(--text-base);
   line-height: 1.4;
   color: var(--black);
 }
-.principles-list li:first-child { border-top: none; }
-.principles-list li { border-bottom: 1px solid var(--rule); }
-.principles-list li:last-child { border-bottom: none; }
 .principles-list li::before {
   content: counter(principles, decimal-leading-zero);
   font-size: var(--text-xs);
@@ -261,9 +273,6 @@ ul { list-style: none; }
 
 /* ── SELECTED WORK (HOME) ───────────────────────────────────── */
 .home-work {
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
   margin-bottom: 5.5rem;
 }
 .home-work-list {
@@ -274,14 +283,9 @@ ul { list-style: none; }
   justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
-  padding: 1.125rem 0;
-  border-top: 1px solid var(--rule);
   text-decoration: none;
   color: var(--black);
 }
-.home-work-item:first-child { border-top: none; }
-.home-work-item { border-bottom: 1px solid var(--rule); }
-.home-work-item:last-child { border-bottom: none; }
 .home-work-item:hover { color: var(--red); }
 .home-work-item:hover .home-work-meta { color: var(--red); opacity: 0.65; }
 .home-work-content {
@@ -354,9 +358,6 @@ ul { list-style: none; }
 }
 
 .work-section {
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
   margin-bottom: 4rem;
 }
 .work-section-heading {
@@ -374,13 +375,13 @@ ul { list-style: none; }
   gap: 1rem;
   padding: 1.25rem 0;
   border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
   text-decoration: none;
   color: var(--black);
   align-items: start;
 }
-.work-list li:first-child .work-item { border-top: none; }
-.work-item { border-bottom: 1px solid var(--rule); }
-.work-list li:last-child .work-item { border-bottom: none; }
+.work-item:first-child { border-top: none; }
+.work-item:last-child { border-bottom: none; }
 .work-item:hover .work-item-title { color: var(--red); }
 
 .work-item-num {
@@ -446,21 +447,15 @@ ul { list-style: none; }
   background: #FFF3CD;
   color: #7A5C00;
 }
-.badge--bootcamp {
-  background: #EEE;
-  color: #666;
-}
-.badge--claritecs {
-  background: var(--red);
-  color: white;
-}
-.badge--featured {
-  background: var(--red);
-  color: white;
-}
+.badge--bootcamp,
 .badge--wip {
   background: #EEE;
   color: #666;
+}
+.badge--claritecs,
+.badge--featured {
+  background: var(--red);
+  color: white;
 }
 
 /* Tags */
@@ -547,21 +542,19 @@ ul { list-style: none; }
   50% { transform: translateY(-0.15em); }
 }
 .about-body {
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
   font-size: var(--text-base);
   line-height: 1.4;
   color: var(--black);
 }
-.about-body p { margin-bottom: 1.125rem; }
-.about-body p:last-child { margin-bottom: 0; }
+.about-body p,
+.cs-section-body p,
+.about-site-text p { margin-bottom: 1.125rem; }
+.about-body p:last-child,
+.cs-section-body p:last-child,
+.about-site-text p:last-child { margin-bottom: 0; }
 .about-body strong { color: var(--black); font-weight: 500; }
 
 .about-section {
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
   padding-top: 3.5rem;
   margin-top: 3.5rem;
   border-top: 1px solid var(--rule);
@@ -582,10 +575,10 @@ ul { list-style: none; }
   gap: 0.5rem 2rem;
   padding: 1rem 0;
   border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
   align-items: baseline;
 }
 .exp-item:first-child { border-top: none; }
-.exp-item { border-bottom: 1px solid var(--rule); }
 .exp-item:last-child { border-bottom: none; }
 .career-timeline-link {
   display: inline-block;
@@ -647,7 +640,6 @@ ul { list-style: none; }
   line-height: 1.4;
   color: var(--black);
 }
-.about-site-text p { margin-bottom: 1.125rem; }
 
 
 /* ════════════════════════════════════════════════════════════
@@ -755,11 +747,6 @@ ul { list-style: none; }
   font-size: var(--text-sm);
   color: var(--black);
 }
-.cs-content {
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
 .cs-section {
   margin-bottom: 4rem;
 }
@@ -775,12 +762,6 @@ ul { list-style: none; }
   color: var(--black);
 }
 .cs-section-body strong { color: var(--black); font-weight: 500; }
-.cs-section-body p {
-  margin-bottom: 1.125rem;
-}
-.cs-section-body p:last-child {
-  margin-bottom: 0;
-}
 .cs-subsection-title {
   font-size: var(--text-base);
   font-weight: 600;
