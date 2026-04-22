@@ -27,8 +27,9 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
     <p><strong>Duration:</strong> 3 months | <strong>Team:</strong> 1 Designer (me), 2 PMs, 3 Devs, 2 QAs</p>
     <p><strong>Key contributions:</strong></p>
     <ul class="cs-list">
-      <li>Although we used existing approval status elements from the expense module, I proposed visual tweaks to reduce component variants and save dev/QA time.</li>
+      <li>Drove the pending approval count framework that allowed employees and managers alike to have full visibility of available and remaining balances, number of days requested and pending.</li>
       <li>Proposed the redesign of the time off page, which included calendar/listing toggle, time off summary cards, and improved layout hierarchy.</li>
+      <li>Although we used existing approval status elements from the expense module, I proposed some visual tweaks to reduce the component variants to save dev/QA time.</li>
       <li>After shipping this iteration, we got positive feedback from customers citing the upgraded approval flows and refreshed UIs in the time off tab during bi-weekly calls with the sales and customer success team — a good indication that we were shipping features that met customers' needs.</li>
     </ul>
   </div>
@@ -52,64 +53,89 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
     <h3 class="cs-subsection-title">Situation</h3>
     <p>The upgraded approval flow meant employees now needed to see approval status details — but the existing calendar view had no room for this, and the calendar space itself was already compromised by balance cards.</p>
 
+    <figure class="cs-figure">
+      <img src="/assets/timeoff-module-1.png" alt="Existing time off page">
+      <figcaption class="cs-caption">Calendar space compromised by balance cards</figcaption>
+    </figure>
+
     <h3 class="cs-subsection-title">Options Considered</h3>
     <ul class="cs-list">
-      <li><strong>Always-visible list below the calendar:</strong> Users would need to scroll down every time to see the statuses, which defeated the purpose of surfacing important things to the top.</li>
-      <li><strong>Inline status on calendar events:</strong> Required additional dev effort for customization, which wasn't possible with a tight timeline.</li>
-      <li><strong>Tabs instead of toggle:</strong> Using tabs meant changing the section below the tab element, which wasn't possible as other sections needed to persist below the calendar.</li>
+      <li><strong>Time off balances still on the right side; toggle on existing calendar.</strong> While it was less dev effort as we will be using same similar layout, listing table has much less width.</li>
       <li><strong>Side panel for status details:</strong> Users would need to click on time off requests to view details. Not useful for events months into the future; toggling the calendar forward was a hassle just to view the status.</li>
+      <li><strong>Time off balances on top; both calendar and listing table visible below.</strong> Calendar and listing table serve the same purpose, thus it was rather redundant to display them both.</li>
     </ul>
 
+    <figure class="cs-figure">
+      <img src="/assets/timeoff-module-wireframe-1.png" alt="Wireframe: balance cards on the right, toggle added to existing calendar">
+      <figcaption class="cs-caption">Early explorations 1: balance cards remained on the right, toggle added to existing calendar</figcaption>
+    </figure>
+
+    <figure class="cs-figure">
+      <img src="/assets/timeoff-module-wireframe-2.png" alt="Wireframe: balance cards on the right, listing table added below calendar">
+      <figcaption class="cs-caption">Early explorations 2: Balance cards remained right, listing table added below calendar</figcaption>
+    </figure>
+
+    <figure class="cs-figure">
+      <img src="/assets/timeoff-module-wireframe-3.png" alt="Wireframe: balance cards moved to top, calendar and listing table separated">
+      <figcaption class="cs-caption">Early explorations 3: Balance cards moved to top, calendar and listing table separated</figcaption>
+    </figure>
+
+
     <h3 class="cs-subsection-title">Decision</h3>
-    <p>Introduced a toggle to switch between calendar and listing views. The calendar view was fully optimised for available space, while the new listing view showed all active (ongoing or upcoming) time off applications with approval status, approver details, and progress.</p>
+  
+    <ul class="cs-list">
+      <li>We finalized on the version with the balance cards on top and a toggle to switch between calendar and listing views. </li>
+      <li>The calendar view was fully optimised for available space, while the new listing view showed all active (ongoing or upcoming) time off applications with approval status, approver details, and progress.</li>
+    </ul>
+
+    <figure class="cs-figure">
+      <img src="/assets/timeoff-module-2.png" alt="Calendar optimized for space with view toggle">
+      <figcaption class="cs-caption">Calendar optimized for space with view toggle</figcaption>
+    </figure>
+
+    <figure class="cs-figure">
+      <img src="/assets/timeoff-module-3.png" alt="New listing view with request statuses">
+      <figcaption class="cs-caption">New listing view with request statuses</figcaption>
+    </figure>
 
     <h3 class="cs-subsection-title">Rationale</h3>
     <ul class="cs-list">
       <li>Employees needed two distinct mental modes: "when am I off" (calendar) vs. "what's the status of my requests" (listing). A toggle lets them switch contexts cleanly rather than the other options.</li>
-      <li>With the calendar view, users can see upcoming time off for the current month at a glance, and for the next few months a couple of clicks away.</li>
-      <li>With the listing view, users can see the statuses of all upcoming events on a single page, even if the request is months away.</li>
     </ul>
 
     <h3 class="cs-subsection-title">Result</h3>
     <ul class="cs-list">
-      <li>Admins now have access to more powerful approval flows, and employees have control over what they wish to see — who the approvers are, where it's stuck, and who to follow up with.</li>
+      <li>Employees have control over what they wish to see — who the approvers are, where it's stuck, and who to follow up with.</li>
       <li>When doing internal testing with colleagues pre-deployment, the feedback was that they had better clarity about their time off balances and statuses of the upcoming requests.</li>
     </ul>
-
-    <!-- TODO: Add toggle interaction mockup or screenshot -->
   </div>
 </section>
 
 <section class="cs-section">
-  <h2 class="cs-section-title">Decision 2: Streamlining the Approver Component</h2>
+  <h2 class="cs-section-title">Decision 2: Parallel Approver Flow</h2>
   <div class="cs-section-body">
     <h3 class="cs-subsection-title">Situation</h3>
-    <p>In the Expense module, the approver column had several component variants for different numbers of approvers, creating a maintenance burden for design and development. Also, it made the column look cluttered without added value.</p>
+    <p>In the previous version, each approval level could only have a single approver that covered everyone — not powerful enough to cater to the different needs of the organization. On top of that, the time off module has the concept of time off type and policy (where a type can have multiple policies) — a concept that didn't exist in the Expense module, so the existing approval flow setup couldn't handle it out of the box.</p>
 
     <h3 class="cs-subsection-title">Options Considered</h3>
     <ul class="cs-list">
-      <li><strong>Keep the existing multi-variant approach:</strong> It would be visually consistent with what existed, but the maintenance burden would continue and the visual clutter would persist.</li>
+      <li><strong>Reuse existing elements and add a new section to select time off policies.</strong> Lower dev/QA effort.</li>
+      <li><strong>Introduce time off policy as a new criteria within the existing element.</strong> Higher dev/QA effort.</li>
     </ul>
 
     <h3 class="cs-subsection-title">Decision</h3>
-    <p>Streamlined to only 2 variants: single approver and multiple approvers. Pending approvals show the number of approvers and a purple badge on the avatar.</p>
+    <p>Reworked the approval flow and introduced time off policy as a new criteria within the existing element.</p>
 
     <h3 class="cs-subsection-title">Rationale</h3>
     <ul class="cs-list">
-      <li>Two variants cover all cases without the combinatorial explosion of the previous approach. This reduced the maintenance surface for both the design system and front-end code.</li>
-      <li>The change would be cleaner visually for users and reduce dev/QA effort in the long run since the element would be reused back in Expense and other modules in the future.</li>
+      <li>Initially, we tried using the existing elements from the Expense module and created a separate section to select the time off policies range first. We realised it was very difficult to create approval flows for some scenarios. E.g. for specific employees, admins needed to know their time off policies — which meant jumping off to another screen; for specific countries, admins had to select all time off policies, then select the countries. Neither was intuitive.</li>
+      <li>Folding policy into the approval flow element itself catered to all the scenarios required, and made configuration easier and faster.</li>
     </ul>
-
-    <h3 class="cs-subsection-title">Validation</h3>
-    <p>Before moving ahead with the change, I tested and validated these 2 variants with extreme situations — users with really long names, approval levels with > 10 parallel approvers, approvers who were later deleted or dismissed, etc. — to make sure they could handle all edge cases.</p>
 
     <h3 class="cs-subsection-title">Result</h3>
     <ul class="cs-list">
-      <li>With this update, we managed to reduce dev/QA effort by more than 50%.</li>
-      <li>This pattern was later adopted back into the Expense module in its next iteration.</li>
+      <li>Reduced approval flow configuration time by 25%.</li>
     </ul>
-
-    <!-- TODO: Add component variants comparison (before/after) -->
   </div>
 </section>
 
@@ -117,28 +143,117 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
   <h2 class="cs-section-title">Decision 3: Time Off Page Layout Redesign</h2>
   <div class="cs-section-body">
     <h3 class="cs-subsection-title">Situation</h3>
-    <p>The existing time off page had several usability issues: balance cards consumed calendar space, action buttons were hidden below the fold, the calendar legend was hard to reference, and secondary items like "work schedule" and "holiday config" looked out of place.</p>
+
+    <figure class="cs-figure">
+      <img src="/assets/timeoff-module-1.png" alt="Existing time off page">
+      <figcaption class="cs-caption">Existing time off page. Deja vu.</figcaption>
+    </figure>
+
+    <p>The existing time off page had several usability issues: balance cards consumed calendar space, action buttons were hidden below the fold, the calendar legend was hard to reference, and secondary items like "work schedule" and "holiday calendar" looked out of place.</p>
 
     <h3 class="cs-subsection-title">Decision</h3>
-    <ul class="cs-list">
+
+    <ol class="cs-list cs-list--ordered">
       <li>Moved time off balance cards to the top with a refreshed visual style — they're essential context before any action.</li>
       <li>Calendar legend moved up for easier reference.</li>
       <li>Action buttons grouped together and made visible (no more hiding below the fold).</li>
-      <li>"Work schedule" and "holiday config" repositioned below the calendar and revised to be consistent with elements in the Settings module.</li>
-    </ul>
+      <li>"Work schedule" and "holiday calendar" repositioned below the calendar and revised to be consistent with elements in the Settings module.</li>
+    </ol>
+
+    <figure class="cs-figure">
+      <img src="/assets/timeoff-module-8.png" alt="Redesigned time off page (points 1-3)">
+      <figcaption class="cs-caption">Redesigned time off page (points 1-3)</figcaption>
+    </figure>
+
+    <figure class="cs-figure">
+      <img src="/assets/timeoff-module-9.png" alt="Redesigned time off page (point 4)">
+      <figcaption class="cs-caption">Redesigned time off page (point 4)</figcaption>
+    </figure>
+
+    <figure class="cs-figure">
+      <img src="/assets/timeoff-module-10.png" alt="redesigned time off page in full">
+      <figcaption class="cs-caption">redesigned time off page in full</figcaption>
+    </figure>
 
     <h3 class="cs-subsection-title">Rationale</h3>
     <ul class="cs-list">
-      <li>Surfaced what's essential (balance, calendar, actions) and toned down what's not — so the page hierarchy matches how employees actually use it.</li>
+      <li>Surfaced what's essential (balance, calendar, actions) and toned down what's not (configs) — so the page hierarchy matches how employees actually use it.</li>
       <li>Employees who accessed this page usually had these objectives: check balances, submit new requests, and check request statuses. These should be the centerpiece of the tab.</li>
     </ul>
+
 
     <h3 class="cs-subsection-title">Result</h3>
     <ul class="cs-list">
       <li>A more visually and hierarchically balanced page with essential sections at the top, allowing users the sense of control and full visibility immediately.</li>
     </ul>
 
-    <!-- TODO: Add page layout before/after mockups -->
+  </div>
+</section>
+
+<section class="cs-section">
+  <h2 class="cs-section-title">Decision 4: Pending Approval Count Framework</h2>
+  <div class="cs-section-body">
+    <h3 class="cs-subsection-title">Situation</h3>
+    <p>Previously, the time off request details page displayed only the number of days applied for; it lacked essential details like the available and remaining balance, and how many days are pending. The employee couldn't tell immediately if they had enough balances without pausing what they were doing to get those information. Their flow was interrupted.</p>
+   
+   <figure class="cs-figure">
+      <img src="/assets/timeoff-module-5.png" alt="Previous time off details page has only the number of days applied for">
+      <figcaption class="cs-caption">Previous time off details page has only the number of days applied for</figcaption>
+    </figure>
+    
+    <h3 class="cs-subsection-title">Options Considered</h3>
+    <ul class="cs-list">
+      <li>1x4 grid; left-aligned</li>
+      <li>1x4 grid; center-aligned</li>
+      <li>2x2 grid; left-aligned</li>
+      <li>2x2 grid; center-aligned</li>
+      <li>The center-aligned grids and 2x2 grid were not suitable as broke the reading flow and it used up more space than required.</li>
+    </ul>
+    
+   <figure class="cs-figure">
+      <img src="/assets/timeoff-module-wireframe-4.png" alt="Explorations of balance overview section">
+      <figcaption class="cs-caption">Explorations of balance overview section</figcaption>
+    </figure>    
+
+    <h3 class="cs-subsection-title">Decision</h3>
+    <ul class="cs-list">
+      <li>Implement the balance overview section in 1x4 grid format.</li>
+    </ul>
+
+   <p><strong>Other additions</strong>:</p>
+     <ul class="cs-list">
+      <li>We ensured the balance overview section is coherent for every request of the same time off type that are still in pending status</li>
+      <li>When a request is in pending status, details like available balance and amount pending needed to refresh to reflect changes in other requests of the same type, e.g. employee submitted new request, another request got approved or declined, etc.</li>
+      <li>Once a request gets approved, balance overview retains only the number of days applied while removing the rest.</li>
+    </ul>
+   
+   <figure class="cs-figure">
+      <img src="/assets/timeoff-module-4.png" alt="Mapping out the pending approval count logic">
+      <figcaption class="cs-caption">Mapping out the pending approval count logic</figcaption>
+    </figure>
+
+   <figure class="cs-figure">
+      <img src="/assets/timeoff-module-6.png" alt="Updated details page with new balance overview">
+      <figcaption class="cs-caption">Updated details page with new balance overview; pending status</figcaption>
+    </figure> 
+     
+   <figure class="cs-figure">
+      <img src="/assets/timeoff-module-7.png" alt="Updated details page with new balance overview">
+      <figcaption class="cs-caption">Approved request showing only the # of days applied</figcaption>
+    </figure> 
+
+    <h3 class="cs-subsection-title">Rationale</h3>
+    <ul class="cs-list">
+      <li>It fits the employee's mental model at different points of the time off request.</li>
+      <li>When requesting, the <strong>most important thing the employee needs to know is whether she has enough balance</strong>. Which means the calculation in the balance overview section must be clear and complete.</li>
+      <li>But once that request got approved, all those numbers didn't matter anymore, except for the number of days applied. Their mind has already moved on to the actual time off.</li>
+    </ul>
+
+    <h3 class="cs-subsection-title">Result</h3>
+    <ul class="cs-list">
+      <li>A time off details page that provides relevant information at different points of the journey, and one that reflects the user's mental model.</li>
+    </ul>
+
   </div>
 </section>
 
@@ -157,7 +272,7 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
 
     <h3 class="cs-subsection-title">What I Learned</h3>
     <ul class="cs-list">
-      <li>Redesigning modules taught me that the hardest problem isn't just visual refresh – it's about understanding the main outcomes of the user accessing the page and designing for time.</li>
+      <li>Redesigning modules taught me that the hardest problem isn't just visual refresh – it's about understanding the main outcomes of the user accessing the page and designing for the user's mental model at each point in their journey.</li>
     </ul>
   </div>
 </section>

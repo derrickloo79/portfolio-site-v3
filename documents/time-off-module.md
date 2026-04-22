@@ -52,23 +52,25 @@
 - Admins now have access to more powerful approval flow, and employees have control over what they wished to see — who the approvers are, where it's stuck, and who to follow up with.
 - When doing internal testing with colleagues pre-deployment, the feedback was that they had better clarity about their time off balances and statuses of the upcoming requests.
 
-### 2. Streamlining the Approver Component
+### 2. Parallel Approver Flow
 
-**Situation**: In the Expense module, the approver column had several component variants for different numbers of approvers, creating a maintenance burden for design and development. Also, it made the column looked cluttered without added value.
+**Situation**: In the previous version, each approval level could only have a single approver that covered everyone — not powerful enough to cater to the different needs of the organization. On top of that, the time off module has the concept of time off type and policy (where a type can have multiple policies) — a concept that didn't exist in the expense module, so the existing approval flow setup couldn't handle it out of the box.
 
 **Options considered**:
 
-- I considered keeping the existing multi-variant approach but decided on the change eventually because it would be cleaner visually for the users and reduced dev/QA effort in the long run since the element would be reused back in Expense and other modules in the future.
+- Reuse existing elements and add a new section to select the time off policies. Lower dev/QA effort.
+- Introduce time off policy as a new criteria within the existing element. Higher dev/QA effort.
 
-**Decision**: Streamlined to only 2 variants: single approver and multiple approvers. Pending approvals show the number of approvers and a purple badge on the avatar.
+**Decision**: Reworked the approval flow and introduced time off policy as a new criteria within the existing element.
 
-**Rationale**: Two variants cover all cases without the combinatorial explosion of the previous approach. This reduced the maintenance surface for both the design system and front-end code.
+**Rationale**:
 
-Before we went ahead with the change, I tested and validated that these 2 variants with extreme situations, e.g. users with really long names, approval levels with > 10 parallel approvers, approvers who were later deleted or dismissed, etc, to make sure they could handle all edges cases.
+- Initially, we tried using the existing elements from the expense module and created a separate section to select the time off policies range first. We realised it was very difficult to create approval flows for some scenarios. E.g. for specific employees, admins needed to know their time off policies — which meant jumping off to another screen; for specific countries, admins had to select all time off policies, then select the countries. Neither was intuitive.
+- Folding policy into the approval flow element itself catered to all the scenarios required, and made configuration easier and faster.
 
 **Result**:
 
-- With this update, we've managed to reduce dev/QA effort by more than 50%. This pattern was later adopted back into the Expense module in its next iteration.
+- Reduced approval flow configuration time by 25%.
 
 ### 3. Time Off Page Layout Redesign
 
@@ -89,6 +91,38 @@ Before we went ahead with the change, I tested and validated that these 2 varian
 **Result**:
 
 - A more visually and hierarchically balanced page with essential sections at the top, allowing users the sense of control and full visibility immediately.
+
+### 4. Pending Approval Count Framework
+
+**Situation**: Previously, the time off request details page displayed only the number of days applied for; it lacked essential details like the available and remaining balance, and how many days are pending. The employee couldn't tell immediately if they had enough balances without pausing what they were doing to get those information. Their flow was interrupted.
+
+**Options considered**:
+
+- 1x4 grid; left-aligned
+- 1x4 grid; center-aligned
+- 2x2 grid; left-aligned
+- 2x2 grid; center-aligned
+- The center-aligned grids and 2x2 grid were not suitable as broke the reading flow and it used up more space than required.
+
+**Decision**:
+
+- Implement the balance overview section in 1x4 grid format.
+
+**Other additions**:
+
+- We ensured the balance overview section is coherent for every request of the same time off type that are still in pending status.
+- When a request is in pending status, details like available balance and amount pending needed to refresh to reflect changes in other requests of the same type, e.g. employee submitted new request, another request got approved or declined, etc.
+- Once a request gets approved, balance overview retains only the number of days applied while removing the rest.
+
+**Rationale**:
+
+- It fits the employee's mental model at different points of the time off request.
+- When requesting, the **most important thing the employee needs to know is whether she has enough balance**. Which means the calculation in the balance overview section must be clear and complete.
+- But once that request got approved, all those numbers didn't matter anymore, except for the number of days applied. Their mind has already moved on to the actual time off.
+
+**Result**:
+
+- A time off details page that provides relevant information at different points of the journey, and one that reflects the user's mental model.
 
 ## Reflection
 
