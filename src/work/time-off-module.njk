@@ -60,7 +60,7 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
 
     <h3 class="cs-subsection-title">Options Considered</h3>
     <ul class="cs-list">
-      <li><strong>Time off balances still on the right side; toggle on existing calendar.</strong> While it was less dev effort as we will be using same similar layout, listing table has much less width.</li>
+      <li><strong>Time off balances still on the right side; toggle on existing calendar.</strong> While it was less dev effort as we would be using a similar layout, the listing table has much less width.</li>
       <li><strong>Side panel for status details:</strong> Users would need to click on time off requests to view details. Not useful for events months into the future; toggling the calendar forward was a hassle just to view the status.</li>
       <li><strong>Time off balances on top; both calendar and listing table visible below.</strong> Calendar and listing table serve the same purpose, thus it was rather redundant to display them both.</li>
     </ul>
@@ -72,7 +72,7 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
 
     <figure class="cs-figure">
       <img src="/assets/timeoff-module-wireframe-2.png" alt="Wireframe: balance cards on the right, listing table added below calendar">
-      <figcaption class="cs-caption">Early explorations 2: Balance cards remained right, listing table added below calendar</figcaption>
+      <figcaption class="cs-caption">Early explorations 2: Balance cards remained on the right, listing table added below calendar</figcaption>
     </figure>
 
     <figure class="cs-figure">
@@ -100,7 +100,7 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
 
     <h3 class="cs-subsection-title">Rationale</h3>
     <ul class="cs-list">
-      <li>Employees needed two distinct mental modes: "when am I off" (calendar) vs. "what's the status of my requests" (listing). A toggle lets them switch contexts cleanly rather than the other options.</li>
+      <li>Employees needed two distinct mental modes: "when am I off" (calendar) vs. "what's the status of my requests" (listing). A toggle lets them switch contexts cleanly rather than via the other options.</li>
     </ul>
 
     <h3 class="cs-subsection-title">Result</h3>
@@ -115,7 +115,18 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
   <h2 class="cs-section-title">Decision 2: Parallel Approver Flow</h2>
   <div class="cs-section-body">
     <h3 class="cs-subsection-title">Situation</h3>
-    <p>In the previous version, each approval level could only have a single approver that covered everyone — not powerful enough to cater to the different needs of the organization. On top of that, the time off module has the concept of time off type and policy (where a type can have multiple policies) — a concept that didn't exist in the Expense module, so the existing approval flow setup couldn't handle it out of the box.</p>
+    <p>In the previous version, each approval level could only have a single approver that covered everyone — not powerful enough to cater to the different needs of the organization.</p>
+    <p>On top of that, the time off module has the concept of time off type and policy (where a type can have multiple policies) — a concept that didn't exist in the Expense module, so the existing approval flow setup couldn't handle it out of the box.</p>
+
+   <figure class="cs-figure">
+      <img src="/assets/timeoff-module-11.png" alt="Previous approval flow">
+      <figcaption class="cs-caption">Approval flow from the Expense module allowed only one approver per level and no way to define scope of users</figcaption>
+    </figure>
+
+   <figure class="cs-figure">
+      <img src="/assets/timeoff-module-12.png" alt="A time off type with multiple time off policies">
+      <figcaption class="cs-caption">A time off type with multiple time off policies</figcaption>
+    </figure>
 
     <h3 class="cs-subsection-title">Options Considered</h3>
     <ul class="cs-list">
@@ -123,18 +134,43 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
       <li><strong>Introduce time off policy as a new criteria within the existing element.</strong> Higher dev/QA effort.</li>
     </ul>
 
+   <figure class="cs-figure">
+      <img src="/assets/timeoff-module-13.png" alt="Scenario: specific employees with time off policy 1">
+      <figcaption class="cs-caption">Scenario: specific employees with time off policy 1</figcaption>
+    </figure>
+
+   <figure class="cs-figure">
+      <img src="/assets/timeoff-module-14.png" alt="Scenario: employees from country SG">
+      <figcaption class="cs-caption">Scenario: employees from country SG</figcaption>
+    </figure>
+
     <h3 class="cs-subsection-title">Decision</h3>
     <p>Reworked the approval flow and introduced time off policy as a new criteria within the existing element.</p>
 
+    <h3 class="cs-subsection-title">Other additions</h3>
+    <p>Added a catch-all rule – <strong>a safety net</strong> – that catches any employees who somehow managed to fall through all the approval scopes. The reason could be an incomplete profile — missing department, role, country, etc.</p>
+
     <h3 class="cs-subsection-title">Rationale</h3>
     <ul class="cs-list">
-      <li>Initially, we tried using the existing elements from the Expense module and created a separate section to select the time off policies range first. We realised it was very difficult to create approval flows for some scenarios. E.g. for specific employees, admins needed to know their time off policies — which meant jumping off to another screen; for specific countries, admins had to select all time off policies, then select the countries. Neither was intuitive.</li>
+      <li>Initially, we tried using the existing elements from the Expense module and created a separate section to select the time off policies range first.</li>
+      <li>It worked fine if the criterion is simply by time off policies; but in some scenarios it became unintuitive or self-defeating.</li>
+      <li>E.g. for specific employees, the admin needed to know their time off policies — which meant jumping off to another screen to retrieve them; for specific countries, admins had to select all time off policies, then select the countries. Either the flow was interrupted or redundant selection was required.</li>
       <li>Folding policy into the approval flow element itself catered to all the scenarios required, and made configuration easier and faster.</li>
     </ul>
 
+   <figure class="cs-figure">
+      <img src="/assets/timeoff-module-15.png" alt="Redesigned approval flow detail page using specific groups">
+      <figcaption class="cs-caption">Redesigned approval flow detail page using specific groups</figcaption>
+    </figure>
+
+   <figure class="cs-figure">
+      <img src="/assets/timeoff-module-16.png" alt="The catch-all rule which could be neither deleted nor moved around.">
+      <figcaption class="cs-caption">The catch-all rule which could be neither deleted nor moved around.</figcaption>
+    </figure>
+
     <h3 class="cs-subsection-title">Result</h3>
     <ul class="cs-list">
-      <li>Reduced approval flow configuration time by 25%.</li>
+      <li>During the internal testing, we managed to reduce configuration time by 25% for most of the scenarios, and reduce drop off rate by 1/3. Drop off means the subject couldn't finish the flow due to incomplete data.</li>
     </ul>
   </div>
 </section>
@@ -201,28 +237,19 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
       <figcaption class="cs-caption">Previous time off details page has only the number of days applied for</figcaption>
     </figure>
     
-    <h3 class="cs-subsection-title">Options Considered</h3>
+    <h3 class="cs-subsection-title">Options Considered & Decision Made</h3>
     <ul class="cs-list">
-      <li>1x4 grid; left-aligned</li>
-      <li>1x4 grid; center-aligned</li>
-      <li>2x2 grid; left-aligned</li>
-      <li>2x2 grid; center-aligned</li>
-      <li>The center-aligned grids and 2x2 grid were not suitable as broke the reading flow and it used up more space than required.</li>
+      <li>We explored different grid and alignment layouts and finalized on the 1x4 grid format. The center-aligned grids and 2x2 grid were not suitable as they broke the reading flow and used up more space than required.</li>
     </ul>
-    
+ 
    <figure class="cs-figure">
       <img src="/assets/timeoff-module-wireframe-4.png" alt="Explorations of balance overview section">
       <figcaption class="cs-caption">Explorations of balance overview section</figcaption>
-    </figure>    
-
-    <h3 class="cs-subsection-title">Decision</h3>
-    <ul class="cs-list">
-      <li>Implement the balance overview section in 1x4 grid format.</li>
-    </ul>
+    </figure>   
 
    <p><strong>Other additions</strong>:</p>
      <ul class="cs-list">
-      <li>We ensured the balance overview section is coherent for every request of the same time off type that are still in pending status</li>
+      <li>We ensured the balance overview section is coherent for every request of the same time off type that are still in pending status.</li>
       <li>When a request is in pending status, details like available balance and amount pending needed to refresh to reflect changes in other requests of the same type, e.g. employee submitted new request, another request got approved or declined, etc.</li>
       <li>Once a request gets approved, balance overview retains only the number of days applied while removing the rest.</li>
     </ul>
@@ -246,12 +273,12 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
     <ul class="cs-list">
       <li>It fits the employee's mental model at different points of the time off request.</li>
       <li>When requesting, the <strong>most important thing the employee needs to know is whether she has enough balance</strong>. Which means the calculation in the balance overview section must be clear and complete.</li>
-      <li>But once that request got approved, all those numbers didn't matter anymore, except for the number of days applied. Their mind has already moved on to the actual time off.</li>
+      <li>But once that request got approved, none of the numbers except for the days applied mattered. Their mind has already moved on to the actual time off.</li>
     </ul>
 
     <h3 class="cs-subsection-title">Result</h3>
     <ul class="cs-list">
-      <li>A time off details page that provides relevant information at different points of the journey, and one that reflects the user's mental model.</li>
+      <li>For this case, there was no metric to measure its success save for the fact that it achieved its purpose of providing the right information at different points of time based on the feedback by internal users and clients.</li>
     </ul>
 
   </div>
@@ -262,7 +289,7 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
   <div class="cs-section-body">
     <h3 class="cs-subsection-title">What I'd Do Differently</h3>
     <ul class="cs-list">
-      <li>Handle the scenario where approvers are deleted mid-flow, leaving submissions stuck with no recourse. At the time, we decided employees would need to reapply — a known gap we accepted due to time constraint and the low probability of occurrence.</li>
+      <li>Handle the scenario where approvers are deleted mid-flow, leaving submissions stuck with no recourse. At the time, we decided employees would need to reapply — a known gap we accepted due to time constraints and the low probability of occurrence.</li>
     </ul>
 
     <h3 class="cs-subsection-title">What the System Still Can't Do Cleanly</h3>
