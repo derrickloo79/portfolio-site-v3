@@ -27,8 +27,8 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
     <p><strong>Duration:</strong> 3 months | <strong>Team:</strong> 1 Designer (me), 2 PMs, 3 Devs, 2 QAs</p>
     <p><strong>Key contributions:</strong></p>
     <ul class="cs-list">
-      <li>Drove the pending approval count framework that allowed employees and managers alike to have full visibility of available and remaining balances, number of days requested and pending.</li>
       <li>Proposed the redesign of the time off page, which included calendar/listing toggle, time off summary cards, and improved layout hierarchy.</li>
+      <li>Drove the redesign of approval flow modal that allowed the admin to define the scope with time off policies as additional criteria, and parallel approvers per level.</li>
       <li>Although we used existing approval status elements from the expense module, I proposed some visual tweaks to reduce the component variants to save dev/QA time.</li>
       <li>After shipping this iteration, we got positive feedback from customers citing the upgraded approval flows and refreshed UIs in the time off tab during bi-weekly calls with the sales and customer success team — a good indication that we were shipping features that met customers' needs.</li>
     </ul>
@@ -85,7 +85,7 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
   
     <ul class="cs-list">
       <li>We finalized on the version with the balance cards on top and a toggle to switch between calendar and listing views. </li>
-      <li>The calendar view was fully optimised for available space, while the new listing view showed all active (ongoing or upcoming) time off applications with approval status, approver details, and progress.</li>
+      <li>The calendar view was fully optimized for available space, while the new listing view showed all active (ongoing or upcoming) time off applications with approval status, approver details, and progress.</li>
     </ul>
 
     <figure class="cs-figure">
@@ -103,10 +103,22 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
       <li>Employees needed two distinct mental modes: "when am I off" (calendar) vs. "what's the status of my requests" (listing). A toggle lets them switch contexts cleanly rather than via the other options.</li>
     </ul>
 
+    <h3 class="cs-subsection-title">Other changes</h3>
+    <ol class="cs-list cs-list--ordered">
+      <li>Previously in the Expense module, there were variants and interactions for the different number of parallel approvers. And when implementing here in the time off module, the QA needed to test them all again.</li>
+      <li>I reduced them to having only 2 variants to save on dev/QA effort: single and multiple approvers. The interaction was also simplified to show all the approver names on hover.</li>
+    </ol>
+
+   <figure class="cs-figure">
+      <img src="/assets/timeoff-module-17.png" alt="At least 5 variants previously VS 2 after refinement">
+      <figcaption class="cs-caption">At least 5 variants previously VS 2 after refinement</figcaption>
+    </figure>
+
+
     <h3 class="cs-subsection-title">Result</h3>
     <ul class="cs-list">
       <li>Employees have control over what they wish to see — who the approvers are, where it's stuck, and who to follow up with.</li>
-      <li>When doing internal testing with colleagues pre-deployment, the feedback was that they had better clarity about their time off balances and statuses of the upcoming requests.</li>
+      <li>Reduced dev/QA effort by half; simplified design system maintenance</li>
     </ul>
   </div>
 </section>
@@ -129,10 +141,10 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
     </figure>
 
     <h3 class="cs-subsection-title">Options Considered</h3>
-    <ul class="cs-list">
-      <li><strong>Reuse existing elements and add a new section to select time off policies.</strong> Lower dev/QA effort.</li>
-      <li><strong>Introduce time off policy as a new criteria within the existing element.</strong> Higher dev/QA effort.</li>
-    </ul>
+    <p>Initially, we tried using the existing elements from the Expense module and created a separate section to select the time off policies range first.</p>
+    <p>It worked fine if the criterion was simply time off policies; but in some scenarios it became unintuitive or self-defeating.</p>
+    <p>E.g. for specific employees, the admin needed to know their time off policies — which meant jumping off to another screen to retrieve them; for specific countries, admins had to select all time off policies, then select the countries.</p>
+    <p>In those scenarios, either the flow was interrupted or redundant selection was required.</p>
 
    <figure class="cs-figure">
       <img src="/assets/timeoff-module-13.png" alt="Scenario: specific employees with time off policy 1">
@@ -145,16 +157,14 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
     </figure>
 
     <h3 class="cs-subsection-title">Decision</h3>
-    <p>Reworked the approval flow and introduced time off policy as a new criteria within the existing element.</p>
+    <p>Proposed to rework the approval flow and introduce time off policy as a new criterion within the existing element.</p>
 
     <h3 class="cs-subsection-title">Other additions</h3>
     <p>Added a catch-all rule – <strong>a safety net</strong> – that catches any employees who somehow managed to fall through all the approval scopes. The reason could be an incomplete profile — missing department, role, country, etc.</p>
 
     <h3 class="cs-subsection-title">Rationale</h3>
     <ul class="cs-list">
-      <li>Initially, we tried using the existing elements from the Expense module and created a separate section to select the time off policies range first.</li>
-      <li>It worked fine if the criterion is simply by time off policies; but in some scenarios it became unintuitive or self-defeating.</li>
-      <li>E.g. for specific employees, the admin needed to know their time off policies — which meant jumping off to another screen to retrieve them; for specific countries, admins had to select all time off policies, then select the countries. Either the flow was interrupted or redundant selection was required.</li>
+      <li>Although initial design reduced dev/QA effort, it would create friction and frustration in user experiences later. Which eventually would create additional rework.</li>
       <li>Folding policy into the approval flow element itself catered to all the scenarios required, and made configuration easier and faster.</li>
     </ul>
 
@@ -170,7 +180,7 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
 
     <h3 class="cs-subsection-title">Result</h3>
     <ul class="cs-list">
-      <li>During the internal testing, we managed to reduce configuration time by 25% for most of the scenarios, and reduce drop off rate by 1/3. Drop off means the subject couldn't finish the flow due to incomplete data.</li>
+      <li>During the internal testing, we managed to reduce configuration time by 25% for most of the scenarios, and reduce drop-off rate by 1/3. Drop-off means the subject couldn't finish the flow due to incomplete data.</li>
     </ul>
   </div>
 </section>
@@ -217,7 +227,6 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
       <li>Employees who accessed this page usually had these objectives: check balances, submit new requests, and check request statuses. These should be the centerpiece of the tab.</li>
     </ul>
 
-
     <h3 class="cs-subsection-title">Result</h3>
     <ul class="cs-list">
       <li>A more visually and hierarchically balanced page with essential sections at the top, allowing users the sense of control and full visibility immediately.</li>
@@ -230,7 +239,7 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
   <h2 class="cs-section-title">Decision 4: Pending Approval Count Framework</h2>
   <div class="cs-section-body">
     <h3 class="cs-subsection-title">Situation</h3>
-    <p>Previously, the time off request details page displayed only the number of days applied for; it lacked essential details like the available and remaining balance, and how many days are pending. The employee couldn't tell immediately if they had enough balances without pausing what they were doing to get those information. Their flow was interrupted.</p>
+    <p>Previously, the time off request details page displayed only the number of days applied for; it lacked essential details like the available and remaining balance, and how many days are pending. The employee couldn't tell immediately if they had enough balances without pausing what they were doing to get that information. Their flow was interrupted.</p>
    
    <figure class="cs-figure">
       <img src="/assets/timeoff-module-5.png" alt="Previous time off details page has only the number of days applied for">
@@ -249,8 +258,8 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
 
    <p><strong>Other additions</strong>:</p>
      <ul class="cs-list">
-      <li>We ensured the balance overview section is coherent for every request of the same time off type that are still in pending status.</li>
-      <li>When a request is in pending status, details like available balance and amount pending needed to refresh to reflect changes in other requests of the same type, e.g. employee submitted new request, another request got approved or declined, etc.</li>
+      <li>We ensured the balance overview section is coherent for every request of the same time off type that is still in pending status.</li>
+      <li>When a request is in pending status, details like available balance and amount pending needed to refresh to reflect changes in other requests of the same type, e.g., an employee submitted a new request, another request got approved or declined, etc.</li>
       <li>Once a request gets approved, balance overview retains only the number of days applied while removing the rest.</li>
     </ul>
    
@@ -278,7 +287,7 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
 
     <h3 class="cs-subsection-title">Result</h3>
     <ul class="cs-list">
-      <li>For this case, there was no metric to measure its success save for the fact that it achieved its purpose of providing the right information at different points of time based on the feedback by internal users and clients.</li>
+      <li>For this case, there was no metric to measure its success, except for the fact that it achieved its purpose of providing the right information at different points of time based on the feedback by internal users and clients.</li>
     </ul>
 
   </div>
@@ -290,16 +299,19 @@ team: 1 Designer, 2 PMs, 3 Devs, 2 QAs
     <h3 class="cs-subsection-title">What I'd Do Differently</h3>
     <ul class="cs-list">
       <li>Handle the scenario where approvers are deleted mid-flow, leaving submissions stuck with no recourse. At the time, we decided employees would need to reapply — a known gap we accepted due to time constraints and the low probability of occurrence.</li>
+      <li>Remove the calendar from the employee profile and have only the listing view. We already have a dedicated calendar page where I can view not only my own but also my team's time off events.</li>
     </ul>
 
     <h3 class="cs-subsection-title">What the System Still Can't Do Cleanly</h3>
     <ul class="cs-list">
-      <li>Cater for unlimited leave types — instead of showing days available, these should show days taken. This requires a different card treatment.</li>
+      <li>Cater for unlimited time off — instead of showing days available, it would show days taken. This requires a different card treatment.</li>
+      <li>Still lacking some time off types like time off with expiration, birthday leave where it could automatically be added on the employee's birth month, etc.</li>
     </ul>
 
     <h3 class="cs-subsection-title">What I Learned</h3>
     <ul class="cs-list">
-      <li>Redesigning modules taught me that the hardest problem isn't just visual refresh – it's about understanding the main outcomes of the user accessing the page and designing for the user's mental model at each point in their journey.</li>
+      <li>Redesigning modules taught me that the hardest problem isn't just visual refresh – it's about understanding the main outcomes users have when accessing the page and designing for the user's mental model at each point in their journey.</li>
+      <li>Not every design decision can be backed by a metric to measure its success; sometimes it would be more qualitative which required constant contact with clients post-release to find out how the product made them feel.</li>
     </ul>
   </div>
 </section>
