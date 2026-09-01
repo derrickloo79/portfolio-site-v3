@@ -39,20 +39,167 @@ team: 1 Designer, 2 PMs, 4 Devs, 2 QAs
 </section>
 
 <section class="cs-section">
-  <h2 class="cs-section-title">Design Decisions</h2>
+  <h2 class="cs-section-title">Key Design Decisions</h2>
   <div class="cs-section-body">
-    <h3 class="cs-subsection-title">Splitting steps to protect priority actions</h3>
-    <p>I initially tried combining two jobs into a single step to reduce the total step count. But this pushed the critical task of assigning onboarding tasks below the fold. I decided to break them into two distinct steps — a longer flow, but one where nothing important gets buried.</p>
-    <!-- TODO: Add screenshot -->
+    <h3 class="cs-subsection-title">1. Surfacing the affordance of task templates</h3>
+    <p><strong>Situation</strong>: Task templates were hidden in the task editor, and the link itself was inconspicuously placed on the top-left corner.</p>
+    <p>The “Add task” was more prominent in the main screen, so users naturally added tasks instead of leveraging task templates.</p>
 
-    <h3 class="cs-subsection-title">In-place editing at summary</h3>
-    <p>At the final summary step, I wanted to allow direct inline editing so users wouldn't need to navigate back. This wasn't technically feasible, so I designed the edit button to take users back to the relevant step instead — a pragmatic compromise that kept the flow simple.</p>
-    <!-- TODO: Add screenshot -->
+    <figure class="cs-figure">
+      <img src="/assets/add-employee-form-01.png" alt="Task editor (Before)">
+      <figcaption class="cs-caption">Task editor (Before)</figcaption>
+    </figure>
 
-    <h3 class="cs-subsection-title">Sequential stepping after edits</h3>
-    <p>Jumping directly back to the summary after editing a previous step was technically complex and fragile. I opted for sequential stepping — users step through to the end after an edit. It's a trade-off I'd revisit in a future iteration, but it kept the release scope clean.</p>
+    <p>There were other UX issues with the task editor.</p>
+    <ol class="cs-list">
+      <li>Users couldn't tell how many tasks there were for templates with very long names.</li>
+      <li>Users couldn't tell what the tasks in each template were unless they loaded it into the editor.</li>
+      <li>Empty templates (zero tasks) are also listed, taking up space.</li>
+    </ol>
 
-    <h3 class="cs-subsection-title">ATS integration (scoped out)</h3>
+    <figure class="cs-figure">
+      <img src="/assets/add-employee-form-02.png" alt="UX issues with task editor modal">
+      <figcaption class="cs-caption">UX issues with task editor modal</figcaption>
+    </figure>
+
+    <p><strong>Decision</strong>: Surface the task templates to the front with slight background accent to get more attention than “Add task” outlined button.</p>
+
+    <p><strong>Other changes</strong>:</p>
+    <ol class="cs-list">
+      <li>Hide all empty templates.</li>
+      <li>Truncate long template names so number of tasks are always visible.</li>
+      <li>Introduced a Preview button, allowing the admin to preview the tasks in a modal before deciding to load them. Took reference from Miro’s templates library that has a similar function.</li>
+    </ol>
+
+    <figure class="cs-figure">
+      <img src="/assets/add-employee-form-03.png" alt="Task editor (After)">
+      <figcaption class="cs-caption">Task editor (After)</figcaption>
+    </figure>
+
+    <figure class="cs-figure">
+      <img src="/assets/add-employee-form-04.png" alt="Previewing tasks before loading">
+      <figcaption class="cs-caption">Previewing tasks before loading the template</figcaption>
+    </figure>
+
+    <p><strong>Rationale</strong>:</p>
+    <ul class="cs-list">
+      <li>Using contrast in background to bring users' attention to the task template section.</li>
+      <li>Allowing users to preview a template's tasks before committing gives them a sense of control.</li>
+    </ul>
+
+    <h3 class="cs-subsection-title">2. Integrating with the new Payroll Module</h3>
+    <p><strong>Situation</strong>: Ever since the new Payroll module was released, the users have been requesting for the ability to enrol the new hire directly into payroll while adding them into the org via the add employee form.</p>
+    <p>They found the flow incomplete, and friction existed as they still needed to go to the Payroll module to do manual enrolment for the same new hire.</p>
+
+    <p>Compensation was part of the previous core section, and Payroll is a completely new module that had more sections than the 3 compensation fields. I had to factor in clients who haven’t bought the Payroll module to continue using Compensation.</p>
+    
+    <figure class="cs-figure">
+      <img src="/assets/add-employee-form-05.png" alt="Compensation section (Before)">
+      <figcaption class="cs-caption">Compensation section (Before)</figcaption>
+    </figure>
+
+    <p><strong>Decision</strong>: Display the relevant sections and fields through progressive disclosure. System would check the modules purchased by the clients.</p>
+    <ul class="cs-list">
+      <li>Those without the Payroll module would continue using the Compensation section;</li>
+      <li>Those who had it could choose to enroll the new hire or not;</li>
+      <li>If they chose to enroll, the admin needs to provide the payroll details; or else, they would just provide the compensation details, as before.</li>
+    </ul>
+
+    <p><strong>How we got there</strong>: Mapped the new add employee form journey with the new step of enrolling the employee into a payroll org, taking note of the various paths that the admin could take and designed for them.</p>
+
+    <figure class="cs-figure">
+      <img src="/assets/add-employee-form-06.png" alt="Compensation and Payroll workflow">
+      <figcaption class="cs-caption">Compensation and Payroll workflow</figcaption>
+    </figure>
+
+    <p><strong>Rationale</strong>: Providing for all user journeys gave the admin full control over the whole process.</p>
+
+    <figure class="cs-figure">
+      <img src="/assets/add-employee-form-07.png" alt="Clients without Payroll module continue to fill in Compensation details">
+      <figcaption class="cs-caption">Clients without Payroll module continue to fill in Compensation details</figcaption>
+    </figure>
+
+    <figure class="cs-figure">
+      <img src="/assets/add-employee-form-08.png" alt="Clients with Payroll module but choose not to enroll new hire will fill in the Compensation details">
+      <figcaption class="cs-caption">Clients with Payroll module but choose not to enroll new hire will fill in the Compensation details</figcaption>
+    </figure>
+
+    <figure class="cs-figure">
+      <img src="/assets/add-employee-form-09.png" alt="Client enrolling new hire needs to provide Base Salary and Recurring Item details">
+      <figcaption class="cs-caption">Client enrolling new hire needs to provide Base Salary and Recurring Item details</figcaption>
+    </figure>
+
+    <p><strong>Other changes</strong>: For the Base Salary and Recurring Item details, I used hidden logic to imply the values for Effective Date and Event. Typically, these fields are manually entered in the Payroll module.</p>
+
+    <figure class="cs-figure">
+      <img src="/assets/add-employee-form-10.png" alt="Effective Date and Event are implied using hidden logic">
+      <figcaption class="cs-caption">Effective Date and Event are implied using hidden logic</figcaption>
+    </figure>
+
+    <p><strong>Reason</strong>: Since we are adding a new hire, the Effective Date can only be the 1st day of work. It was added in step 1 so we could re-use that value. Likewise for Event, the value can only be “New Hire”.</p>
+   
+    <p>By doing so, we reduced the fields the admin needed to populate, thus speeding up the process.</p>
+
+    <h3 class="cs-subsection-title">3. Revising work schedule step</h3>
+    <p><strong>Situation</strong>: Users kept clicking on those round static icons, thinking that they are interactive. They thought the system had become inactive when no changes were made.</p>
+
+    <figure class="cs-figure">
+      <img src="/assets/add-employee-form-11.png" alt="Static icons thought to be interactive">
+      <figcaption class="cs-caption">Static icons thought to be interactive</figcaption>
+    </figure>
+
+    <p><strong>Final design</strong>:</p>
+    <ul class="cs-list">
+      <li>Clear hierarchy of header and description text.</li>
+      <li>Selected days have good contrast and won’t be confused as interactive buttons.</li>
+      <li>Refreshed radio card with a check-circle icon; also has a clear indication of selected state.</li>
+    </ul>
+
+    <figure class="cs-figure">
+      <img src="/assets/add-employee-form-12.png" alt="Work schedule options (After)">
+      <figcaption class="cs-caption">Work schedule options (After)</figcaption>
+    </figure>
+
+    <figure class="cs-figure">
+      <img src="/assets/add-employee-form-13.png" alt="Exploring various designs">
+      <figcaption class="cs-caption">Exploring various designs</figcaption>
+    </figure>
+
+    <h3 class="cs-subsection-title">4. Converting form to multi-step wizard</h3>
+    <p><strong>Situation</strong>: The form is very long and the admins found it overwhelming with so many sections and details on a page.</p>
+
+    <figure class="cs-figure">
+      <img src="/assets/add-employee-form-14.png" alt="Add employee form (Before)">
+      <figcaption class="cs-caption">Add employee form (Before)</figcaption>
+    </figure>
+
+    <p>Various exploration versions were tried before we finalized the designs, after getting feedback from stakeholders.</p>
+
+    <figure class="cs-figure">
+      <img src="/assets/add-employee-form-16.png" alt="Exploration 1">
+      <figcaption class="cs-caption">Exploration 1</figcaption>
+    </figure>
+
+    <figure class="cs-figure">
+      <img src="/assets/add-employee-form-17.png" alt="Exploration 2">
+      <figcaption class="cs-caption">Exploration 2</figcaption>
+    </figure>
+
+    <p><strong>Final design</strong>:</p>
+    <ul class="cs-list">
+      <li>Broken down into 6 essential steps: employee details, compensation, time off, onboarding tasks, invite access, summary.</li>
+      <li>Added toggle to show only key fields and quicklinks to each field section in step 1.</li>
+    </ul>
+
+    <figure class="cs-figure">
+      <img src="/assets/add-employee-form-15.png" alt="Add employee form (After)">
+      <figcaption class="cs-caption">Add employee form (After)</figcaption>
+    </figure>
+
+    <p><strong>Reason</strong>: Each step maps to various key modules in the system, making it modular and easier to maintain. The toggle to show only key fields gives admins control over what to fill in when they have only limited info initially. Quicklinks allow admins to quickly jump between sections when the form is long.</p>
+
+
+    <h3 class="cs-subsection-title">5. ATS integration (scoped out)</h3>
     <p>I timeboxed an exploration of pulling employee data from an ATS app to pre-fill the form. The interaction and flow showed promise, but we couldn't converge on a final form within the timebox — and it was a deep rabbit hole. I recommended deferring it to a later iteration rather than shipping something half-baked.</p>
   </div>
 </section>
@@ -60,9 +207,14 @@ team: 1 Designer, 2 PMs, 4 Devs, 2 QAs
 <section class="cs-section">
   <h2 class="cs-section-title">Reflection</h2>
   <div class="cs-section-body">
+    <h3 class="cs-subsection-title">What I'd do differently</h3>
     <ul class="cs-list">
-      <li><strong>Would do differently:</strong> Present all steps in a single view with detailed work handled in drawer modals — reducing the perceived complexity of the multi-step flow.</li>
-      <li><strong>Still unresolved:</strong> Inline editing at the summary step and the ability to jump across completed steps — both worth tackling in a future iteration.</li>
+      <li>Present all steps in a single view with detailed work handled in drawer modals — reducing the perceived complexity of the multi-step flow.</li>
+    </ul>
+
+    <h3 class="cs-subsection-title">What the system still can't do cleanly</h3>
+    <ul class="cs-list">
+      <li>Inline editing at the summary step and the ability to jump across completed steps — both worth tackling in a future iteration.</li>
     </ul>
   </div>
 </section>
