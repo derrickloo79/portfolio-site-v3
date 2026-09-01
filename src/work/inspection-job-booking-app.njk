@@ -12,27 +12,27 @@ team: Solo — design & development; business owner as stakeholder
 <section class="cs-section">
   <h2 class="cs-section-title">Context & Challenge</h2>
   <div class="cs-section-body">
-    <p>My ex-boss runs a rope and crane inspection business. Before Inspect, every job — request, scheduling, assignment, and status update — was coordinated ad hoc over phone calls and WhatsApp. There was no central system, no scheduling visibility, and no easy way to keep a requestor updated without someone manually messaging them.</p>
+    <p>My ex-boss runs a rope and crane inspection business, and before Inspect, everything ran on phone calls and WhatsApp — requests, scheduling, assignments, status updates, all of it. There was no central system, no way to see the schedule at a glance, and no way to keep a requestor in the loop without someone manually messaging them.</p>
     <p><strong>Key entities:</strong> Job Request → Job → Assignment</p>
-    <p><strong>Personas:</strong> Requestor (the client submitting an inspection request), Admin/"the programmer" (accepts, schedules, and assigns jobs; manages job details), FSP — Field Service Partner (the inspector who carries out the job)</p>
-    <p><strong>Core design tension:</strong> keeping requestors informed and able to track status without requiring them to create an account or log in, while giving admins full control over scheduling and assignment.</p>
-    <p><strong>Strategic constraint:</strong> one-month timeline for the first iteration, designed and built solo.</p>
-    <p><strong>The trigger:</strong> the admin had become the bottleneck — every attachment and contact detail had to be manually forwarded between requestor and FSP, with the admin scrolling back through long WhatsApp threads just to dig up information buried in the conversation. That repeated time sink is what made a proper system worth building.</p>
+    <p><strong>Personas:</strong> the requestor (the client submitting a job), the admin — everyone at the company just calls them "the programmer" — who accepts, schedules, and assigns jobs, and the FSP (Field Service Partner), the inspector who actually shows up on site.</p>
+    <p><strong>The core design tension:</strong> I wanted requestors to feel informed and able to track their job without making them sign up for yet another account, while still giving the admin full control over scheduling and assignment.</p>
+    <p><strong>Strategic constraint:</strong> one month for the first version, and I was designing and building it entirely on my own.</p>
+    <p><strong>The trigger:</strong> the admin had basically become a human relay — forwarding attachments and contact details back and forth, scrolling through long WhatsApp threads just to dig up info that was buried somewhere in the conversation. That repeated time sink is what made building a proper system worth it.</p>
   </div>
 </section>
 
 <section class="cs-section">
   <h2 class="cs-section-title">My Role & Impact</h2>
   <div class="cs-section-body">
-    <p><strong>Role:</strong> Design & development, solo — research, UX, UI, and build.</p>
-    <p><strong>Duration:</strong> 1 month (first iteration) | <strong>Team:</strong> Me (design + dev), business owner as the primary stakeholder and client. I was also training to become an FSP myself during this project, which gave me first-hand insight into what the field-service side actually needs.</p>
+    <p><strong>Role:</strong> I designed and built this one entirely solo — research, UX, UI, front-end and back-end.</p>
+    <p><strong>Duration:</strong> One month for the first iteration. <strong>Team:</strong> Just me on design and development, with the business owner as my main stakeholder and client. I was also training to become an FSP myself during this project, which turned out to be a real advantage — I got first-hand insight into what the field side actually needs.</p>
     <p><strong>Key contributions:</strong></p>
     <ul class="cs-list">
-      <li>Designed and built the end-to-end system from scratch: public request form, admin console, and FSP login.</li>
-      <li>Defined the three-role access model (Requestor / Admin / FSP) and the job lifecycle connecting them.</li>
-      <li>Just wrapped up beta testing on the dev server and opened the production server for real clients to start submitting requests — quantified outcomes still to come.</li>
-      <li>Admin feedback so far: a much clearer picture of the schedule, with visibility into who's doing what job each day, and no more accidentally double-booking an FSP across AM/PM sessions.</li>
-      <li>FSP feedback so far: no more scrolling through WhatsApp to piece together job and contact details — everything now lives in one place.</li>
+      <li>Designed and built the whole system from scratch — the public request form, the admin console, and the FSP login.</li>
+      <li>Figured out the three-role access model (requestor, admin, FSP) and how the job lifecycle connects them.</li>
+      <li>Just wrapped up beta testing on the dev server, and we've opened the production server for real clients to start submitting requests — so the real numbers are still coming in.</li>
+      <li>The admin's feedback so far: a much clearer picture of the schedule, seeing who's doing what job each day, and no more accidentally double-booking an FSP across AM/PM sessions.</li>
+      <li>FSP feedback so far: no more scrolling through WhatsApp to piece together job and contact details — it's all sitting in one place now.</li>
     </ul>
   </div>
 </section>
@@ -41,13 +41,13 @@ team: Solo — design & development; business owner as stakeholder
   <h2 class="cs-section-title">Process & Collaboration</h2>
   <div class="cs-section-body">
     <ul class="cs-list">
-      <li>Scoped requirements directly with the business owner and programmer as the client.</li>
-      <li>Mapped the job lifecycle across all three roles — request → accept/schedule/assign → field execution → status updates — to identify exactly where a system could replace manual coordination.</li>
-      <li>Being trained as an FSP myself gave me direct, first-person exposure to what field inspectors need on the ground, rather than relying on secondhand requirements.</li>
-      <li>The main priority was getting a basic, functional version live within the month — the goal being to get requestors, the admin, and FSPs actually using it so we could gather real feedback on what to improve next.</li>
-      <li>Cut: automated WhatsApp status update messages. I wasn't familiar with the WhatsApp Business API, and even with AI assistance it would have been too technically involved to ship within the timeline — on top of the time needed for Meta's account verification.</li>
-      <li>Cut: in-app assignment acceptance for FSPs. Instead, the admin and FSP still discuss the assignment over WhatsApp, and the admin updates the schedule in the system afterward.</li>
-      <li>Neither cut was a dealbreaker, since I'd already designed a workaround: a button on the job details page that opens WhatsApp with a pre-filled message, ready to send.</li>
+      <li>Scoped requirements directly with the business owner — the "programmer" — as my client.</li>
+      <li>Mapped out the job lifecycle across all three roles — request, accept/schedule/assign, field execution, status updates — to see exactly where a system could take over from manual coordination.</li>
+      <li>Training as an FSP myself meant I got direct, first-hand exposure to what field inspectors actually need, instead of relying on secondhand requirements.</li>
+      <li>The priority was just getting something basic and functional live within the month — the goal was to get requestors, the admin, and FSPs actually using it, so we could gather real feedback on what to improve next.</li>
+      <li>One thing we cut: automated WhatsApp status update messages. I wasn't familiar with the WhatsApp Business API, and even with AI's help, it would've been too technically involved to ship within the timeline — on top of the time Meta needs to verify a business account.</li>
+      <li>Another cut: letting FSPs accept assignments in-app. Instead, the admin and FSP still hash it out over WhatsApp, and the admin updates the schedule afterward.</li>
+      <li>Neither cut really hurt, since I'd already built a workaround: a button on the job details page that opens WhatsApp with a pre-filled message, ready to send.</li>
     </ul>
   </div>
 </section>
@@ -56,16 +56,15 @@ team: Solo — design & development; business owner as stakeholder
   <h2 class="cs-section-title">Decision 1: Three Scoped Roles — Requestor, Admin, FSP</h2>
   <div class="cs-section-body">
     <h3 class="cs-subsection-title">Situation</h3>
-    <p>Job coordination happened over phone and WhatsApp, with no separation between who could request a job, who scheduled and assigned it, and who executed it in the field. Everyone touching a job needed a different set of information and actions.</p>
+    <p>Job coordination happened entirely over phone and WhatsApp, with no separation between who could request a job, who scheduled and assigned it, and who actually executed it in the field. Everyone touching a job needed a different slice of information and a different set of actions.</p>
 
     <h3 class="cs-subsection-title">Options Considered</h3>
     <ul class="cs-list">
-      <li><strong>Requiring requestors to sign up for an account before submitting a request:</strong> dropped, since that's too much friction for a request that might not even get accepted. Instead, the form asks for only essential info, with the LM and MILL certs marked optional in case the requestor doesn't have them on hand at that moment.</li>
-      <li><strong>Building this out as a full CRM to manage clients:</strong> out of scope for this first iteration, which was scoped specifically as booking and scheduling, not client management.</li>
-      <li><strong>A single shared login for admin and FSP:</strong> dropped in favor of separate logins, since FSPs need their own fields (FSP number, joined date, operator level) that don't apply to admins.</li>
+      <li><strong>Requiring requestors to sign up for an account before submitting a request:</strong> I dropped this — it's too much friction for a request that might not even get accepted. Instead, I kept the form as light as possible, asking only for the essentials, and made the LM and MILL certs optional in case the requestor doesn't have them on hand.</li>
+      <li><strong>Building this out as a full CRM to manage clients:</strong> out of scope for this first version — the brief was booking and scheduling, not managing client relationships.</li>
+      <li><strong>A single shared login for admin and FSP:</strong> I wanted this at first, but split them into separate logins once I realized FSPs need their own fields — FSP number, joined date, operator level — that don't apply to admins.</li>
     </ul>
 
-    <!-- TODO: Add screenshot — request form / admin console / FSP login -->
     <figure class="cs-figure">
       <img src="/assets/inspect-1-1.jpeg" alt="Request form (early prototype)">
       <figcaption class="cs-caption">Request form (early prototype)</figcaption>
@@ -85,25 +84,25 @@ team: Solo — design & development; business owner as stakeholder
       <img src="/assets/inspect-1-5.png" alt="Field Service Partner (FSP's) dashboard page">
       <figcaption class="cs-caption">Field Service Partner (FSP's) dashboard page</figcaption>
     </figure>
-    
+
     <figure class="cs-figure">
       <img src="/assets/inspect-1-13.jpeg" alt="Auto-completing of site access location">
       <figcaption class="cs-caption">Planner page early prototype</figcaption>
     </figure>
-    
+
     <figure class="cs-figure">
       <img src="/assets/inspect-1-12.png" alt="Auto-completing of site access location">
       <figcaption class="cs-caption">Planner page version 2: job cards' color defined by FSPs</figcaption>
     </figure>
 
     <h3 class="cs-subsection-title">Decision</h3>
-    <p>Built three scoped experiences: a public-facing form for requestors to submit jobs with no account needed, an admin console for accepting, scheduling, and assigning jobs, and an authenticated login for FSPs that only shows jobs assigned to them.</p>
+    <p>I built three scoped experiences: a public-facing form for requestors to submit jobs with no account needed, an admin console for accepting, scheduling, and assigning jobs, and an authenticated login for FSPs that only shows jobs assigned to them.</p>
 
     <h3 class="cs-subsection-title">Rationale</h3>
-    <p>Each role only needs to see and do a narrow slice of the job lifecycle. Keeping the request form public removes friction for the client's customers; scoping the FSP view to assigned jobs only keeps the field experience focused and avoids exposing jobs that aren't theirs.</p>
+    <p>Each role really only needs to see and do a narrow slice of the job lifecycle. Keeping the request form public removes friction for the client's customers, and scoping the FSP view to just their assigned jobs keeps the field experience focused — no need to expose jobs that aren't theirs.</p>
 
     <h3 class="cs-subsection-title">Result</h3>
-    <p>The admin now has a clear bird's-eye view of all inspection jobs on the planner page, with full job details on the listing page and a record of each FSP's completed and assigned jobs. For FSPs, it's just as straightforward — they see the schedule for the upcoming week and the details for those jobs, with completed jobs out of sight, reducing cognitive load.</p>
+    <p>The admin now gets a clear bird's-eye view of every inspection job on the planner page, full job details on the listing page, and a record of what each FSP has done or is assigned to. For FSPs, it's just as simple — they see the schedule for the upcoming week and the details for those jobs, with completed jobs out of sight so there's less to think about.</p>
   </div>
 </section>
 
@@ -111,17 +110,17 @@ team: Solo — design & development; business owner as stakeholder
   <h2 class="cs-section-title">Decision 2: Keeping Requestors Updated Without Requiring an Account</h2>
   <div class="cs-section-body">
     <h3 class="cs-subsection-title">Situation</h3>
-    <p>Requestors are typically construction-industry clients who want a status update, not another account to manage. Requiring login would add friction right where the business needed to look easy to work with.</p>
+    <p>Requestors are usually construction-industry clients who just want a status update, not another account to manage. Requiring a login would've added friction exactly where the business needed to look easy to work with.</p>
 
     <h3 class="cs-subsection-title">Options Considered</h3>
     <ul class="cs-list">
-      <li><strong>Email updates:</strong> dropped, as it felt old-school and untimely; requestors aren't checking email the way they check WhatsApp.</li>
-      <li><strong>WhatsApp:</strong> the default choice, since it's the app all parties already use heavily.</li>
-      <li><strong>A public link:</strong> kept alongside WhatsApp, since it lets a requestor forward status to their own managers or supervisors without pulling them into the same WhatsApp group and pinging them constantly.</li>
+      <li><strong>Email updates:</strong> dropped — it felt old-school and slow; requestors aren't checking email the way they check WhatsApp.</li>
+      <li><strong>WhatsApp:</strong> the obvious default, since it's the app everyone involved already uses constantly.</li>
+      <li><strong>A public link:</strong> kept alongside WhatsApp, since it lets a requestor forward status to their own managers or supervisors without dragging them into the same WhatsApp group and pinging them constantly.</li>
     </ul>
 
     <h3 class="cs-subsection-title">Decision</h3>
-    <p>Admins send job updates to the requestor either via WhatsApp message or a public shareable link — no login required on the requestor's side.</p>
+    <p>Admins send job updates to the requestor either through a WhatsApp message or a public shareable link — no login required on the requestor's end.</p>
 
     <figure class="cs-figure">
       <img src="/assets/inspect-1-6.png" alt="Public link as viewed by requestor">
@@ -134,10 +133,10 @@ team: Solo — design & development; business owner as stakeholder
     </figure>
 
     <h3 class="cs-subsection-title">Rationale</h3>
-    <p>This mirrors how the business already communicated with clients (WhatsApp), so it doesn't introduce a new habit. The public link gives a persistent, shareable reference point without the overhead of account creation.</p>
+    <p>This just mirrors how the business already talks to its clients, so it doesn't introduce a new habit. And the public link gives a persistent, shareable reference point without the overhead of setting up an account.</p>
 
     <h3 class="cs-subsection-title">Result</h3>
-    <p>To be updated after real clients start using it.</p>
+    <p>Still to be seen — I'll know more once real clients start using it.</p>
   </div>
 </section>
 
@@ -145,16 +144,16 @@ team: Solo — design & development; business owner as stakeholder
   <h2 class="cs-section-title">Decision 3: Capturing Accurate Job-Site Location and Point-of-Contact Details</h2>
   <div class="cs-section-body">
     <h3 class="cs-subsection-title">Situation</h3>
-    <p>Inspection jobs happen at physical sites — often construction sites — that need a precise location and a point of contact (POC) for the FSP to coordinate with on arrival. Addresses alone aren't always reliable for construction sites, and contact numbers need to be actionable, not just displayed as text.</p>
+    <p>Inspection jobs happen at physical sites — often construction sites — that need a precise location and a point of contact (POC) for the FSP to coordinate with on arrival. Addresses alone aren't always reliable for construction sites, and contact numbers need to actually do something, not just sit there as text.</p>
 
     <h3 class="cs-subsection-title">Options Considered</h3>
     <ul class="cs-list">
-      <li>This wasn't in the initial prototype at all — it only surfaced as essential once we started internal testing and recalled our own frustrations getting to sites.</li>
-      <li><strong>An embedded map on the details page:</strong> dropped, since it added little value on its own. What actually mattered was a link that opens directly in Google Maps for turn-by-turn driving directions, not a static map view.</li>
+      <li>This wasn't even in the initial prototype — it only became obvious once we started internal testing and I remembered my own frustration just trying to get to a site.</li>
+      <li><strong>An embedded map on the details page:</strong> dropped — it didn't add much on its own. What actually mattered was a link that opens straight into Google Maps for turn-by-turn directions, not a static map sitting on the page.</li>
     </ul>
 
     <h3 class="cs-subsection-title">Decision</h3>
-    <p>Admins can set the actual job location either by typing an address with autocomplete or by dropping a pin manually on Google Maps, for cases where the site doesn't have a clean address. Contact numbers are tap-to-WhatsApp — clicking one opens WhatsApp directly to message or call, rather than showing a plain phone number or routing through native telephony.</p>
+    <p>Admins can set the actual job location either by typing an address with autocomplete, or by dropping a pin manually on Google Maps for sites that don't have a clean address. Contact numbers are tap-to-WhatsApp — tapping one opens WhatsApp directly to message or call, instead of showing a plain number or routing through the phone's native dialer.</p>
 
     <figure class="cs-figure">
       <img src="/assets/inspect-1-8.png" alt="Auto-completing of site access location">
@@ -167,10 +166,10 @@ team: Solo — design & development; business owner as stakeholder
     </figure>
 
     <h3 class="cs-subsection-title">Rationale</h3>
-    <p>Construction sites often don't resolve cleanly to a mapped address, so manual pin-drop is a necessary fallback to autocomplete. Routing contact numbers straight to WhatsApp matches how the business and its FSPs already communicate, and removes a copy-paste step.</p>
+    <p>Construction sites often don't resolve cleanly to a mapped address, so manual pin-drop is a necessary fallback to autocomplete. And routing contact numbers straight to WhatsApp just matches how the business and its FSPs already talk to each other — it saves a copy-paste step.</p>
 
     <h3 class="cs-subsection-title">Result</h3>
-    <p>With the actual site access location and notes in hand, the FSP can reach the site faster and plan the nearest parking point ahead of time. Previously, without that detail, FSPs had gone to the wrong gate and needed to make a huge detour — wasting time and effort on-site.</p>
+    <p>With the actual site access location and notes on hand, the FSP can get to the site faster and figure out the nearest parking ahead of time. Before this, FSPs would sometimes end up at the wrong gate and have to make a huge detour — wasting time and effort right when they're on-site.</p>
   </div>
 </section>
 
@@ -178,15 +177,15 @@ team: Solo — design & development; business owner as stakeholder
   <h2 class="cs-section-title">Decision 4: Reference Documentation for FSPs</h2>
   <div class="cs-section-body">
     <h3 class="cs-subsection-title">Situation</h3>
-    <p>Before a job, FSPs need to know equipment-specific details — the crane's LM (load moment) number certification and the MILL certs for the ropes involved — information that previously had to be tracked down separately.</p>
+    <p>Before a job, FSPs need equipment-specific details — the crane's LM (load moment) number certification and the MILL certs for the ropes involved — info that used to be tracked down separately every time.</p>
 
     <h3 class="cs-subsection-title">Options Considered</h3>
     <ul class="cs-list">
-      <li><strong>A shared document repository:</strong> dropped, since it meant standing up and managing another piece of software for what's fundamentally a simple need.</li>
+      <li><strong>A shared document repository:</strong> dropped — that would've meant standing up and managing a whole separate piece of software for what's really a simple need.</li>
     </ul>
 
     <h3 class="cs-subsection-title">Decision</h3>
-    <p>Admins upload the relevant LM number cert and MILL certs directly to the job, so FSPs have them on hand as reference before heading to site.</p>
+    <p>Admins upload the relevant LM number cert and MILL certs directly to the job, so FSPs have them ready as reference before heading out.</p>
 
     <figure class="cs-figure">
       <img src="/assets/inspect-1-10.png" alt="Certs uploaded by programmer">
@@ -199,10 +198,10 @@ team: Solo — design & development; business owner as stakeholder
     </figure>
 
     <h3 class="cs-subsection-title">Rationale</h3>
-    <p>Attaching certs at the job level keeps everything an FSP needs in one place, tied to the specific job rather than a separate lookup process.</p>
+    <p>Attaching certs at the job level keeps everything an FSP needs in one place, tied to that specific job, instead of a separate lookup process.</p>
 
     <h3 class="cs-subsection-title">Result</h3>
-    <p>FSPs now have one straightforward place to retrieve the docs they need, instead of scrolling back through messages to find them.</p>
+    <p>FSPs now have one obvious place to grab the docs they need, instead of scrolling back through messages trying to find them.</p>
   </div>
 </section>
 
@@ -211,20 +210,20 @@ team: Solo — design & development; business owner as stakeholder
   <div class="cs-section-body">
     <h3 class="cs-subsection-title">What I'd Do Differently</h3>
     <ul class="cs-list">
-      <li>Reduce repeated information on the details page. Right now some info shows up twice — once as metadata at the top of the section, and again further down — and I'd want to display it clearly without the duplication.</li>
-      <li>Push the visual design further from typical enterprise software — more colour, more personality. The calendar UI on the scheduled job details page is an early example of the direction I'd want to take further.</li>
+      <li>Cut down on repeated information on the details page. Right now some info shows up twice — once as metadata up top, and again further down — and I'd want to show it clearly without the duplication.</li>
+      <li>Push the visual design further from typical enterprise software — more colour, more personality. The calendar UI on the scheduled job details page is an early hint of the direction I'd want to take it.</li>
     </ul>
 
     <h3 class="cs-subsection-title">What the System Still Can't Do Cleanly</h3>
     <ul class="cs-list">
-      <li>Send automated WhatsApp status update messages — planned for the 2nd iteration.</li>
-      <li>Accept job requests through an interactive WhatsApp chatbot — planned for a later iteration.</li>
+      <li>Send automated WhatsApp status updates — planned for the second iteration.</li>
+      <li>Accept job requests through an interactive WhatsApp chatbot — planned for later on.</li>
     </ul>
 
     <h3 class="cs-subsection-title">What I Learned</h3>
     <ul class="cs-list">
-      <li>Dogfooding the app as a trainee FSP myself meant I could design against what I actually needed on the ground, rather than relying entirely on secondhand feedback — which can sometimes reflect what users wish they wanted rather than what actually works.</li>
-      <li>AI-assisted development can produce overly complex first answers; clear, specific prompting helps a lot, and it often worked better to walk through a problem step-by-step with the AI rather than asking for everything at once, which could get overwhelming.</li>
+      <li>Dogfooding the app as a trainee FSP myself meant I could design for what I actually needed on the ground, instead of relying entirely on secondhand feedback — which can sometimes reflect what users wish they wanted, rather than what actually works.</li>
+      <li>AI-assisted development can spit out overly complex first answers. Clear, specific prompting helps a lot, and it usually worked better to walk through a problem step-by-step with the AI rather than dumping everything on it at once.</li>
     </ul>
   </div>
 </section>
